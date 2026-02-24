@@ -575,6 +575,24 @@ function renderProfile(c) {
       {label:'Problem Solving',val:parseInt(c.gradeProblemSolving)||0}
     ];
     const barColor = v => v>=4?'var(--green)':v>=3?'var(--yellow)':'var(--red)';
+    const ratingEmoji = r => r==5?'🟢':r==4?'🟢':r==3?'🟡':r==2?'🔴':'🔴';
+    
+    // Build scenario responses HTML
+    let scenarioHTML = '';
+    SCENARIOS.forEach((s, i) => {
+      const rating = c['scenario'+i+'Rating'];
+      const note = c['scenario'+i+'Note'];
+      if (rating || note) {
+        scenarioHTML += `<div style="padding:10px 0;border-bottom:1px solid #f0f0f0;">
+          <div style="font-size:13px;color:#666;margin-bottom:4px;">${esc(s.q)}</div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            ${rating?`<span style="font-size:14px;">${ratingEmoji(parseInt(rating))} ${rating}/5</span>`:''}
+            ${note?`<span style="font-size:13px;color:#444;">— ${esc(note)}</span>`:''}
+          </div>
+        </div>`;
+      }
+    });
+
     vibeHTML = `<div class="card">
       <div class="card-title"><span class="icon" style="background:var(--yellow-light);color:var(--yellow)">🎯</span> Vibe Evaluation</div>
       <div class="data-row"><span class="label">Interviewer</span><span class="value">${esc(c.interviewerName)}</span></div>
@@ -585,6 +603,10 @@ function renderProfile(c) {
         <div class="data-row"><span class="label">Hire Decision</span><span class="value" style="font-weight:700">${esc(c.hireDecision||'—')}</span></div>
         ${c.vibeNotes?`<div class="data-row"><span class="label">Notes</span><span class="value">${esc(c.vibeNotes)}</span></div>`:''}
       </div>
+      ${scenarioHTML?`<div style="margin-top:16px;padding-top:12px;border-top:2px solid #f0f0f0;">
+        <div style="font-weight:600;font-size:14px;margin-bottom:8px;">📋 Scenario Responses</div>
+        ${scenarioHTML}
+      </div>`:''}
     </div>`;
   }
 
