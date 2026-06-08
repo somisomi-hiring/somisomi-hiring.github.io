@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SomiSomi — Manager Hiring Dashboard</title>
+<title>SomiSomi — Hiring Dashboard</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -24,14 +24,18 @@
   --red-light: #FEF0EF;
   --blue: #2B6CB0;
   --blue-light: #EBF4FF;
-  --purple: #7C3AED;
-  --purple-light: #F3EEFF;
   --radius: 12px;
   --shadow: 0 1px 3px rgba(45,27,14,0.06), 0 4px 12px rgba(45,27,14,0.04);
   --shadow-lg: 0 4px 12px rgba(45,27,14,0.08), 0 12px 32px rgba(45,27,14,0.06);
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
 .container { max-width: 720px; margin: 0 auto; padding: 24px 16px 80px; }
 .container.wide { max-width: 900px; }
 h1, h2, h3 { font-family: 'Fraunces', serif; }
@@ -39,49 +43,81 @@ h1, h2, h3 { font-family: 'Fraunces', serif; }
 .page-header .logo { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 800; color: var(--accent); }
 .page-header h1 { font-size: 22px; font-weight: 600; margin-top: 4px; }
 .page-header p { color: var(--text-soft); margin-top: 6px; font-size: 15px; }
-.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 16px; box-shadow: var(--shadow); animation: fadeUp 0.35s ease both; }
-.card-title { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-.card-title .icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+.card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 24px; margin-bottom: 16px; box-shadow: var(--shadow); animation: fadeUp 0.35s ease both;
+}
+.card-title {
+  font-family: 'Fraunces', serif; font-size: 17px; font-weight: 700;
+  margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+}
+.card-title .icon {
+  width: 28px; height: 28px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0;
+}
 .field { margin-bottom: 16px; }
 .field:last-child { margin-bottom: 0; }
-.field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; letter-spacing: 0.2px; }
+.field label {
+  display: block; font-size: 13px; font-weight: 600;
+  margin-bottom: 6px; letter-spacing: 0.2px;
+}
 .field label .optional { font-weight: 400; color: var(--text-soft); font-size: 12px; }
-input[type="text"],input[type="password"],input[type="email"],input[type="date"],input[type="time"],select,textarea {
+input[type="text"],input[type="password"],input[type="email"],select,textarea {
   width: 100%; padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 8px;
   font-family: 'DM Sans', sans-serif; font-size: 15px; color: var(--text);
   background: var(--surface); transition: border-color 0.2s, box-shadow 0.2s; outline: none;
 }
 input:focus, select:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-light); }
-textarea { resize: vertical; min-height: 70px; }
+textarea { resize: vertical; min-height: 80px; }
 .radio-group { display: flex; gap: 8px; flex-wrap: wrap; }
-.radio-group label { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 400; cursor: pointer; padding: 8px 14px; border: 1.5px solid var(--border); border-radius: 8px; transition: all 0.2s; user-select: none; }
-.radio-group label:has(input:checked) { border-color: var(--accent); background: var(--accent-light); color: var(--accent); font-weight: 500; }
+.radio-group label {
+  display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 400;
+  cursor: pointer; padding: 8px 14px; border: 1.5px solid var(--border); border-radius: 8px;
+  transition: all 0.2s; user-select: none;
+}
+.radio-group label:has(input:checked) {
+  border-color: var(--accent); background: var(--accent-light); color: var(--accent); font-weight: 500;
+}
 .radio-group input { display: none; }
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; border: none; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-.btn-primary { background: var(--accent); color: #fff; width: 100%; padding: 14px; font-size: 16px; border-radius: 10px; box-shadow: 0 2px 8px rgba(232,87,42,0.25); }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 12px 24px; border: none; border-radius: 8px;
+  font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s;
+}
+.btn-primary {
+  background: var(--accent); color: #fff; width: 100%; padding: 14px; font-size: 16px;
+  border-radius: 10px; box-shadow: 0 2px 8px rgba(232,87,42,0.25);
+}
 .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
 .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 .btn-secondary { background: var(--surface); color: var(--text); border: 1.5px solid var(--border); }
 .btn-secondary:hover { background: var(--surface-alt); }
 .btn-sm { padding: 8px 16px; font-size: 13px; }
-
-.status-chip { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+.status-chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600;
+}
 .status-applied { background: var(--blue-light); color: var(--blue); }
-.status-phonescreenscheduled { background: var(--purple-light); color: var(--purple); }
-.status-phonescreendone { background: var(--purple-light); color: var(--purple); }
-.status-inpersonscheduled { background: var(--yellow-light); color: var(--yellow); }
-.status-inpersondone { background: var(--yellow-light); color: var(--yellow); }
+.status-interviewed { background: var(--yellow-light); color: var(--yellow); }
 .status-hired { background: var(--green-light); color: var(--green); }
 .status-rejected { background: var(--red-light); color: var(--red); }
-
-.toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--text); color: #fff; padding: 12px 24px; border-radius: 10px; font-size: 14px; font-weight: 500; box-shadow: var(--shadow-lg); z-index: 1000; transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px);
+  background: var(--text); color: #fff; padding: 12px 24px; border-radius: 10px;
+  font-size: 14px; font-weight: 500; box-shadow: var(--shadow-lg); z-index: 1000;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
 .toast.show { transform: translateX(-50%) translateY(0); }
 .empty-state { text-align: center; padding: 48px 24px; color: var(--text-soft); }
 .empty-state .icon { font-size: 40px; margin-bottom: 12px; }
 .loading { display: flex; align-items: center; justify-content: center; padding: 60px; }
-.spinner { width: 32px; height: 32px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.7s linear infinite; }
+.spinner {
+  width: 32px; height: 32px; border: 3px solid var(--border);
+  border-top-color: var(--accent); border-radius: 50%; animation: spin 0.7s linear infinite;
+}
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* Login */
 #view-login.active { display: flex; align-items: center; justify-content: center; min-height: 80vh; }
 .login-card { width: 100%; max-width: 360px; text-align: center; }
 .login-card .logo { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 800; color: var(--accent); margin-bottom: 4px; }
@@ -89,86 +125,141 @@ textarea { resize: vertical; min-height: 70px; }
 .pin-input { text-align: center; font-size: 24px; letter-spacing: 8px; font-weight: 700; padding: 14px; }
 .login-error { color: var(--red); font-size: 13px; margin-top: 8px; display: none; }
 
+/* Dashboard */
 .dash-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
 .dash-toolbar .left { display: flex; gap: 6px; flex-wrap: wrap; }
-.filter-btn { padding: 6px 14px; border: 1.5px solid var(--border); border-radius: 20px; background: var(--surface); font-family: 'DM Sans'; font-size: 13px; font-weight: 500; color: var(--text-soft); cursor: pointer; transition: all 0.2s; }
+.filter-btn {
+  padding: 6px 14px; border: 1.5px solid var(--border); border-radius: 20px;
+  background: var(--surface); font-family: 'DM Sans'; font-size: 13px; font-weight: 500;
+  color: var(--text-soft); cursor: pointer; transition: all 0.2s;
+}
 .filter-btn.active { border-color: var(--accent); background: var(--accent-light); color: var(--accent); font-weight: 600; }
 .filter-btn:hover:not(.active) { border-color: #ccc; }
 .candidate-list { display: flex; flex-direction: column; gap: 10px; }
-.candidate-row { display: flex; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; cursor: pointer; transition: all 0.2s; box-shadow: var(--shadow); gap: 12px; animation: fadeUp 0.35s ease both; }
+.candidate-row {
+  display: flex; align-items: center; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px; cursor: pointer; transition: all 0.2s;
+  box-shadow: var(--shadow); gap: 12px; animation: fadeUp 0.35s ease both;
+}
 .candidate-row:hover { border-color: var(--accent); box-shadow: var(--shadow-lg); transform: translateY(-1px); }
-.candidate-row .avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--accent-light); color: var(--accent); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; flex-shrink: 0; }
+.candidate-row .avatar {
+  width: 42px; height: 42px; border-radius: 50%; background: var(--accent-light);
+  color: var(--accent); display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 16px; flex-shrink: 0;
+}
 .candidate-row .info { flex: 1; min-width: 0; }
 .candidate-row .name { font-weight: 600; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .candidate-row .meta { font-size: 13px; color: var(--text-soft); margin-top: 2px; }
 .candidate-row .right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
 
-.profile-back { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 500; color: var(--text-soft); cursor: pointer; margin-bottom: 16px; padding: 6px 0; border: none; background: none; font-family: 'DM Sans'; }
+/* Profile */
+.profile-back {
+  display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 500;
+  color: var(--text-soft); cursor: pointer; margin-bottom: 16px; padding: 6px 0;
+  border: none; background: none; font-family: 'DM Sans';
+}
 .profile-back:hover { color: var(--accent); }
 .profile-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
-.profile-header .avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--accent-light); color: var(--accent); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 22px; font-family: 'Fraunces', serif; flex-shrink: 0; }
+.profile-header .avatar {
+  width: 56px; height: 56px; border-radius: 50%; background: var(--accent-light);
+  color: var(--accent); display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 22px; font-family: 'Fraunces', serif; flex-shrink: 0;
+}
 .profile-header .details h2 { font-size: 22px; font-weight: 700; }
 .profile-header .details .sub { color: var(--text-soft); font-size: 14px; margin-top: 2px; }
-.profile-actions { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; align-items: center; }
-.data-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 14px; gap: 12px; }
+.profile-actions { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+.data-row {
+  display: flex; justify-content: space-between; padding: 10px 0;
+  border-bottom: 1px solid var(--border); font-size: 14px;
+}
 .data-row:last-child { border-bottom: none; }
-.data-row .label { color: var(--text-soft); flex-shrink: 0; }
-.data-row .value { font-weight: 500; text-align: right; word-break: break-word; white-space: pre-wrap; }
-
-.tabs { display: flex; gap: 4px; margin-bottom: 16px; border-bottom: 2px solid var(--border); }
-.tab-btn { background: none; border: none; padding: 10px 16px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; color: var(--text-soft); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.2s; }
-.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
-.tab-panel { display: none; }
-.tab-panel.active { display: block; animation: fadeUp 0.3s ease; }
-
-/* Review card — shows application answer + notes box */
-.review-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; margin-bottom: 12px; box-shadow: var(--shadow); animation: fadeUp 0.35s ease both; }
-.review-card .review-label { font-size: 12px; font-weight: 700; color: var(--text-soft); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
-.review-card .review-answer { background: var(--surface-alt); border-left: 3px solid var(--accent); padding: 10px 14px; border-radius: 6px; font-size: 14px; color: var(--text); white-space: pre-wrap; margin-bottom: 10px; word-break: break-word; }
-.review-card .review-answer.empty { color: var(--text-soft); font-style: italic; }
-.review-card textarea { min-height: 60px; font-size: 14px; }
-.review-card .notes-label { font-size: 12px; font-weight: 600; color: var(--text-soft); margin-bottom: 4px; display: block; }
-
-.question-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 12px; box-shadow: var(--shadow); animation: fadeUp 0.35s ease both; }
-.question-card .question { font-weight: 600; font-size: 15px; margin-bottom: 10px; }
-.question-card textarea { min-height: 80px; margin-bottom: 10px; }
-.rating-btns { display: flex; gap: 6px; flex-wrap: wrap; }
-.rating-btns button { padding: 8px 14px; border: 1.5px solid var(--border); border-radius: 8px; background: var(--surface); font-family: 'DM Sans'; font-size: 13px; cursor: pointer; transition: all 0.2s; }
-.rating-btns button:hover { border-color: #bbb; }
-.rating-btns button.selected { border-color: var(--accent); background: var(--accent-light); color: var(--accent); font-weight: 600; }
-
-.overall-grade { display: flex; flex-direction: column; gap: 12px; }
-.grade-item { display: flex; align-items: center; gap: 12px; }
-.grade-item .label { font-size: 14px; width: 150px; flex-shrink: 0; }
-.grade-dots { display: flex; gap: 4px; }
-.grade-dots button { width: 36px; height: 36px; border: 1.5px solid var(--border); border-radius: 8px; background: var(--surface); font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.15s; font-family: 'DM Sans'; color: var(--text-soft); }
-.grade-dots button:hover { border-color: #bbb; }
-.grade-dots button.selected { border-color: var(--accent); background: var(--accent); color: #fff; }
-
+.data-row .label { color: var(--text-soft); flex-shrink: 0; margin-right: 12px; }
+.data-row .value { font-weight: 500; text-align: right; }
 .vibe-score-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
-.vibe-score-bar .label { font-size: 13px; color: var(--text-soft); width: 140px; flex-shrink: 0; }
+.vibe-score-bar .label { font-size: 13px; color: var(--text-soft); width: 120px; flex-shrink: 0; }
 .vibe-score-bar .bar { flex: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
 .vibe-score-bar .bar-fill { height: 100%; border-radius: 4px; transition: width 0.5s ease; }
 .vibe-score-bar .score { font-size: 13px; font-weight: 600; width: 24px; text-align: right; }
 
-.upcoming-panel { background: var(--blue-light); border: 1.5px solid #c3dafe; border-radius: var(--radius); padding: 20px; margin-bottom: 20px; animation: fadeUp 0.35s ease both; }
-.upcoming-panel .panel-title { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 700; color: var(--blue); display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
-.upcoming-item { display: flex; align-items: center; gap: 12px; padding: 12px; background: #fff; border-radius: 10px; margin-bottom: 8px; cursor: pointer; transition: all 0.2s; border: 1px solid #e2ecf7; }
+/* Vibe Eval */
+.scenario-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 20px; margin-bottom: 12px; box-shadow: var(--shadow); animation: fadeUp 0.35s ease both;
+}
+.scenario-card .question { font-weight: 600; font-size: 15px; margin-bottom: 4px; }
+.scenario-card .hint {
+  font-size: 13px; color: var(--green); background: var(--green-light);
+  padding: 6px 10px; border-radius: 6px; margin-bottom: 12px; display: inline-block;
+}
+.rating-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+.rating-btns button {
+  padding: 8px 14px; border: 1.5px solid var(--border); border-radius: 8px;
+  background: var(--surface); font-family: 'DM Sans'; font-size: 13px;
+  cursor: pointer; transition: all 0.2s;
+}
+.rating-btns button:hover { border-color: #bbb; }
+.rating-btns button.selected { border-color: var(--accent); background: var(--accent-light); color: var(--accent); font-weight: 600; }
+.scenario-note { margin-top: 8px; font-size: 13px; }
+.scenario-note input { padding: 8px 12px; font-size: 13px; }
+.overall-grade { display: flex; flex-direction: column; gap: 12px; }
+.grade-item { display: flex; align-items: center; gap: 12px; }
+.grade-item .label { font-size: 14px; width: 140px; flex-shrink: 0; }
+.grade-dots { display: flex; gap: 4px; }
+.grade-dots button {
+  width: 36px; height: 36px; border: 1.5px solid var(--border); border-radius: 8px;
+  background: var(--surface); font-size: 14px; font-weight: 600; cursor: pointer;
+  transition: all 0.15s; font-family: 'DM Sans'; color: var(--text-soft);
+}
+.grade-dots button:hover { border-color: #bbb; }
+.grade-dots button.selected { border-color: var(--accent); background: var(--accent); color: #fff; }
+
+@media (max-width: 600px) {
+  .profile-header { flex-direction: column; text-align: center; }
+  .dash-toolbar { flex-direction: column; align-items: stretch; }
+  .dash-toolbar .left { justify-content: center; }
+  .grade-item { flex-direction: column; align-items: flex-start; gap: 6px; }
+}
+/* Interview Scheduling */
+.upcoming-panel {
+  background: var(--blue-light); border: 1.5px solid #c3dafe; border-radius: var(--radius);
+  padding: 20px; margin-bottom: 20px; animation: fadeUp 0.35s ease both;
+}
+.upcoming-panel .panel-title {
+  font-family: 'Fraunces', serif; font-size: 16px; font-weight: 700; color: var(--blue);
+  display: flex; align-items: center; gap: 8px; margin-bottom: 14px;
+}
+.upcoming-item {
+  display: flex; align-items: center; gap: 12px; padding: 12px; background: #fff;
+  border-radius: 10px; margin-bottom: 8px; cursor: pointer; transition: all 0.2s;
+  border: 1px solid #e2ecf7;
+}
 .upcoming-item:last-child { margin-bottom: 0; }
 .upcoming-item:hover { border-color: var(--blue); box-shadow: 0 2px 8px rgba(43,108,176,0.1); }
-.upcoming-item .date-badge { background: var(--blue); color: #fff; border-radius: 10px; padding: 8px 10px; text-align: center; min-width: 52px; flex-shrink: 0; }
-.upcoming-item .date-badge.phone { background: var(--purple); }
+.upcoming-item .date-badge {
+  background: var(--blue); color: #fff; border-radius: 10px; padding: 8px 10px;
+  text-align: center; min-width: 52px; flex-shrink: 0;
+}
 .upcoming-item .date-badge .month { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
 .upcoming-item .date-badge .day { font-size: 20px; font-weight: 800; line-height: 1.1; font-family: 'Fraunces', serif; }
 .upcoming-item .details { flex: 1; min-width: 0; }
 .upcoming-item .details .name { font-weight: 600; font-size: 14px; }
 .upcoming-item .details .time { font-size: 13px; color: var(--text-soft); margin-top: 2px; }
-.upcoming-kind { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
-.upcoming-kind.phone { background: var(--purple-light); color: var(--purple); }
-.upcoming-kind.inperson { background: var(--yellow-light); color: var(--yellow); }
+.upcoming-none { font-size: 13px; color: var(--blue); opacity: 0.7; text-align: center; padding: 8px; }
 
-.modal-overlay { position: fixed; inset: 0; background: rgba(45,27,14,0.4); z-index: 500; display: flex; align-items: center; justify-content: center; padding: 16px; animation: fadeIn 0.2s ease; }
-.modal { background: var(--surface); border-radius: var(--radius); padding: 28px; width: 100%; max-width: 400px; box-shadow: var(--shadow-lg); animation: fadeUp 0.3s ease; }
+.interview-badge {
+  display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600;
+  color: var(--blue); background: var(--blue-light); padding: 3px 8px; border-radius: 6px;
+}
+
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(45,27,14,0.4); z-index: 500;
+  display: flex; align-items: center; justify-content: center; padding: 16px;
+  animation: fadeIn 0.2s ease;
+}
+.modal {
+  background: var(--surface); border-radius: var(--radius); padding: 28px;
+  width: 100%; max-width: 400px; box-shadow: var(--shadow-lg); animation: fadeUp 0.3s ease;
+}
 .modal h3 { font-family: 'Fraunces', serif; font-size: 18px; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
 .modal .field { margin-bottom: 16px; }
 .modal .modal-actions { display: flex; gap: 8px; margin-top: 20px; }
@@ -178,26 +269,18 @@ textarea { resize: vertical; min-height: 70px; }
 .view { display: none; }
 .view.active { display: block; }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-
-@media (max-width: 600px) {
-  .profile-header { flex-direction: column; text-align: center; }
-  .dash-toolbar { flex-direction: column; align-items: stretch; }
-  .dash-toolbar .left { justify-content: center; }
-  .grade-item { flex-direction: column; align-items: flex-start; gap: 6px; }
-  .grade-item .label { width: auto; }
-}
 </style>
 </head>
 <body>
 
 <div class="toast" id="toast"></div>
 
-<!-- LOGIN -->
+<!-- ════════════════ LOGIN ════════════════ -->
 <div id="view-login" class="view active">
   <div class="container">
     <div class="login-card card">
       <div class="logo">SomiSomi</div>
-      <h2>Manager Hiring Dashboard</h2>
+      <h2>Hiring Dashboard</h2>
       <div class="field">
         <input type="password" class="pin-input" id="pin-input" placeholder="PIN" maxlength="10">
       </div>
@@ -207,28 +290,25 @@ textarea { resize: vertical; min-height: 70px; }
   </div>
 </div>
 
-<!-- DASHBOARD -->
+<!-- ════════════════ DASHBOARD ════════════════ -->
 <div id="view-dashboard" class="view">
   <div class="container wide">
     <div class="page-header" style="text-align:left; padding-bottom:20px;">
       <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
         <div>
-          <div class="logo" style="font-family:'Fraunces',serif; font-size:28px; font-weight:800; color:var(--accent);">SomiSomi</div>
-          <h1>Manager Hiring Dashboard</h1>
+          <div class="logo">SomiSomi</div>
+          <h1>Hiring Dashboard</h1>
         </div>
         <button class="btn btn-secondary btn-sm" onclick="logoutDash()">🔒 Log Out</button>
       </div>
     </div>
     <div class="dash-toolbar">
       <div class="left">
-        <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
-        <button class="filter-btn" onclick="setFilter('Applied',this)">📩 Applied</button>
-        <button class="filter-btn" onclick="setFilter('Phone Screen Scheduled',this)">📞 PS Scheduled</button>
-        <button class="filter-btn" onclick="setFilter('Phone Screen Done',this)">📞 PS Done</button>
-        <button class="filter-btn" onclick="setFilter('In-Person Scheduled',this)">🤝 IP Scheduled</button>
-        <button class="filter-btn" onclick="setFilter('In-Person Done',this)">🤝 IP Done</button>
-        <button class="filter-btn" onclick="setFilter('Hired',this)">✅ Hired</button>
-        <button class="filter-btn" onclick="setFilter('Rejected',this)">❌ Rejected</button>
+        <button class="filter-btn active" data-filter="all" onclick="setFilter('all',this)">All</button>
+        <button class="filter-btn" data-filter="Applied" onclick="setFilter('Applied',this)">📩 Applied</button>
+        <button class="filter-btn" data-filter="Interviewed" onclick="setFilter('Interviewed',this)">💬 Interviewed</button>
+        <button class="filter-btn" data-filter="Hired" onclick="setFilter('Hired',this)">✅ Hired</button>
+        <button class="filter-btn" data-filter="Rejected" onclick="setFilter('Rejected',this)">❌ Rejected</button>
       </div>
       <button class="btn btn-secondary btn-sm" onclick="refreshDash()">↻ Refresh</button>
     </div>
@@ -237,7 +317,7 @@ textarea { resize: vertical; min-height: 70px; }
   </div>
 </div>
 
-<!-- PROFILE -->
+<!-- ════════════════ PROFILE ════════════════ -->
 <div id="view-profile" class="view">
   <div class="container">
     <button class="profile-back" onclick="showView('dashboard')">← Back to Dashboard</button>
@@ -245,74 +325,63 @@ textarea { resize: vertical; min-height: 70px; }
   </div>
 </div>
 
-<!-- PHONE SCREEN -->
-<div id="view-phonescreen" class="view">
+<!-- ════════════════ VIBE EVALUATION ════════════════ -->
+<div id="view-vibe" class="view">
   <div class="container">
-    <button class="profile-back" id="ps-back-btn">← Back to Profile</button>
+    <button class="profile-back" id="vibe-back-btn">← Back to Profile</button>
     <div class="page-header" style="text-align:left; padding-top:0;">
-      <h1>📞 Phone Screen</h1>
-      <p id="ps-candidate-name"></p>
-      <p style="margin-top:8px;font-size:13px;">Review each answer with them. Add notes as they elaborate. Skip notes if nothing new.</p>
+      <h1>🎯 Vibe Evaluation</h1>
+      <p id="vibe-candidate-name"></p>
     </div>
-    <form id="ps-form">
+    <form id="vibe-form">
       <div class="card">
         <div class="card-title"><span class="icon" style="background:var(--accent-light);color:var(--accent)">👤</span> Interviewer</div>
         <div class="field">
           <label>Your Name *</label>
-          <input type="text" name="phoneScreenerName" required>
+          <input type="text" name="interviewerName" required placeholder="Employee conducting interview">
         </div>
       </div>
-
-      <div id="ps-review-cards"></div>
-
-      <div class="card">
-        <div class="card-title"><span class="icon" style="background:var(--green-light);color:var(--green)">🎯</span> Overall Vibe</div>
-        <div class="field">
-          <label>General notes about their vibe <span class="optional">(optional)</span></label>
-          <textarea name="ps_overallNotes" placeholder="Your overall impression from the call — energy, communication style, anything that stood out"></textarea>
+      <!-- Job Overview -->
+      <div class="card" style="padding:0; overflow:hidden;">
+        <div style="background:var(--surface-alt); padding:16px 24px; display:flex; align-items:center; gap:10px; cursor:pointer; user-select:none;" onclick="document.getElementById('jobOverviewBody').style.display = document.getElementById('jobOverviewBody').style.display === 'none' ? 'block' : 'none'">
+          <span style="font-size:20px">📖</span>
+          <span style="font-family:'Fraunces',serif; font-size:16px; font-weight:700; color:var(--accent);">Job Overview – Read to Candidate</span>
+          <span style="margin-left:auto; font-size:12px; color:var(--text-soft);">tap to expand/collapse</span>
         </div>
-        <div class="field" style="margin-top:12px">
-          <label>Move forward to in-person interview? *</label>
-          <div class="radio-group">
-            <label><input type="radio" name="ps_moveForward" value="Yes" required> ✅ Yes</label>
-            <label><input type="radio" name="ps_moveForward" value="Maybe"> 🤔 Maybe</label>
-            <label><input type="radio" name="ps_moveForward" value="No"> ❌ No</label>
+        <div id="jobOverviewBody" style="padding:20px 24px;">
+          <div style="margin-bottom:16px; padding-bottom:16px; border-bottom:1px solid var(--border);">
+            <div style="font-weight:700; font-size:14px; color:var(--accent); display:flex; align-items:center; gap:8px; margin-bottom:4px;">💰 Register</div>
+            <p style="font-size:13px; color:var(--text-soft); line-height:1.6; padding-left:28px;">This is the front of house — you're the face of SomiSomi. You'll be explaining the menu to customers, answering questions, and making recommendations. Being friendly and outgoing is key here. <strong>This is the person making tips for everyone</strong>, so your energy directly affects the whole team's earnings.</p>
+          </div>
+          <div style="margin-bottom:16px; padding-bottom:16px; border-bottom:1px solid var(--border);">
+            <div style="font-weight:700; font-size:14px; color:var(--accent); display:flex; align-items:center; gap:8px; margin-bottom:4px;">🧇 Taiyaki & Ahboong Station</div>
+            <p style="font-size:13px; color:var(--text-soft); line-height:1.6; padding-left:28px;">You'll be working with hot surfaces — it's like making waffles. You pour the batter, fill it, and press it. <strong>It's all about speed</strong> — especially during rushes. You need to keep up with orders while being careful with the hot equipment.</p>
+          </div>
+          <div style="margin-bottom:16px; padding-bottom:16px; border-bottom:1px solid var(--border);">
+            <div style="font-weight:700; font-size:14px; color:var(--accent); display:flex; align-items:center; gap:8px; margin-bottom:4px;">🍦 Ice Cream Station</div>
+            <p style="font-size:13px; color:var(--text-soft); line-height:1.6; padding-left:28px;">This is the last station you'll learn during training. Swirling the soft serve <strong>requires practice</strong> — it takes a bit to get the technique down. In the meantime, you can help with fillings for the cones and taiyaki, and asking customers if they want toppings.</p>
+          </div>
+          <div style="margin-bottom:16px; padding-bottom:16px; border-bottom:1px solid var(--border);">
+            <div style="font-weight:700; font-size:14px; color:var(--accent); display:flex; align-items:center; gap:8px; margin-bottom:4px;">🔧 Backend / Prep</div>
+            <p style="font-size:13px; color:var(--text-soft); line-height:1.6; padding-left:28px;">This is behind the scenes — making ingredients, measuring dry ingredients, blending mixes, and restocking stations. It's less customer-facing but just as important to keep everything running smoothly.</p>
+          </div>
+          <div>
+            <div style="font-weight:700; font-size:14px; color:var(--accent); display:flex; align-items:center; gap:8px; margin-bottom:4px;">💵 Pay & Training</div>
+            <p style="font-size:13px; color:var(--text-soft); line-height:1.6; padding-left:28px;"><strong>Pay:</strong> $7.25/hour for your first 35 training hours. After training you will receive tips which put you anywhere between $11–$14/hr.<br><strong>Training:</strong> Starts Saturday/Sunday morning, 11:30 AM – 3:00 PM. We'll cover all stations and approve you to continue by the end.<br><strong>Motto:</strong> <em>"Be on time, ready to learn, and work with a positive attitude."</em></p>
           </div>
         </div>
       </div>
 
-      <button type="submit" class="btn btn-primary" id="ps-submit-btn">Submit Phone Screen</button>
-    </form>
-  </div>
-</div>
-
-<!-- IN-PERSON -->
-<div id="view-inperson" class="view">
-  <div class="container">
-    <button class="profile-back" id="ip-back-btn">← Back to Profile</button>
-    <div class="page-header" style="text-align:left; padding-top:0;">
-      <h1>🤝 In-Person Interview</h1>
-      <p id="ip-candidate-name"></p>
-    </div>
-    <form id="ip-form">
-      <div class="card">
-        <div class="card-title"><span class="icon" style="background:var(--accent-light);color:var(--accent)">👤</span> Interviewer</div>
-        <div class="field">
-          <label>Your Name *</label>
-          <input type="text" name="inPersonInterviewerName" required>
-        </div>
-      </div>
-      <div id="ip-summary"></div>
-      <div id="ip-questions"></div>
-      <div class="card">
+      <div id="scenario-cards"></div>
+      <div class="card" style="margin-top:4px">
         <div class="card-title"><span class="icon" style="background:var(--yellow-light);color:var(--yellow)">⭐</span> Overall Grades (0–5)</div>
         <div class="overall-grade">
-          <div class="grade-item"><span class="label">Leadership</span><div class="grade-dots" data-grade="gradeLeadership"></div></div>
-          <div class="grade-item"><span class="label">Decision Making</span><div class="grade-dots" data-grade="gradeDecisionMaking"></div></div>
+          <div class="grade-item"><span class="label">Attitude</span><div class="grade-dots" data-grade="gradeAttitude"></div></div>
           <div class="grade-item"><span class="label">Communication</span><div class="grade-dots" data-grade="gradeCommunication"></div></div>
           <div class="grade-item"><span class="label">Reliability</span><div class="grade-dots" data-grade="gradeReliability"></div></div>
+          <div class="grade-item"><span class="label">Customer Service</span><div class="grade-dots" data-grade="gradeCustomerService"></div></div>
+          <div class="grade-item"><span class="label">Energy & Enthusiasm</span><div class="grade-dots" data-grade="gradeEnergy"></div></div>
           <div class="grade-item"><span class="label">Problem Solving</span><div class="grade-dots" data-grade="gradeProblemSolving"></div></div>
-          <div class="grade-item"><span class="label">Integrity</span><div class="grade-dots" data-grade="gradeIntegrity"></div></div>
         </div>
       </div>
       <div class="card">
@@ -326,15 +395,15 @@ textarea { resize: vertical; min-height: 70px; }
           </div>
         </div>
         <div class="field" style="margin-top:12px">
-          <label>Would you trust them with running the store?</label>
+          <label>Would you trust them with closing duties?</label>
           <div class="radio-group">
-            <label><input type="radio" name="trustWithStore" value="Yes" required> Yes</label>
-            <label><input type="radio" name="trustWithStore" value="Maybe"> Maybe</label>
-            <label><input type="radio" name="trustWithStore" value="No"> No</label>
+            <label><input type="radio" name="trustClosing" value="Yes" required> Yes</label>
+            <label><input type="radio" name="trustClosing" value="Maybe"> Maybe</label>
+            <label><input type="radio" name="trustClosing" value="No"> No</label>
           </div>
         </div>
         <div class="field" style="margin-top:12px">
-          <label>If you had to give tough feedback to this manager, how do you think they'd take it?</label>
+          <label>If you had to have a tough conversation with this employee about not pulling their weight, how do you think they&#39;d handle it?</label>
           <div class="radio-group">
             <label><input type="radio" name="coachability" value="Defensive" required> 😤 Defensive</label>
             <label><input type="radio" name="coachability" value="Would get offended"> 😟 Would get offended</label>
@@ -350,138 +419,62 @@ textarea { resize: vertical; min-height: 70px; }
           </div>
         </div>
         <div class="field" style="margin-top:12px">
-          <label>Overall notes / conditions <span class="optional">(optional)</span></label>
-          <textarea name="ip_overallNotes"></textarea>
+          <label>Notes / Conditions <span class="optional">(optional)</span></label>
+          <textarea name="vibeNotes" placeholder="Any other thoughts..."></textarea>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary" id="ip-submit-btn">Submit In-Person Interview</button>
+      <button type="submit" class="btn btn-primary" id="vibe-btn">Submit Evaluation</button>
     </form>
   </div>
 </div>
 
-<!-- MODALS -->
-<div id="schedule-ps-modal" class="modal-overlay" style="display:none" onclick="if(event.target===this)closeModal('schedule-ps-modal')">
+<!-- ════════════════ INTERVIEW SCHEDULING MODAL ════════════════ -->
+<div id="schedule-modal" class="modal-overlay" style="display:none" onclick="if(event.target===this)closeScheduleModal()">
   <div class="modal">
-    <h3>📞 Schedule Phone Screen</h3>
-    <div class="field"><label>Date *</label><input type="date" id="ps-date" required></div>
-    <div class="field"><label>Time *</label><input type="time" id="ps-time" required></div>
-    <div class="field"><label>Notes <span class="optional">(optional)</span></label><input type="text" id="ps-notes"></div>
-    <div class="modal-actions">
-      <button class="btn btn-secondary" onclick="closeModal('schedule-ps-modal')">Cancel</button>
-      <button class="btn btn-primary" style="width:auto;padding:12px 24px" onclick="savePhoneScreenSchedule()">Save</button>
+    <h3>📅 Schedule Interview</h3>
+    <div class="field">
+      <label>Interview Date *</label>
+      <input type="date" id="sched-date" required>
     </div>
-  </div>
-</div>
-
-<div id="schedule-ip-modal" class="modal-overlay" style="display:none" onclick="if(event.target===this)closeModal('schedule-ip-modal')">
-  <div class="modal">
-    <h3>🤝 Schedule In-Person Interview</h3>
-    <div class="field"><label>Date *</label><input type="date" id="ip-date" required></div>
-    <div class="field"><label>Time *</label><input type="time" id="ip-time" required></div>
-    <div class="field"><label>Notes <span class="optional">(optional)</span></label><input type="text" id="ip-notes"></div>
-    <div class="modal-actions">
-      <button class="btn btn-secondary" onclick="closeModal('schedule-ip-modal')">Cancel</button>
-      <button class="btn btn-primary" style="width:auto;padding:12px 24px" onclick="saveInPersonSchedule()">Save</button>
+    <div class="field">
+      <label>Interview Time *</label>
+      <input type="time" id="sched-time" required>
     </div>
-  </div>
-</div>
-
-<div id="reject-modal" class="modal-overlay" style="display:none" onclick="if(event.target===this)closeModal('reject-modal')">
-  <div class="modal">
-    <h3>❌ Reject Candidate</h3>
-    <div class="field"><label>Your Name *</label><input type="text" id="reject-name" required></div>
-    <div class="field"><label>Reason for rejection *</label><textarea id="reject-reason" placeholder="Why are you rejecting this candidate? (e.g. availability doesn't match, pay expectations too high, concerning attitude on call, etc.)" required style="min-height:90px;"></textarea></div>
+    <div class="field">
+      <label>Notes <span class="optional">(optional)</span></label>
+      <input type="text" id="sched-notes" placeholder="e.g. Ask about weekends">
+    </div>
     <div class="modal-actions">
-      <button class="btn btn-secondary" onclick="closeModal('reject-modal')">Cancel</button>
-      <button class="btn btn-primary" style="width:auto;padding:12px 24px;background:var(--red);" onclick="saveRejection()">Reject</button>
+      <button class="btn btn-secondary" onclick="closeScheduleModal()">Cancel</button>
+      <button class="btn btn-primary" style="width:auto;padding:12px 24px" onclick="saveInterview()">Save</button>
     </div>
   </div>
 </div>
 
 <script>
 const CONFIG = {
-  API_URL: 'https://script.google.com/macros/s/AKfycbwTO3hiqx-7JsoNGK80DB6DP1uK52lk4isrezT0JmnedMYaac1zhHpzkGG22A0KKxO8Ag/exec',
-  DASHBOARD_PIN: '1300'
+  API_URL: 'https://script.google.com/macros/s/AKfycbzz_4awmlNpt3gOdz5kc1qnjCcSBALVCPiDQQGrviuaApAagcCIjyVi5fpiHTFLlQek3Q/exec',
+  DASHBOARD_PIN: '1234'
 };
-
-// Phone screen review items — { notesField: 'ps_...', label, getAnswer(c) }
-const PS_REVIEW_ITEMS = [
-  { notesField: 'ps_collegeNotes',           label: 'Education & Other Job',          getAnswer: c => {
-      const parts = [];
-      if (c.otherJob === 'Yes') parts.push('Other job: ' + (c.otherJobDesc || 'Yes'));
-      else if (c.otherJob === 'No') parts.push('Other job: No');
-      if (c.attendedCollege === 'Yes') {
-        const cParts = ['College: ' + (c.collegeStatus || 'Yes')];
-        if (c.collegeMajor) cParts.push('Major: ' + c.collegeMajor);
-        parts.push(cParts.join(' · '));
-      } else if (c.attendedCollege === 'No') parts.push('College: No');
-      if (!parts.length && c.collegeOrOtherJob) parts.push(joinYesNo(c.collegeOrOtherJob, c.collegeOrOtherJobDesc));
-      return parts.join('\n');
-    } },
-  { notesField: 'ps_availabilityNotes',      label: 'Open Availability',              getAnswer: c => joinYesNo(c.openAvailability,  c.openAvailabilityDesc) },
-  { notesField: 'ps_startDateNotes',         label: 'When Can They Start',            getAnswer: c => formatDate(c.startDate) },
-  { notesField: 'ps_roleFitNotes',           label: 'Role / Pay Fit',                 getAnswer: c => joinYesNo(c.roleFit, c.roleFitDiscussDesc) },
-  { notesField: 'ps_recentJobNotes',         label: 'Work History',                   getAnswer: c => {
-      // New format: branching
-      if (c.currentlyEmployed === 'Yes') {
-        const parts = [];
-        if (c.currentJobTitle || c.currentJobCompany) parts.push([c.currentJobTitle, c.currentJobCompany].filter(Boolean).join(' @ '));
-        if (c.currentJobDuration) parts.push('(' + c.currentJobDuration + ')');
-        let out = 'Currently employed: ' + parts.join(' ');
-        if (c.currentJobDayToDay) out += '\n\n' + c.currentJobDayToDay;
-        return out;
-      }
-      if (c.currentlyEmployed === 'No') {
-        let out = 'Not currently employed.\n\nMost recent: ' + [c.recentJobTitle, c.recentJobCompany].filter(Boolean).join(' @ ');
-        if (c.recentJobDayToDay) out += '\n\n' + c.recentJobDayToDay;
-        return out;
-      }
-      // Old format fallback
-      return [c.recentJobTitle, c.recentJobCompany].filter(Boolean).join(' @ ') + (c.recentJobDayToDay?'\n\n'+c.recentJobDayToDay:'');
-    } },
-  { notesField: 'ps_recentPayNotes',         label: 'Pay',                            getAnswer: c => c.currentPay || c.recentPay },
-  { notesField: 'ps_whyLeavingNotes',        label: 'Why Leaving / Why Left',         getAnswer: c => c.whyLookingToLeave || c.whyLeftRecentJob || c.whyLeaving },
-  { notesField: 'ps_inventoryNotes',         label: 'Inventory Experience',           getAnswer: c => joinYesNo(c.inventoryExp, c.inventoryExpDesc) },
-  { notesField: 'ps_schedulingNotes',        label: 'Scheduling Experience',          getAnswer: c => joinYesNo(c.schedulingExp, c.schedulingExpDesc) },
-  { notesField: 'ps_hireFireNotes',          label: 'Hiring / Firing Experience',     getAnswer: c => joinYesNo(c.hireFireExp, c.hireFireExpDesc) },
-  { notesField: 'ps_trainingNotes',          label: 'Training Experience',            getAnswer: c => joinYesNo(c.trainingExp, c.trainingExpDesc) },
-  { notesField: 'ps_customerServiceNotes',   label: 'Customer Service Experience',    getAnswer: c => joinYesNo(c.customerServiceExp, c.customerServiceExpDesc) },
-  { notesField: 'ps_applicationNotesNotes',  label: 'Anything Else (from application)', getAnswer: c => c.notes }
-];
-
-const IP_QUESTIONS = [
-  "An employee calls out last minute and another doesn't show up — how do you handle the shift?",
-  "An employee is repeatedly late and does not bring it up at all (does not apologize or try to address it). How do you address it, and when would you escalate to termination?",
-  "Walk me through exactly how you would terminate an employee.",
-  "If one employee is noticeably underperforming compared to the rest of the team, how do you handle it?",
-  "How do you handle employees who have bad attitudes, gossip, or start bringing down the team?",
-  "We received a 1-star review and the customer reached out personally to you explaining that an employee was very rude to them. How would you handle that?",
-  "How would you handle a difficult situation involving customers — like someone intoxicated, disruptive, or unsafe behavior in the store?",
-  "How do you manage situations where employees are friends, dating, or crossing professional boundaries at work?",
-  "If something goes wrong during a shift — like equipment breaking, AC going out, or a maintenance issue — what's your approach?",
-  "How do you balance taking care of customers (like replacing dropped items) while also protecting the business from being taken advantage of?"
-];
-
-function joinYesNo(yesNoValue, desc) {
-  const yn = yesNoValue || '';
-  if (desc) return yn + (yn?' — ':'') + desc;
-  return yn || '—';
-}
-
-function traitBadge(val) {
-  if (!val) return '—';
-  if (val === 'Strongly Agree') return '<span style="color:var(--green);font-weight:600;">💪 ' + esc(val) + '</span>';
-  if (val === 'Agree')          return '<span style="color:var(--blue);font-weight:600;">👍 ' + esc(val) + '</span>';
-  if (val === 'Disagree')       return '<span style="color:var(--red);font-weight:600;">👎 ' + esc(val) + '</span>';
-  return esc(val);
-}
 
 let candidates = [];
 let currentFilter = 'all';
 let currentCandidate = null;
 let gradeValues = {};
-let ipRatings = {};
+let scenarioRatings = {};
 
+const SCENARIOS = [
+  { q: "Your car breaks down and your shift starts in an hour — what do you do?", hint: "✅ Good answer: Calls/texts the store right away, finds a ride (Uber, friend, family), doesn't just no-show" },
+  { q: "A customer is upset and yelling about their order being wrong — how do you handle it?", hint: "✅ Good answer: Stays calm, apologizes, remakes the order or gets a manager, doesn't argue back" },
+  { q: "Being on time is one of our core values. You're always punctual, but this one time you're running 5 minutes late — what do you do?", hint: "✅ Good answer: Contacts the store immediately before the shift starts, gives a heads up and ETA, doesn't just show up late without saying anything, takes responsibility instead of making excuses" },
+  { q: "This team runs on equal contribution and accountability. You'll get honest feedback often, how do you handle feedback? Let's say the manager tells you to work on speed, how would you take that feedback?", hint: "✅ Good answer: Takes it positively and without defensiveness, acknowledges the feedback, has a plan to improve (e.g. asks for tips, practices, pays attention to what slows them down), doesn't make excuses or take it personally" },
+  { q: "You notice your coworker is slacking off and not doing their fair share — what do you do?", hint: "✅ Good answer: Picks up the slack without drama, talks to them directly if needed, lets a manager know if it keeps happening, doesn't gossip about it to other coworkers" },
+  { q: "It's 2 minutes to closing and a big family walks in — how do you greet them?", hint: "✅ Good answer: Welcomes them warmly, serves them with a good attitude, doesn't make them feel like a burden or rush them out" },
+  { q: "You notice a coworker isn't wearing gloves while handling food — what do you do?", hint: "✅ Good answer: Politely reminds them, doesn't ignore it, understands food safety comes first" },
+  { q: "A customer asks for something that's not on the menu — what do you do?", hint: "✅ Good answer: Is polite, checks with a manager if unsure, suggests similar items we do have" }
+];
+
+// ── Views ──
 function showView(name) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.getElementById('view-' + name).classList.add('active');
@@ -489,16 +482,18 @@ function showView(name) {
   if (name === 'dashboard') loadCandidates();
 }
 
+// ── Toast ──
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg; t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 3000);
 }
 
+// ── Login ──
 function checkPin() {
   const pin = document.getElementById('pin-input').value;
   if (pin === CONFIG.DASHBOARD_PIN) {
-    sessionStorage.setItem('mgrDashAuth', 'true');
+    sessionStorage.setItem('dashAuth', 'true');
     document.getElementById('login-error').style.display = 'none';
     showView('dashboard');
   } else {
@@ -508,9 +503,13 @@ function checkPin() {
   }
 }
 document.getElementById('pin-input').addEventListener('keydown', e => { if (e.key === 'Enter') checkPin(); });
-function logoutDash() { sessionStorage.removeItem('mgrDashAuth'); showView('login'); }
-if (sessionStorage.getItem('mgrDashAuth')) showView('dashboard');
 
+function logoutDash() { sessionStorage.removeItem('dashAuth'); showView('login'); }
+
+// Auto-login if session exists
+if (sessionStorage.getItem('dashAuth')) showView('dashboard');
+
+// ── Dashboard ──
 async function loadCandidates() {
   const list = document.getElementById('candidate-list');
   list.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
@@ -520,7 +519,7 @@ async function loadCandidates() {
     candidates = json.candidates || [];
     renderCandidates();
   } catch (err) {
-    list.innerHTML = '<div class="empty-state"><div class="icon">⚠️</div><p>Could not load candidates.</p></div>';
+    list.innerHTML = '<div class="empty-state"><div class="icon">⚠️</div><p>Could not load candidates. Check your API URL.</p></div>';
   }
 }
 
@@ -533,79 +532,27 @@ function setFilter(filter, btn) {
   renderCandidates();
 }
 
-function statusClass(s) { return 'status-' + String(s || 'applied').toLowerCase().replace(/[^a-z]/g, ''); }
-
 function renderCandidates() {
   const list = document.getElementById('candidate-list');
   let filtered = currentFilter === 'all' ? candidates : candidates.filter(c => c.status === currentFilter);
   if (!filtered.length) {
     list.innerHTML = '<div class="empty-state"><div class="icon">📋</div><p>No candidates found.</p></div>';
-    renderUpcoming();
     return;
   }
   list.innerHTML = filtered.map((c, i) => {
     const initials = (c.name || '?').split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+    const statusClass = 'status-' + (c.status || 'applied').toLowerCase();
     const date = c.timestamp ? new Date(c.timestamp).toLocaleDateString() : '';
-    const nextLabel = nextScheduledLabel(c);
     return `<div class="candidate-row" onclick="openProfile(${c.row})" style="animation-delay:${i*0.04}s">
       <div class="avatar">${initials}</div>
-      <div class="info">
-        <div class="name">${esc(c.name)}</div>
-        <div class="meta">${esc(c.phone||'')}${date?' · Applied '+date:''}${nextLabel?' · '+nextLabel:''}</div>
-      </div>
-      <div class="right"><span class="status-chip ${statusClass(c.status)}">${esc(c.status||'Applied')}</span></div>
+      <div class="info"><div class="name">${esc(c.name)}</div><div class="meta">${esc(c.phone||'')}${date?' · Applied '+date:''}${c.interviewDate?' · <span class="interview-badge">📅 '+formatInterviewDate(c.interviewDate)+(c.interviewTime?' · '+formatInterviewTime(c.interviewTime):'')+'</span>':''}</div></div>
+      <div class="right"><span class="status-chip ${statusClass}">${esc(c.status||'Applied')}</span></div>
     </div>`;
   }).join('');
-  renderUpcoming();
+  renderUpcomingInterviews();
 }
 
-function nextScheduledLabel(c) {
-  if (c.inPersonDate && !c.inPersonInterviewerName) {
-    return `🤝 ${formatDate(c.inPersonDate)}${c.inPersonTime?' '+formatTime(c.inPersonTime):''}`;
-  }
-  if (c.phoneScreenDate && !c.phoneScreenerName) {
-    return `📞 ${formatDate(c.phoneScreenDate)}${c.phoneScreenTime?' '+formatTime(c.phoneScreenTime):''}`;
-  }
-  return '';
-}
-
-function renderUpcoming() {
-  const panel = document.getElementById('upcoming-interviews');
-  const now = new Date(); now.setHours(0,0,0,0);
-  const upcoming = [];
-  candidates.forEach(c => {
-    if (c.phoneScreenDate && !c.phoneScreenerName) {
-      const d = parseDateOnly(c.phoneScreenDate);
-      if (d && d >= now) upcoming.push({ kind: 'phone', c, date: c.phoneScreenDate, time: c.phoneScreenTime, notes: c.phoneScreenNotes });
-    }
-    if (c.inPersonDate && !c.inPersonInterviewerName) {
-      const d = parseDateOnly(c.inPersonDate);
-      if (d && d >= now) upcoming.push({ kind: 'inperson', c, date: c.inPersonDate, time: c.inPersonTime, notes: c.inPersonNotes });
-    }
-  });
-  upcoming.sort((a,b) => (String(a.date)+(a.time||'')).localeCompare(String(b.date)+(b.time||'')));
-
-  if (!upcoming.length) { panel.innerHTML = ''; return; }
-
-  panel.innerHTML = `<div class="upcoming-panel">
-    <div class="panel-title">📅 Upcoming Interviews</div>
-    ${upcoming.map(u => {
-      const d = parseDateOnly(u.date);
-      const month = d ? d.toLocaleDateString('en-US', { month: 'short', timeZone: 'America/Chicago' }) : '??';
-      const day = d ? parseInt(d.toLocaleDateString('en-US', { day: 'numeric', timeZone: 'America/Chicago' })) : '?';
-      const kindLabel = u.kind === 'phone' ? 'Phone Screen' : 'In-Person';
-      const kindClass = u.kind === 'phone' ? 'phone' : 'inperson';
-      return `<div class="upcoming-item" onclick="openProfile(${u.c.row})">
-        <div class="date-badge ${u.kind==='phone'?'phone':''}"><div class="month">${month}</div><div class="day">${day}</div></div>
-        <div class="details">
-          <div class="name">${esc(u.c.name)} <span class="upcoming-kind ${kindClass}">${kindLabel}</span></div>
-          <div class="time">${formatTime(u.time)}${u.notes?' · '+esc(u.notes):''}</div>
-        </div>
-      </div>`;
-    }).join('')}
-  </div>`;
-}
-
+// ── Profile ──
 async function openProfile(row) {
   showView('profile');
   const content = document.getElementById('profile-content');
@@ -623,8 +570,54 @@ async function openProfile(row) {
 function renderProfile(c) {
   const content = document.getElementById('profile-content');
   const initials = (c.name||'?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
-  const hasPS = !!c.phoneScreenerName;
-  const hasIP = !!c.inPersonInterviewerName;
+  const statusClass = 'status-'+(c.status||'applied').toLowerCase();
+
+  let vibeHTML = '';
+  if (c.interviewerName) {
+    const grades = [
+      {label:'Attitude',val:parseInt(c.gradeAttitude)||0},
+      {label:'Communication',val:parseInt(c.gradeCommunication)||0},
+      {label:'Reliability',val:parseInt(c.gradeReliability)||0},
+      {label:'Customer Service',val:parseInt(c.gradeCustomerService)||0},
+      {label:'Energy & Enthusiasm',val:parseInt(c.gradeEnergy)||0},
+      {label:'Problem Solving',val:parseInt(c.gradeProblemSolving)||0}
+    ];
+    const barColor = v => v>=4?'var(--green)':v>=3?'var(--yellow)':'var(--red)';
+    const ratingEmoji = r => r==5?'🟢':r==4?'🟢':r==3?'🟡':r==2?'🔴':'🔴';
+    
+    // Build scenario responses HTML
+    let scenarioHTML = '';
+    SCENARIOS.forEach((s, i) => {
+      const rating = c['scenario'+i+'Rating'];
+      const note = c['scenario'+i+'Note'];
+      if (rating || note) {
+        scenarioHTML += `<div style="padding:10px 0;border-bottom:1px solid #f0f0f0;">
+          <div style="font-size:13px;color:#666;margin-bottom:4px;">${esc(s.q)}</div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            ${rating?`<span style="font-size:14px;">${ratingEmoji(parseInt(rating))} ${rating}/5</span>`:''}
+            ${note?`<span style="font-size:13px;color:#444;">— ${esc(note)}</span>`:''}
+          </div>
+        </div>`;
+      }
+    });
+
+    vibeHTML = `<div class="card">
+      <div class="card-title"><span class="icon" style="background:var(--yellow-light);color:var(--yellow)">🎯</span> Vibe Evaluation</div>
+      <div class="data-row"><span class="label">Interviewer</span><span class="value">${esc(c.interviewerName)}</span></div>
+      <div style="margin-top:16px">${grades.map(g=>`<div class="vibe-score-bar"><span class="label">${g.label}</span><div class="bar"><div class="bar-fill" style="width:${g.val*20}%;background:${barColor(g.val)}"></div></div><span class="score">${g.val}</span></div>`).join('')}</div>
+      <div style="margin-top:12px">
+        <div class="data-row"><span class="label">Enjoy working with?</span><span class="value">${esc(c.enjoyWorking||'—')}</span></div>
+        <div class="data-row"><span class="label">Trust with closing?</span><span class="value">${esc(c.trustClosing||'—')}</span></div>
+        <div class="data-row"><span class="label">Coachability</span><span class="value">${esc(c.coachability||'—')}</span></div>
+        <div class="data-row"><span class="label">Hire Decision</span><span class="value" style="font-weight:700">${esc(c.hireDecision||'—')}</span></div>
+        ${c.vibeNotes?`<div class="data-row"><span class="label">Notes</span><span class="value">${esc(c.vibeNotes)}</span></div>`:''}
+      </div>
+      ${scenarioHTML?`<div style="margin-top:16px;padding-top:12px;border-top:2px solid #f0f0f0;">
+        <div style="font-weight:600;font-size:14px;margin-bottom:8px;">📋 Scenario Responses</div>
+        ${scenarioHTML}
+      </div>`:''}
+    </div>`;
+  }
 
   content.innerHTML = `
     <div class="profile-header">
@@ -632,239 +625,77 @@ function renderProfile(c) {
       <div class="details"><h2>${esc(c.name)}</h2><div class="sub">${esc(c.phone||'')}${c.email?' · '+esc(c.email):''}</div></div>
     </div>
     <div class="profile-actions">
-      <span class="status-chip ${statusClass(c.status)}">${esc(c.status||'Applied')}</span>
-      <button class="btn btn-secondary btn-sm" onclick="openPhoneScreenModal()">📞 Schedule Phone Screen</button>
-      ${!hasPS?`<button class="btn btn-primary btn-sm" onclick="startPhoneScreen()">📞 Start Phone Screen</button>`:''}
-      <button class="btn btn-secondary btn-sm" onclick="openInPersonModal()">🤝 Schedule In-Person</button>
-      ${hasPS && !hasIP?`<button class="btn btn-primary btn-sm" onclick="startInPerson()">🤝 Start In-Person</button>`:''}
-      <select class="btn btn-secondary btn-sm" onchange="updateStatus(this.value); this.value=''" style="cursor:pointer;">
+      <span class="status-chip ${statusClass}">${esc(c.status||'Applied')}</span>
+      ${!c.interviewerName?`<button class="btn btn-primary btn-sm" onclick="startVibe()">🎯 Start Interview</button>`:''}
+      <button class="btn btn-secondary btn-sm" onclick="openScheduleModal()">📅 Schedule Interview</button>
+      <select class="btn btn-secondary btn-sm" onchange="updateStatus(this.value)" style="cursor:pointer;">
         <option value="">Change Status…</option>
         <option value="Applied">📩 Applied</option>
-        <option value="Phone Screen Scheduled">📞 Phone Screen Scheduled</option>
-        <option value="Phone Screen Done">📞 Phone Screen Done</option>
-        <option value="In-Person Scheduled">🤝 In-Person Scheduled</option>
-        <option value="In-Person Done">🤝 In-Person Done</option>
+        <option value="Interviewed">💬 Interviewed</option>
         <option value="Hired">✅ Hired</option>
         <option value="Rejected">❌ Rejected</option>
       </select>
     </div>
-
-    ${c.status==='Rejected' && c.rejectionReason?`<div class="card" style="border-color:#f5b5b1; background:var(--red-light);">
-      <div class="card-title" style="color:var(--red)"><span class="icon" style="background:#fff;color:var(--red)">❌</span> Rejected</div>
-      <div class="data-row" style="border-color:#f5b5b1"><span class="label">Reason</span><span class="value">${esc(c.rejectionReason)}</span></div>
-      ${c.rejectedBy?`<div class="data-row" style="border-color:#f5b5b1"><span class="label">Rejected by</span><span class="value">${esc(c.rejectedBy)}</span></div>`:''}
-      ${c.rejectedAt?`<div class="data-row" style="border-color:#f5b5b1"><span class="label">On</span><span class="value">${formatDate(c.rejectedAt)}</span></div>`:''}
+    ${c.interviewDate?`<div class="card" style="border-color:#c3dafe; background:var(--blue-light);">
+      <div class="card-title" style="color:var(--blue)"><span class="icon" style="background:#fff;color:var(--blue)">📅</span> Scheduled Interview</div>
+      <div class="data-row" style="border-color:#c3dafe"><span class="label">Date</span><span class="value">${formatInterviewDate(c.interviewDate)}</span></div>
+      <div class="data-row" style="border-color:#c3dafe"><span class="label">Time</span><span class="value">${formatInterviewTime(c.interviewTime)}</span></div>
+      ${c.interviewNotes?`<div class="data-row" style="border-color:#c3dafe"><span class="label">Notes</span><span class="value">${esc(c.interviewNotes)}</span></div>`:''}
+      <div style="margin-top:12px"><button class="btn btn-secondary btn-sm" onclick="clearInterview()">✕ Remove</button></div>
     </div>`:''}
-
-    ${c.phoneScreenDate?`<div class="card" style="border-color:#ddd0ff; background:var(--purple-light);">
-      <div class="card-title" style="color:var(--purple)"><span class="icon" style="background:#fff;color:var(--purple)">📞</span> Phone Screen Scheduled</div>
-      <div class="data-row" style="border-color:#ddd0ff"><span class="label">Date</span><span class="value">${formatDate(c.phoneScreenDate)}</span></div>
-      <div class="data-row" style="border-color:#ddd0ff"><span class="label">Time</span><span class="value">${formatTime(c.phoneScreenTime)}</span></div>
-      ${c.phoneScreenNotes?`<div class="data-row" style="border-color:#ddd0ff"><span class="label">Notes</span><span class="value">${esc(c.phoneScreenNotes)}</span></div>`:''}
-      <div style="margin-top:12px"><button class="btn btn-secondary btn-sm" onclick="clearPhoneScreenSchedule()">✕ Remove</button></div>
-    </div>`:''}
-
-    ${c.inPersonDate?`<div class="card" style="border-color:#c3dafe; background:var(--blue-light);">
-      <div class="card-title" style="color:var(--blue)"><span class="icon" style="background:#fff;color:var(--blue)">🤝</span> In-Person Interview Scheduled</div>
-      <div class="data-row" style="border-color:#c3dafe"><span class="label">Date</span><span class="value">${formatDate(c.inPersonDate)}</span></div>
-      <div class="data-row" style="border-color:#c3dafe"><span class="label">Time</span><span class="value">${formatTime(c.inPersonTime)}</span></div>
-      ${c.inPersonNotes?`<div class="data-row" style="border-color:#c3dafe"><span class="label">Notes</span><span class="value">${esc(c.inPersonNotes)}</span></div>`:''}
-      <div style="margin-top:12px"><button class="btn btn-secondary btn-sm" onclick="clearInPersonSchedule()">✕ Remove</button></div>
-    </div>`:''}
-
     <div class="card">
-      <div class="card-title"><span class="icon" style="background:var(--blue-light);color:var(--blue)">📝</span> Application</div>
-
-      <div style="margin-bottom:8px;">
-        <div style="font-size:12px;color:var(--text-soft);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">✋ Eligibility</div>
-        ${(c.foodMgmtExp||c.multiLocationExp)?`<div class="data-row"><span class="label">Food industry mgmt experience</span><span class="value">${esc(c.foodMgmtExp||c.multiLocationExp||'—')}${(c.foodMgmtExpDesc||c.multiLocationExpDesc)?' — '+esc(c.foodMgmtExpDesc||c.multiLocationExpDesc):''}</span></div>`:''}
-        ${c.yearsFoodServiceMgmt?`<div class="data-row"><span class="label">Years food service mgmt</span><span class="value">${esc(c.yearsFoodServiceMgmt)}</span></div>`:''}
-        ${c.canCommute?`<div class="data-row"><span class="label">Two-location commute</span><span class="value">${esc(c.canCommute)}${c.canCommuteDesc?' — '+esc(c.canCommuteDesc):''}</span></div>`:''}
-        ${c.foodManagerCert?`<div class="data-row"><span class="label">Food Manager Cert</span><span class="value">${esc(c.foodManagerCert)}</span></div>`:''}
-        ${c.gedOrHigher?`<div class="data-row"><span class="label">GED or higher</span><span class="value">${esc(c.gedOrHigher)}</span></div>`:''}
-      </div>
-
-      <div style="margin-top:14px;padding-top:10px;border-top:2px solid var(--border);">
-        <div style="font-size:12px;color:var(--text-soft);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">🎓 Education &amp; Commitments</div>
-        ${c.otherJob?`<div class="data-row"><span class="label">Other job</span><span class="value">${esc(c.otherJob)}${c.otherJobDesc?' — '+esc(c.otherJobDesc):''}</span></div>`:''}
-        ${c.attendedCollege?`
-          <div class="data-row"><span class="label">Attended college</span><span class="value">${esc(c.attendedCollege)}</span></div>
-          ${c.collegeStatus?`<div class="data-row"><span class="label">College status</span><span class="value">${esc(c.collegeStatus)}</span></div>`:''}
-          ${c.collegeMajor?`<div class="data-row"><span class="label">Major</span><span class="value">${esc(c.collegeMajor)}</span></div>`:''}
-        `:''}
-        ${(!c.otherJob && !c.attendedCollege && c.collegeOrOtherJob)?`<div class="data-row"><span class="label">College / Other Job</span><span class="value">${esc(c.collegeOrOtherJob)}${c.collegeOrOtherJobDesc?' — '+esc(c.collegeOrOtherJobDesc):''}</span></div>`:''}
-      </div>
-
-      <div style="margin-top:14px;padding-top:10px;border-top:2px solid var(--border);">
-        <div style="font-size:12px;color:var(--text-soft);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">📅 Availability &amp; Fit</div>
-        <div class="data-row"><span class="label">Open Availability</span><span class="value">${esc(c.openAvailability||'—')}${c.openAvailabilityDesc?' — '+esc(c.openAvailabilityDesc):''}</span></div>
-        <div class="data-row"><span class="label">Can Start</span><span class="value">${formatDate(c.startDate)||'—'}</span></div>
-        <div class="data-row"><span class="label">Role / Pay Fit</span><span class="value">${esc(c.roleFit||'—')}${c.roleFitDiscussDesc?' — '+esc(c.roleFitDiscussDesc):''}</span></div>
-      </div>
-
-      ${c.currentlyEmployed?`
-        <div style="margin-top:14px;padding-top:10px;border-top:2px solid var(--border);">
-          <div style="font-size:12px;color:var(--text-soft);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">💼 Work History</div>
-          <div class="data-row"><span class="label">Currently employed?</span><span class="value">${esc(c.currentlyEmployed)}</span></div>
-          ${c.currentlyEmployed==='Yes'?`
-            ${c.currentJobCompany?`<div class="data-row"><span class="label">Current Company</span><span class="value">${esc(c.currentJobCompany)}</span></div>`:''}
-            ${c.currentJobDuration?`<div class="data-row"><span class="label">How Long</span><span class="value">${esc(c.currentJobDuration)}</span></div>`:''}
-            ${c.currentJobTitle?`<div class="data-row"><span class="label">Current Title</span><span class="value">${esc(c.currentJobTitle)}</span></div>`:''}
-            ${c.currentJobDayToDay?`<div class="data-row"><span class="label">Day-to-Day</span><span class="value">${esc(c.currentJobDayToDay)}</span></div>`:''}
-            ${c.currentPay?`<div class="data-row"><span class="label">Current Pay</span><span class="value">${esc(c.currentPay)}</span></div>`:''}
-            ${c.whyLookingToLeave?`<div class="data-row"><span class="label">Why Leaving</span><span class="value">${esc(c.whyLookingToLeave)}</span></div>`:''}
-          `:`
-            ${c.recentJobCompany?`<div class="data-row"><span class="label">Most Recent Company</span><span class="value">${esc(c.recentJobCompany)}</span></div>`:''}
-            ${c.recentJobTitle?`<div class="data-row"><span class="label">Most Recent Title</span><span class="value">${esc(c.recentJobTitle)}</span></div>`:''}
-            ${c.recentJobDayToDay?`<div class="data-row"><span class="label">Day-to-Day</span><span class="value">${esc(c.recentJobDayToDay)}</span></div>`:''}
-            ${c.recentPay?`<div class="data-row"><span class="label">Most Recent Pay</span><span class="value">${esc(c.recentPay)}</span></div>`:''}
-            ${c.whyLeftRecentJob?`<div class="data-row"><span class="label">Why Left</span><span class="value">${esc(c.whyLeftRecentJob)}</span></div>`:''}
-          `}
-        </div>
-      `:`
-        ${c.recentJobCompany?`<div class="data-row"><span class="label">Most Recent Company</span><span class="value">${esc(c.recentJobCompany)}</span></div>`:''}
-        ${c.recentJobTitle?`<div class="data-row"><span class="label">Most Recent Title</span><span class="value">${esc(c.recentJobTitle)}</span></div>`:''}
-        ${c.recentJobDayToDay?`<div class="data-row"><span class="label">Day-to-Day</span><span class="value">${esc(c.recentJobDayToDay)}</span></div>`:''}
-        ${c.recentPay?`<div class="data-row"><span class="label">Most Recent Pay</span><span class="value">${esc(c.recentPay)}</span></div>`:''}
-        ${c.whyLeaving?`<div class="data-row"><span class="label">Why Leaving</span><span class="value">${esc(c.whyLeaving)}</span></div>`:''}
+      <div class="card-title"><span class="icon" style="background:var(--blue-light);color:var(--blue)">📅</span> Availability & Reliability</div>
+      <div class="data-row"><span class="label">Student</span><span class="value">${esc(c.student||'—')}</span></div>
+      <div class="data-row"><span class="label">Other Job</span><span class="value">${esc(c.otherJob||'—')}${c.otherJobDesc?' — '+esc(c.otherJobDesc):''}</span></div>
+      <div class="data-row"><span class="label">Job Type</span><span class="value">${esc(c.jobType||'—')}${c.lastDay&&c.jobType==='Seasonal'?' — Last day: '+esc(c.lastDay):''}</span></div>
+      <div class="data-row"><span class="label">Available Days</span><span class="value">${esc(c.days||'—')}</span></div>
+      <div class="data-row"><span class="label">Machine Cleaning</span><span class="value">${esc(c.machineCleaning||'—')}</span></div>
+      ${c.schedNotes?`<div class="data-row"><span class="label">Schedule Notes</span><span class="value">${esc(c.schedNotes)}</span></div>`:''}
+      <div class="data-row"><span class="label">Hours Preferred</span><span class="value">${esc(c.hoursPreferred||'—')}</span></div>
+      <div class="data-row"><span class="label">Hours Minimum</span><span class="value">${esc(c.hoursMinimum||'—')}</span></div>
+      <div class="data-row"><span class="label">Transportation</span><span class="value">${esc(c.transport||'—')}</span></div>
+      <div class="data-row"><span class="label">Bank Account</span><span class="value">${esc(c.bank||'—')}</span></div>
+      <div class="data-row"><span class="label">Start Immediately</span><span class="value">${esc(c.startNow||'—')}${c.startDate?' — '+esc(c.startDate):''}</span></div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon" style="background:var(--yellow-light);color:var(--yellow)">💼</span> Experience</div>
+      ${c.currentlyEmployed ? `<div class="data-row"><span class="label">Currently Employed</span><span class="value">${esc(c.currentlyEmployed)}</span></div>` : ''}
+      ${c.currentlyEmployed === 'Yes' ? `
+        <div class="data-row"><span class="label">Company</span><span class="value">${esc(c.currentCompany||'—')}</span></div>
+        <div class="data-row"><span class="label">Job Title</span><span class="value">${esc(c.currentTitle||'—')}</span></div>
+        <div class="data-row"><span class="label">How Long</span><span class="value">${esc(c.currentLength||'—')}</span></div>
+        <div class="data-row"><span class="label">Reason Leaving</span><span class="value">${esc(c.currentReason||'—')}</span></div>
+      ` : c.currentlyEmployed === 'No' ? `
+        <div class="data-row"><span class="label">Most Recent Company</span><span class="value">${esc(c.recentCompany||'—')}</span></div>
+        <div class="data-row"><span class="label">Job Title</span><span class="value">${esc(c.recentTitle||'—')}</span></div>
+        <div class="data-row"><span class="label">How Long Ago</span><span class="value">${esc(c.recentWhen||'—')}</span></div>
+        <div class="data-row"><span class="label">How Long There</span><span class="value">${esc(c.recentLength||'—')}</span></div>
+        <div class="data-row"><span class="label">Reason Left</span><span class="value">${esc(c.recentReason||'—')}</span></div>
+      ` : `
+        <div class="data-row"><span class="label">Recent Job</span><span class="value">${esc(c.recentJob||'—')}</span></div>
+        ${c.recentJob ? `<div class="data-row"><span class="label">Duration</span><span class="value">${esc(c.recentJobLength||'—')}</span></div><div class="data-row"><span class="label">Reason Left</span><span class="value">${esc(c.recentJobReason||'—')}</span></div>` : ''}
       `}
-
-      ${c.recentJobWasMgmt?`
-        <div style="margin-top:14px;padding:12px 14px;background:var(--blue-light);border-radius:8px;border-left:3px solid var(--blue);">
-          <div style="font-size:12px;color:var(--blue);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">🍴 Most Recent Food Service Mgmt Role</div>
-          <div class="data-row" style="border-color:#c3dafe"><span class="label">Was most recent job mgmt?</span><span class="value">${esc(c.recentJobWasMgmt)}</span></div>
-          ${c.recentJobWasMgmt==='No'?`
-            ${c.mgmtRoleCompanyTitle?`<div class="data-row" style="border-color:#c3dafe"><span class="label">Company &amp; Title</span><span class="value">${esc(c.mgmtRoleCompanyTitle)}</span></div>`:''}
-            ${c.mgmtRoleDuration?`<div class="data-row" style="border-color:#c3dafe"><span class="label">Duration</span><span class="value">${esc(c.mgmtRoleDuration)}</span></div>`:''}
-            ${c.mgmtRoleTeamSize?`<div class="data-row" style="border-color:#c3dafe"><span class="label">Team Size</span><span class="value">${esc(c.mgmtRoleTeamSize)}</span></div>`:''}
-          `:`<div style="font-size:13px;color:var(--text-soft);font-style:italic;padding:4px 0;">Their most recent job (above) was already a food service mgmt role.</div>`}
-        </div>
-      `:''}
-
-      <div style="margin-top:14px;padding-top:10px;border-top:2px solid var(--border);">
-        <div style="font-size:12px;color:var(--text-soft);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">✅ Specific Experience</div>
-        <div class="data-row"><span class="label">Inventory Exp</span><span class="value">${esc(c.inventoryExp||'—')}${c.inventoryExpDesc?' — '+esc(c.inventoryExpDesc):''}</span></div>
-        <div class="data-row"><span class="label">Scheduling Exp</span><span class="value">${esc(c.schedulingExp||'—')}${c.schedulingExpDesc?' — '+esc(c.schedulingExpDesc):''}</span></div>
-        <div class="data-row"><span class="label">Hire/Fire Exp</span><span class="value">${esc(c.hireFireExp||'—')}${c.hireFireExpDesc?' — '+esc(c.hireFireExpDesc):''}</span></div>
-        <div class="data-row"><span class="label">Training Exp</span><span class="value">${esc(c.trainingExp||'—')}${c.trainingExpDesc?' — '+esc(c.trainingExpDesc):''}</span></div>
-        <div class="data-row"><span class="label">Customer Service Exp</span><span class="value">${esc(c.customerServiceExp||'—')}${c.customerServiceExpDesc?' — '+esc(c.customerServiceExpDesc):''}</span></div>
-      </div>
-
-      ${(c.traitOnTime||c.traitReliable||c.traitAccountable||c.traitAboveBeyond||c.traitRollUpSleeves||c.traitTeamContributor)?`
-        <div style="margin-top:14px;padding-top:10px;border-top:2px solid var(--border);">
-          <div style="font-size:12px;color:var(--text-soft);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">⭐ Self-Assessment</div>
-          ${c.traitOnTime?`<div class="data-row"><span class="label">Always on time</span><span class="value">${traitBadge(c.traitOnTime)}</span></div>`:''}
-          ${c.traitReliable?`<div class="data-row"><span class="label">Reliable (no excuses)</span><span class="value">${traitBadge(c.traitReliable)}</span></div>`:''}
-          ${c.traitAccountable?`<div class="data-row"><span class="label">Accountable</span><span class="value">${traitBadge(c.traitAccountable)}</span></div>`:''}
-          ${c.traitAboveBeyond?`<div class="data-row"><span class="label">Goes above &amp; beyond</span><span class="value">${traitBadge(c.traitAboveBeyond)}</span></div>`:''}
-          ${c.traitRollUpSleeves?`<div class="data-row"><span class="label">Rolls up sleeves</span><span class="value">${traitBadge(c.traitRollUpSleeves)}</span></div>`:''}
-          ${c.traitTeamContributor?`<div class="data-row"><span class="label">Team contributor</span><span class="value">${traitBadge(c.traitTeamContributor)}</span></div>`:''}
-        </div>
-      `:''}
-
-      ${c.notes?`<div class="data-row" style="margin-top:14px;padding-top:14px;border-top:2px solid var(--border);"><span class="label">Notes</span><span class="value">${esc(c.notes)}</span></div>`:''}
+      <div class="data-row"><span class="label">Food Industry Exp</span><span class="value">${esc(c.foodExp||c.foodJob||'—')}</span></div>
     </div>
-
-    <div class="card" style="padding:16px 24px 24px;">
-      <div class="tabs">
-        <button class="tab-btn active" onclick="showTab('ps',this)">📞 Phone Screen${hasPS?' ✓':''}</button>
-        <button class="tab-btn" onclick="showTab('ip',this)">🤝 In-Person${hasIP?' ✓':''}</button>
-      </div>
-      <div id="tab-ps" class="tab-panel active">
-        ${hasPS ? renderPhoneScreenData(c) : '<div class="empty-state"><div class="icon">📞</div><p>No phone screen completed yet.</p></div>'}
-      </div>
-      <div id="tab-ip" class="tab-panel">
-        ${hasIP ? renderInPersonData(c) : '<div class="empty-state"><div class="icon">🤝</div><p>No in-person interview completed yet.</p></div>'}
-      </div>
+    <div class="card">
+      <div class="card-title"><span class="icon" style="background:var(--green-light);color:var(--green)">✅</span> Job Comfort</div>
+      <div class="data-row"><span class="label">Standing / Prep / Cleaning</span><span class="value">${esc(c.comfortPhysical||'—')}</span></div>
+      <div class="data-row"><span class="label">Rushes / Difficult Customers</span><span class="value">${esc(c.comfortRush||'—')}</span></div>
+      ${c.notes?`<div class="data-row"><span class="label">Additional Notes</span><span class="value">${esc(c.notes)}</span></div>`:''}
     </div>
-  `;
+    ${vibeHTML}`;
 }
 
-function renderPhoneScreenData(c) {
-  let itemsHTML = '';
-  PS_REVIEW_ITEMS.forEach(item => {
-    const answer = item.getAnswer(c) || '';
-    const notes = c[item.notesField] || '';
-    if (notes || answer) {
-      itemsHTML += `<div style="padding:12px 0;border-bottom:1px solid #f0f0f0;">
-        <div style="font-size:12px;color:var(--text-soft);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">${esc(item.label)}</div>
-        ${answer?`<div style="font-size:13px;color:#666;margin-bottom:6px;white-space:pre-wrap;"><em>Applied:</em> ${esc(answer)}</div>`:''}
-        ${notes?`<div style="font-size:14px;color:#333;background:var(--purple-light);padding:8px 12px;border-radius:6px;border-left:3px solid var(--purple);white-space:pre-wrap;"><strong>Phone screen notes:</strong> ${esc(notes)}</div>`:''}
-      </div>`;
-    }
-  });
-  return `
-    <div class="data-row"><span class="label">Interviewer</span><span class="value">${esc(c.phoneScreenerName)}</span></div>
-    <div class="data-row"><span class="label">Move Forward?</span><span class="value" style="font-weight:700">${esc(c.ps_moveForward||'—')}</span></div>
-    ${c.ps_overallNotes?`<div class="data-row"><span class="label">Overall Vibe</span><span class="value">${esc(c.ps_overallNotes)}</span></div>`:''}
-    ${itemsHTML?`<div style="margin-top:16px;padding-top:12px;border-top:2px solid #f0f0f0;">
-      <div style="font-weight:600;font-size:14px;margin-bottom:8px;">📋 Review Notes</div>
-      ${itemsHTML}
-    </div>`:''}
-  `;
-}
-
-function renderInPersonData(c) {
-  const ratingEmoji = r => r==='Strong'?'✅':r==='Okay'?'👍':r==='Weak'?'⚠️':r==='Concerning'?'🚩':'';
-  const grades = [
-    {label:'Leadership', val: parseInt(c.gradeLeadership)||0},
-    {label:'Decision Making', val: parseInt(c.gradeDecisionMaking)||0},
-    {label:'Communication', val: parseInt(c.gradeCommunication)||0},
-    {label:'Reliability', val: parseInt(c.gradeReliability)||0},
-    {label:'Problem Solving', val: parseInt(c.gradeProblemSolving)||0},
-    {label:'Integrity', val: parseInt(c.gradeIntegrity)||0}
-  ];
-  const barColor = v => v>=4?'var(--green)':v>=3?'var(--yellow)':'var(--red)';
-
-  let questionsHTML = '';
-  IP_QUESTIONS.forEach((q, i) => {
-    const n = i + 1;
-    const answer = c['ip_q'+n+'_answer'];
-    const rating = c['ip_q'+n+'_rating'];
-    if (answer || rating) {
-      questionsHTML += `<div style="padding:12px 0;border-bottom:1px solid #f0f0f0;">
-        <div style="font-size:13px;color:#666;margin-bottom:4px;font-weight:600;">${esc(q)}</div>
-        ${answer?`<div style="font-size:14px;color:#333;margin-top:6px;white-space:pre-wrap;">${esc(answer)}</div>`:''}
-        ${rating?`<div style="margin-top:6px;font-size:13px;">${ratingEmoji(rating)} ${esc(rating)}</div>`:''}
-      </div>`;
-    }
-  });
-
-  return `
-    <div class="data-row"><span class="label">Interviewer</span><span class="value">${esc(c.inPersonInterviewerName)}</span></div>
-    <div style="margin-top:16px">${grades.map(g=>`<div class="vibe-score-bar"><span class="label">${g.label}</span><div class="bar"><div class="bar-fill" style="width:${g.val*20}%;background:${barColor(g.val)}"></div></div><span class="score">${g.val}</span></div>`).join('')}</div>
-    <div style="margin-top:12px">
-      <div class="data-row"><span class="label">Enjoy working with?</span><span class="value">${esc(c.enjoyWorking||'—')}</span></div>
-      <div class="data-row"><span class="label">Trust running store?</span><span class="value">${esc(c.trustWithStore||'—')}</span></div>
-      <div class="data-row"><span class="label">Coachability</span><span class="value">${esc(c.coachability||'—')}</span></div>
-      <div class="data-row"><span class="label">Hire Decision</span><span class="value" style="font-weight:700">${esc(c.hireDecision||'—')}</span></div>
-      ${c.ip_overallNotes?`<div class="data-row"><span class="label">Overall Notes</span><span class="value">${esc(c.ip_overallNotes)}</span></div>`:''}
-    </div>
-    ${questionsHTML?`<div style="margin-top:16px;padding-top:12px;border-top:2px solid #f0f0f0;">
-      <div style="font-weight:600;font-size:14px;margin-bottom:8px;">📋 Responses</div>
-      ${questionsHTML}
-    </div>`:''}
-  `;
-}
-
-function showTab(which, btn) {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  document.getElementById('tab-' + which).classList.add('active');
-}
-
+// ── Status Update ──
 async function updateStatus(status) {
   if (!status || !currentCandidate) return;
-  if (status === 'Rejected') {
-    document.getElementById('reject-name').value = '';
-    document.getElementById('reject-reason').value = '';
-    document.getElementById('reject-modal').style.display = 'flex';
-    setTimeout(() => document.getElementById('reject-name').focus(), 100);
-    return;
-  }
   try {
-    const params = new URLSearchParams({ action:'updateStatus', row: currentCandidate.row, pin: CONFIG.DASHBOARD_PIN, status });
+    const params = new URLSearchParams({
+      action: 'updateStatus',
+      row: currentCandidate.row,
+      pin: CONFIG.DASHBOARD_PIN,
+      status: status
+    });
     await fetch(CONFIG.API_URL + '?' + params.toString());
     currentCandidate.status = status;
     renderProfile(currentCandidate);
@@ -872,172 +703,38 @@ async function updateStatus(status) {
   } catch (err) { showToast('Error updating status'); }
 }
 
-async function saveRejection() {
-  const name = document.getElementById('reject-name').value.trim();
-  const reason = document.getElementById('reject-reason').value.trim();
-  if (!name) { showToast('Please enter your name'); return; }
-  if (!reason) { showToast('Please enter a reason for rejection'); return; }
-  try {
-    const params = new URLSearchParams({
-      action: 'rejectCandidate',
-      row: currentCandidate.row,
-      pin: CONFIG.DASHBOARD_PIN,
-      rejectionReason: reason,
-      rejectedBy: name
-    });
-    await fetch(CONFIG.API_URL + '?' + params.toString());
-    currentCandidate.status = 'Rejected';
-    currentCandidate.rejectionReason = reason;
-    currentCandidate.rejectedBy = name;
-    currentCandidate.rejectedAt = new Date().toISOString();
-    closeModal('reject-modal');
-    renderProfile(currentCandidate);
-    showToast('Candidate rejected');
-  } catch (err) { showToast('Error rejecting candidate'); }
-}
-
-// ─── PHONE SCREEN ───
-function startPhoneScreen() {
+// ── Vibe Evaluation ──
+function startVibe() {
   if (!currentCandidate) return;
-  showView('phonescreen');
-  document.getElementById('ps-candidate-name').textContent = 'Interviewing: ' + currentCandidate.name;
-  document.getElementById('ps-back-btn').onclick = () => openProfile(currentCandidate.row);
-  document.getElementById('ps-form').reset();
-  const btn = document.getElementById('ps-submit-btn');
-  btn.disabled = false; btn.textContent = 'Submit Phone Screen';
-  renderPSReviewCards();
+  showView('vibe');
+  document.getElementById('vibe-candidate-name').textContent = 'Evaluating: ' + currentCandidate.name;
+  document.getElementById('vibe-back-btn').onclick = () => openProfile(currentCandidate.row);
+  gradeValues = {}; scenarioRatings = {};
+  // Reset the entire form
+  document.getElementById('vibe-form').reset();
+  // Re-enable submit button
+  const btn = document.getElementById('vibe-btn');
+  btn.disabled = false; btn.textContent = 'Submit Evaluation';
+  renderScenarios(); renderGradeDots();
 }
 
-function renderPSReviewCards() {
-  const c = currentCandidate;
-  document.getElementById('ps-review-cards').innerHTML = PS_REVIEW_ITEMS.map((item, i) => {
-    const answer = item.getAnswer(c) || '';
-    const answerHTML = answer
-      ? `<div class="review-answer">${esc(answer)}</div>`
-      : `<div class="review-answer empty">(not provided on application)</div>`;
-    return `<div class="review-card" style="animation-delay:${i*0.03}s">
-      <div class="review-label">${esc(item.label)}</div>
-      ${answerHTML}
-      <label class="notes-label">Phone screen notes <span class="optional">(optional)</span></label>
-      <textarea name="${item.notesField}" placeholder="Anything new they shared, red flags, follow-ups, etc."></textarea>
-    </div>`;
-  }).join('');
-}
-
-document.getElementById('ps-form').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const btn = document.getElementById('ps-submit-btn');
-  btn.disabled = true; btn.textContent = 'Submitting...';
-  const fd = new FormData(e.target);
-  const data = {
-    action: 'phoneScreen',
-    row: currentCandidate.row,
-    pin: CONFIG.DASHBOARD_PIN,
-    phoneScreenerName: fd.get('phoneScreenerName'),
-    ps_overallNotes: fd.get('ps_overallNotes') || '',
-    ps_moveForward: fd.get('ps_moveForward')
-  };
-  PS_REVIEW_ITEMS.forEach(item => {
-    data[item.notesField] = fd.get(item.notesField) || '';
-  });
-  try {
-    const params = new URLSearchParams(data);
-    await fetch(CONFIG.API_URL + '?' + params.toString());
-    showToast('Phone screen submitted!');
-    setTimeout(() => openProfile(currentCandidate.row), 800);
-  } catch (err) {
-    showToast('Error submitting');
-    btn.disabled = false; btn.textContent = 'Submit Phone Screen';
-  }
-});
-
-// ─── IN-PERSON ───
-function startInPerson() {
-  if (!currentCandidate) return;
-  showView('inperson');
-  document.getElementById('ip-candidate-name').textContent = 'Interviewing: ' + currentCandidate.name;
-  document.getElementById('ip-back-btn').onclick = () => openProfile(currentCandidate.row);
-  ipRatings = {}; gradeValues = {};
-  document.getElementById('ip-form').reset();
-  const btn = document.getElementById('ip-submit-btn');
-  btn.disabled = false; btn.textContent = 'Submit In-Person Interview';
-  renderIPSummary();
-  renderIPQuestions();
-  renderGradeDots();
-}
-
-function renderIPSummary() {
-  const c = currentCandidate;
-  const summaryEl = document.getElementById('ip-summary');
-  const hasPS = !!c.phoneScreenerName;
-
-  // If no phone screen, hide the summary section entirely
-  if (!hasPS) {
-    summaryEl.innerHTML = '';
-    return;
-  }
-
-  // Header rows (interviewer, decision, vibe)
-  let headerHTML = `<div class="data-row"><span class="label">Interviewer</span><span class="value">${esc(c.phoneScreenerName)}</span></div>`;
-  headerHTML += `<div class="data-row"><span class="label">Move Forward?</span><span class="value" style="font-weight:700">${esc(c.ps_moveForward||'—')}</span></div>`;
-  if (c.ps_overallNotes) headerHTML += `<div class="data-row"><span class="label">Overall Vibe</span><span class="value">${esc(c.ps_overallNotes)}</span></div>`;
-
-  // Review items — show each PS_REVIEW_ITEM with application answer + PS notes (if any)
-  let itemsHTML = '';
-  PS_REVIEW_ITEMS.forEach(item => {
-    const answer = item.getAnswer(c) || '';
-    const notes = c[item.notesField] || '';
-    if (answer || notes) {
-      itemsHTML += `<div style="padding:14px 0;border-bottom:1px solid var(--border);">
-        <div style="font-size:12px;color:var(--text-soft);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">${esc(item.label)}</div>
-        ${answer?`<div style="font-size:13px;color:#666;margin-bottom:${notes?'8px':'0'};white-space:pre-wrap;"><em style="color:var(--text-soft);">📝 Applied:</em> ${esc(answer)}</div>`:''}
-        ${notes?`<div style="font-size:14px;color:#333;background:var(--purple-light);padding:10px 12px;border-radius:6px;border-left:3px solid var(--purple);white-space:pre-wrap;"><strong style="color:var(--purple);">💬 Phone screen:</strong> ${esc(notes)}</div>`:''}
-      </div>`;
-    }
-  });
-
-  summaryEl.innerHTML = `
-    <div class="card" style="padding:0;overflow:hidden;">
-      <button type="button" onclick="toggleSummary('combined')" style="width:100%;padding:18px 24px;background:var(--purple-light);border:none;text-align:left;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;justify-content:space-between;align-items:center;font-size:15px;font-weight:700;color:var(--purple);">
-        <span>📞 Phone Screen &amp; Application Summary ✓</span>
-        <span id="summary-combined-arrow" style="transition:transform 0.2s;">▼</span>
-      </button>
-      <div id="summary-combined-body" style="display:none;padding:18px 24px;">
-        ${headerHTML}
-        <div style="margin-top:8px;">${itemsHTML}</div>
+function renderScenarios() {
+  document.getElementById('scenario-cards').innerHTML = SCENARIOS.map((s,i) => `
+    <div class="scenario-card" style="animation-delay:${i*0.05}s">
+      <div class="question">${i+1}. ${s.q}</div>
+      <div class="hint">${s.hint}</div>
+      <div class="rating-btns" data-scenario="${i}">
+        <button type="button" onclick="rateScenario(${i},'Strong',this)">✅ Strong</button>
+        <button type="button" onclick="rateScenario(${i},'Okay',this)">👍 Okay</button>
+        <button type="button" onclick="rateScenario(${i},'Weak',this)">⚠️ Weak</button>
+        <button type="button" onclick="rateScenario(${i},'Concerning',this)">🚩 Concerning</button>
       </div>
-    </div>
-  `;
+      <div class="scenario-note"><input type="text" name="scenarioNote${i}" placeholder="Quick note (optional)"></div>
+    </div>`).join('');
 }
 
-function toggleSummary(which) {
-  const body = document.getElementById('summary-' + which + '-body');
-  const arrow = document.getElementById('summary-' + which + '-arrow');
-  const isOpen = body.style.display !== 'none';
-  body.style.display = isOpen ? 'none' : 'block';
-  arrow.style.transform = isOpen ? 'rotate(0)' : 'rotate(180deg)';
-}
-
-function renderIPQuestions() {
-  document.getElementById('ip-questions').innerHTML = IP_QUESTIONS.map((q, i) => {
-    const n = i + 1;
-    return `<div class="question-card" style="animation-delay:${i*0.05}s">
-      <div class="question">${n}. ${esc(q)}</div>
-      <label class="notes-label" style="font-size:12px;font-weight:600;color:var(--text-soft);margin-bottom:4px;display:block;">Your notes</label>
-      <textarea name="ip_q${n}_answer" placeholder="What they said, examples given, red flags, or things that stood out"></textarea>
-      <label class="notes-label" style="font-size:12px;font-weight:600;color:var(--text-soft);margin:8px 0 4px;display:block;">Rating</label>
-      <div class="rating-btns" data-ip-q="${n}">
-        <button type="button" onclick="rateIP(${n},'Strong',this)">✅ Strong</button>
-        <button type="button" onclick="rateIP(${n},'Okay',this)">👍 Okay</button>
-        <button type="button" onclick="rateIP(${n},'Weak',this)">⚠️ Weak</button>
-        <button type="button" onclick="rateIP(${n},'Concerning',this)">🚩 Concerning</button>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function rateIP(n, rating, btn) {
-  ipRatings[n] = rating;
+function rateScenario(idx, rating, btn) {
+  scenarioRatings[idx] = rating;
   btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
 }
@@ -1045,8 +742,8 @@ function rateIP(n, rating, btn) {
 function renderGradeDots() {
   document.querySelectorAll('.grade-dots').forEach(container => {
     const key = container.dataset.grade;
-    container.innerHTML = [0,1,2,3,4,5].map(v =>
-      `<button type="button" onclick="setGrade('${key}',${v},this)">${v}</button>`
+    container.innerHTML = [0,1,2,3,4,5].map(n =>
+      `<button type="button" onclick="setGrade('${key}',${n},this)">${n}</button>`
     ).join('');
   });
 }
@@ -1057,188 +754,220 @@ function setGrade(key, val, btn) {
   btn.classList.add('selected');
 }
 
-document.getElementById('ip-form').addEventListener('submit', async (e) => {
+document.getElementById('vibe-form').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const btn = document.getElementById('ip-submit-btn');
+  const btn = document.getElementById('vibe-btn');
   btn.disabled = true; btn.textContent = 'Submitting...';
   const fd = new FormData(e.target);
   const data = {
-    action: 'inPerson',
-    row: currentCandidate.row,
-    pin: CONFIG.DASHBOARD_PIN,
-    inPersonInterviewerName: fd.get('inPersonInterviewerName'),
-    enjoyWorking: fd.get('enjoyWorking'),
-    trustWithStore: fd.get('trustWithStore'),
-    coachability: fd.get('coachability'),
-    hireDecision: fd.get('hireDecision'),
-    ip_overallNotes: fd.get('ip_overallNotes') || '',
-    ...gradeValues
+    type:'vibeEval', row:currentCandidate.row, pin:CONFIG.DASHBOARD_PIN,
+    interviewerName:fd.get('interviewerName'), enjoyWorking:fd.get('enjoyWorking'),
+    trustClosing:fd.get('trustClosing'), coachability:fd.get('coachability'), hireDecision:fd.get('hireDecision'),
+    vibeNotes:fd.get('vibeNotes')||'', ...gradeValues
   };
-  IP_QUESTIONS.forEach((q, i) => {
-    const n = i + 1;
-    data['ip_q'+n+'_answer'] = fd.get('ip_q'+n+'_answer') || '';
-    data['ip_q'+n+'_rating'] = ipRatings[n] || '';
+  SCENARIOS.forEach((s,i) => {
+    data['scenario'+i+'Rating'] = scenarioRatings[i]||'';
+    data['scenario'+i+'Note'] = fd.get('scenarioNote'+i)||'';
   });
   try {
     const params = new URLSearchParams(data);
+    // Remove 'type' since we use 'action' for GET
+    params.delete('type');
+    params.set('action', 'vibeEval');
     await fetch(CONFIG.API_URL + '?' + params.toString());
-    showToast('In-Person interview submitted!');
+    showToast('Evaluation submitted!');
     setTimeout(() => openProfile(currentCandidate.row), 800);
   } catch (err) {
-    showToast('Error submitting');
-    btn.disabled = false; btn.textContent = 'Submit In-Person Interview';
+    showToast('Error submitting evaluation');
+    btn.disabled = false; btn.textContent = 'Submit Evaluation';
   }
 });
 
-// ─── Scheduling ───
-function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-
-function openPhoneScreenModal() {
-  const modal = document.getElementById('schedule-ps-modal');
-  const dateInput = document.getElementById('ps-date');
-  const timeInput = document.getElementById('ps-time');
-  const notesInput = document.getElementById('ps-notes');
-  if (currentCandidate.phoneScreenDate) {
-    dateInput.value = datePartOnly(currentCandidate.phoneScreenDate);
-    timeInput.value = timePartOnly(currentCandidate.phoneScreenTime);
-    notesInput.value = currentCandidate.phoneScreenNotes || '';
-  } else {
-    dateInput.value = ''; timeInput.value = ''; notesInput.value = '';
-  }
-  dateInput.min = new Date().toISOString().split('T')[0];
-  modal.style.display = 'flex';
-}
-
-function openInPersonModal() {
-  const modal = document.getElementById('schedule-ip-modal');
-  const dateInput = document.getElementById('ip-date');
-  const timeInput = document.getElementById('ip-time');
-  const notesInput = document.getElementById('ip-notes');
-  if (currentCandidate.inPersonDate) {
-    dateInput.value = datePartOnly(currentCandidate.inPersonDate);
-    timeInput.value = timePartOnly(currentCandidate.inPersonTime);
-    notesInput.value = currentCandidate.inPersonNotes || '';
-  } else {
-    dateInput.value = ''; timeInput.value = ''; notesInput.value = '';
-  }
-  dateInput.min = new Date().toISOString().split('T')[0];
-  modal.style.display = 'flex';
-}
-
-async function savePhoneScreenSchedule() {
-  const dateVal = document.getElementById('ps-date').value;
-  const timeVal = document.getElementById('ps-time').value;
-  const notesVal = document.getElementById('ps-notes').value;
-  if (!dateVal || !timeVal) { showToast('Please enter date and time'); return; }
+// ── Interview Scheduling ──
+function formatInterviewDate(dateStr) {
+  if (!dateStr) return '—';
   try {
-    const params = new URLSearchParams({
-      action: 'schedulePhoneScreen', row: currentCandidate.row, pin: CONFIG.DASHBOARD_PIN,
-      phoneScreenDate: dateVal, phoneScreenTime: timeVal, phoneScreenNotes: notesVal
-    });
-    await fetch(CONFIG.API_URL + '?' + params.toString());
-    currentCandidate.phoneScreenDate = dateVal;
-    currentCandidate.phoneScreenTime = timeVal;
-    currentCandidate.phoneScreenNotes = notesVal;
-    closeModal('schedule-ps-modal');
-    renderProfile(currentCandidate);
-    showToast('Phone screen scheduled');
-  } catch (err) { showToast('Error scheduling'); }
+    const s = String(dateStr).trim();
+    let d;
+    if (s.match(/^\d{4}-\d{2}-\d{2}$/)) {
+      d = new Date(s + 'T12:00:00');
+    } else if (s.includes('T')) {
+      const datePart = s.split('T')[0];
+      d = new Date(datePart + 'T12:00:00');
+    } else {
+      d = new Date(s);
+    }
+    if (isNaN(d.getTime())) return s;
+    return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'America/Chicago' });
+  } catch { return String(dateStr); }
 }
 
-async function saveInPersonSchedule() {
-  const dateVal = document.getElementById('ip-date').value;
-  const timeVal = document.getElementById('ip-time').value;
-  const notesVal = document.getElementById('ip-notes').value;
-  if (!dateVal || !timeVal) { showToast('Please enter date and time'); return; }
+function formatInterviewTime(timeStr) {
+  if (!timeStr) return '—';
   try {
-    const params = new URLSearchParams({
-      action: 'scheduleInPerson', row: currentCandidate.row, pin: CONFIG.DASHBOARD_PIN,
-      inPersonDate: dateVal, inPersonTime: timeVal, inPersonNotes: notesVal
-    });
-    await fetch(CONFIG.API_URL + '?' + params.toString());
-    currentCandidate.inPersonDate = dateVal;
-    currentCandidate.inPersonTime = timeVal;
-    currentCandidate.inPersonNotes = notesVal;
-    closeModal('schedule-ip-modal');
-    renderProfile(currentCandidate);
-    showToast('In-person interview scheduled');
-  } catch (err) { showToast('Error scheduling'); }
-}
-
-async function clearPhoneScreenSchedule() {
-  if (!confirm('Remove the scheduled phone screen?')) return;
-  try {
-    const params = new URLSearchParams({
-      action: 'schedulePhoneScreen', row: currentCandidate.row, pin: CONFIG.DASHBOARD_PIN,
-      phoneScreenDate: '', phoneScreenTime: '', phoneScreenNotes: ''
-    });
-    await fetch(CONFIG.API_URL + '?' + params.toString());
-    currentCandidate.phoneScreenDate = '';
-    currentCandidate.phoneScreenTime = '';
-    currentCandidate.phoneScreenNotes = '';
-    renderProfile(currentCandidate);
-    showToast('Phone screen removed');
-  } catch (err) { showToast('Error'); }
-}
-
-async function clearInPersonSchedule() {
-  if (!confirm('Remove the scheduled in-person interview?')) return;
-  try {
-    const params = new URLSearchParams({
-      action: 'scheduleInPerson', row: currentCandidate.row, pin: CONFIG.DASHBOARD_PIN,
-      inPersonDate: '', inPersonTime: '', inPersonNotes: ''
-    });
-    await fetch(CONFIG.API_URL + '?' + params.toString());
-    currentCandidate.inPersonDate = '';
-    currentCandidate.inPersonTime = '';
-    currentCandidate.inPersonNotes = '';
-    renderProfile(currentCandidate);
-    showToast('In-person removed');
-  } catch (err) { showToast('Error'); }
-}
-
-function parseDateOnly(v) {
-  if (!v) return null;
-  const s = String(v).trim();
-  const datePart = s.includes('T') ? s.split('T')[0] : s;
-  const d = new Date(datePart + 'T00:00:00');
-  return isNaN(d.getTime()) ? null : d;
-}
-function datePartOnly(v) {
-  if (!v) return '';
-  const s = String(v).trim();
-  return s.includes('T') ? s.split('T')[0] : s;
-}
-function timePartOnly(v) {
-  if (!v) return '';
-  const s = String(v).trim();
-  if (s.includes('T')) return s.split('T')[1].substring(0,5);
-  if (s.includes(':')) return s.substring(0,5);
-  return s;
-}
-function formatDate(v) {
-  if (!v) return '';
-  const d = parseDateOnly(v);
-  if (!d) return String(v);
-  return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'America/Chicago' });
-}
-function formatTime(v) {
-  if (!v) return '';
-  const s = String(v).trim();
-  if (s.includes('T')) {
-    const d = new Date(s);
-    if (!isNaN(d.getTime())) return d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Chicago' });
-  }
-  if (s.includes(':')) {
-    const bits = s.split(':');
-    const h = parseInt(bits[0]); const m = bits[1].substring(0,2);
+    const s = String(timeStr).trim();
+    let h, m;
+    if (s.includes('T')) {
+      // Google Sheets returns time as "1899-12-30T23:30:00.000Z" (UTC)
+      // Parse the full date and convert to Central Time
+      const d = new Date(s);
+      if (!isNaN(d.getTime())) {
+        return d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Chicago' });
+      }
+      // Fallback: extract time part
+      const timePart = s.split('T')[1];
+      const bits = timePart.split(':');
+      h = parseInt(bits[0]);
+      m = bits[1];
+    } else if (s.includes(':')) {
+      // Simple "17:30" format - already in local time
+      const bits = s.split(':');
+      h = parseInt(bits[0]);
+      m = bits[1];
+    } else {
+      return s;
+    }
     const ampm = h >= 12 ? 'PM' : 'AM';
     const hr12 = h % 12 || 12;
     return `${hr12}:${m} ${ampm}`;
-  }
-  return s;
+  } catch { return String(timeStr); }
 }
-function esc(str) { if(!str) return ''; const d = document.createElement('div'); d.textContent = String(str); return d.innerHTML; }
+
+function renderUpcomingInterviews() {
+  const panel = document.getElementById('upcoming-interviews');
+  const now = new Date();
+  now.setHours(0,0,0,0);
+  const upcoming = candidates
+    .filter(c => {
+      if (!c.interviewDate) return false;
+      const s = String(c.interviewDate).trim();
+      const datePart = s.includes('T') ? s.split('T')[0] : s;
+      const d = new Date(datePart + 'T00:00:00');
+      return !isNaN(d.getTime()) && d >= now;
+    })
+    .sort((a, b) => {
+      const da = a.interviewDate + (a.interviewTime || '00:00');
+      const db = b.interviewDate + (b.interviewTime || '00:00');
+      return da.localeCompare(db);
+    });
+
+  if (!upcoming.length) {
+    panel.innerHTML = '';
+    return;
+  }
+
+  panel.innerHTML = `<div class="upcoming-panel">
+    <div class="panel-title">📅 Upcoming Interviews</div>
+    ${upcoming.map(c => {
+      const s = String(c.interviewDate).trim();
+      const datePart = s.includes('T') ? s.split('T')[0] : s;
+      const d = new Date(datePart + 'T12:00:00');
+      const month = !isNaN(d.getTime()) ? d.toLocaleDateString('en-US', { month: 'short', timeZone: 'America/Chicago' }) : '??';
+      const day = !isNaN(d.getTime()) ? parseInt(d.toLocaleDateString('en-US', { day: 'numeric', timeZone: 'America/Chicago' })) : '?';
+      return `<div class="upcoming-item" onclick="openProfile(${c.row})">
+        <div class="date-badge"><div class="month">${month}</div><div class="day">${day}</div></div>
+        <div class="details">
+          <div class="name">${esc(c.name)}</div>
+          <div class="time">${formatInterviewTime(c.interviewTime)}${c.interviewNotes ? ' · ' + esc(c.interviewNotes) : ''}</div>
+        </div>
+        <span class="status-chip status-${(c.status||'applied').toLowerCase()}">${esc(c.status||'Applied')}</span>
+      </div>`;
+    }).join('')}
+  </div>`;
+}
+
+function openScheduleModal() {
+  const modal = document.getElementById('schedule-modal');
+  const dateInput = document.getElementById('sched-date');
+  const timeInput = document.getElementById('sched-time');
+  const notesInput = document.getElementById('sched-notes');
+
+  // Pre-fill if interview already scheduled
+  if (currentCandidate.interviewDate) {
+    // Convert to YYYY-MM-DD format for the date input
+    const s = String(currentCandidate.interviewDate).trim();
+    const datePart = s.includes('T') ? s.split('T')[0] : s;
+    dateInput.value = datePart;
+    // Handle time - Google Sheets returns "1899-12-30T23:30:00.000Z"
+    const timeRaw = String(currentCandidate.interviewTime || '').trim();
+    if (timeRaw.includes('T')) {
+      const timePart = timeRaw.split('T')[1];
+      timeInput.value = timePart.substring(0, 5); // "23:30"
+    } else {
+      timeInput.value = timeRaw;
+    }
+    notesInput.value = currentCandidate.interviewNotes || '';
+  } else {
+    dateInput.value = '';
+    timeInput.value = '';
+    notesInput.value = '';
+  }
+
+  // Set min date to today
+  const today = new Date().toISOString().split('T')[0];
+  dateInput.min = today;
+
+  modal.style.display = 'flex';
+}
+
+function closeScheduleModal() {
+  document.getElementById('schedule-modal').style.display = 'none';
+}
+
+async function saveInterview() {
+  const dateVal = document.getElementById('sched-date').value;
+  const timeVal = document.getElementById('sched-time').value;
+  const notesVal = document.getElementById('sched-notes').value;
+
+  if (!dateVal || !timeVal) {
+    showToast('Please enter both date and time');
+    return;
+  }
+
+  try {
+    const params = new URLSearchParams({
+      action: 'scheduleInterview',
+      row: currentCandidate.row,
+      pin: CONFIG.DASHBOARD_PIN,
+      interviewDate: dateVal,
+      interviewTime: timeVal,
+      interviewNotes: notesVal
+    });
+    await fetch(CONFIG.API_URL + '?' + params.toString());
+    currentCandidate.interviewDate = dateVal;
+    currentCandidate.interviewTime = timeVal;
+    currentCandidate.interviewNotes = notesVal;
+    closeScheduleModal();
+    renderProfile(currentCandidate);
+    showToast('Interview scheduled for ' + formatInterviewDate(dateVal) + ' at ' + formatInterviewTime(timeVal));
+  } catch (err) {
+    showToast('Error scheduling interview');
+  }
+}
+
+async function clearInterview() {
+  if (!confirm('Remove the scheduled interview?')) return;
+  try {
+    const params = new URLSearchParams({
+      action: 'scheduleInterview',
+      row: currentCandidate.row,
+      pin: CONFIG.DASHBOARD_PIN,
+      interviewDate: '',
+      interviewTime: '',
+      interviewNotes: ''
+    });
+    await fetch(CONFIG.API_URL + '?' + params.toString());
+    currentCandidate.interviewDate = '';
+    currentCandidate.interviewTime = '';
+    currentCandidate.interviewNotes = '';
+    renderProfile(currentCandidate);
+    showToast('Interview removed');
+  } catch (err) {
+    showToast('Error removing interview');
+  }
+}
+
+function esc(str) { if(!str)return''; const d=document.createElement('div'); d.textContent=str; return d.innerHTML; }
 </script>
 </body>
 </html>
