@@ -215,95 +215,7 @@ textarea { resize:vertical; min-height:72px; }
         </div>
       </div>
 
-      <div class="card">
-        <div class="card-title"><span class="icon">✅</span> Reliability</div>
-        <div class="field">
-          <label>Do you have reliable transportation? *</label>
-          <div class="radio-group">
-            <label><input type="radio" name="transport" value="Yes - own car"> Own car</label>
-            <label><input type="radio" name="transport" value="Yes - shared car"> Shared car</label>
-            <label><input type="radio" name="transport" value="Yes - rideshare/bus"> Rideshare/Bus</label>
-            <label><input type="radio" name="transport" value="No"> No</label>
-          </div>
-        </div>
-        <div class="row row-2" style="margin-top:16px">
-          <div class="field">
-            <label>Bank account for direct deposit? *</label>
-            <div class="radio-group">
-              <label><input type="radio" name="bank" value="Yes"> Yes</label>
-              <label><input type="radio" name="bank" value="No"> No</label>
-            </div>
-          </div>
-          <div class="field">
-            <label>Can you start immediately? *</label>
-            <div class="radio-group">
-              <label><input type="radio" name="startNow" value="Yes" onchange="handleStartNow(this)"> Yes</label>
-              <label><input type="radio" name="startNow" value="No" onchange="handleStartNow(this)"> No</label>
-            </div>
-          </div>
-        </div>
-        <div class="field" id="startDateField" style="margin-top:12px;display:none"><label>When can you start? *</label><input type="date" name="startDate"></div>
-      </div>
-
-      <div class="card">
-        <div class="card-title"><span class="icon">💼</span> Experience</div>
-        <div class="field">
-          <label>What's your work experience? *</label>
-          <div class="radio-group">
-            <label><input type="radio" name="currentlyEmployed" value="Currently employed" onchange="handleEmployed(this)"> Currently employed</label>
-            <label><input type="radio" name="currentlyEmployed" value="Previously employed" onchange="handleEmployed(this)"> Previously employed</label>
-            <label><input type="radio" name="currentlyEmployed" value="First job" onchange="handleEmployed(this)"> First job</label>
-          </div>
-        </div>
-        <div id="employedFields" style="display:none;margin-top:12px">
-          <div class="row row-2">
-            <div class="field"><label>Company *</label><input type="text" name="currentCompany" placeholder="e.g. Target"></div>
-            <div class="field"><label>Job Title *</label><input type="text" name="currentTitle" placeholder="e.g. Cashier"></div>
-          </div>
-          <div class="field" style="margin-top:12px"><label>How long have you been there? *</label><input type="text" name="currentLength" placeholder="e.g. 6 months"></div>
-          <div class="field" style="margin-top:12px"><label>Reason for leaving? *</label><input type="text" name="currentReason" placeholder="e.g. Looking for new opportunities"></div>
-        </div>
-        <div id="notEmployedFields" style="display:none;margin-top:12px">
-          <div class="row row-2">
-            <div class="field"><label>Most Recent Company *</label><input type="text" name="recentCompany" placeholder="e.g. Target"></div>
-            <div class="field"><label>Most Recent Job Title *</label><input type="text" name="recentTitle" placeholder="e.g. Cashier"></div>
-          </div>
-          <div class="row row-2" style="margin-top:12px">
-            <div class="field"><label>How long ago? *</label><input type="text" name="recentWhen" placeholder="e.g. 3 months ago"></div>
-            <div class="field"><label>How long were you there? *</label><input type="text" name="recentLength" placeholder="e.g. 1 year"></div>
-          </div>
-          <div class="field" style="margin-top:12px"><label>Reason for leaving? *</label><input type="text" name="recentReason" placeholder="e.g. Moved"></div>
-        </div>
-        <div class="field" style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border)">
-          <label>Any food industry experience? *</label>
-          <div class="radio-group">
-            <label><input type="radio" name="foodExp" value="Yes"> Yes</label>
-            <label><input type="radio" name="foodExp" value="No"> No</label>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title"><span class="icon">🍦</span> Job Expectations</div>
-        <div class="field">
-          <label>Comfortable standing for long periods, doing food prep, and cleaning? *</label>
-          <div class="radio-group">
-            <label><input type="radio" name="comfortPhysical" value="Yes"> Yes</label>
-            <label><input type="radio" name="comfortPhysical" value="No"> No</label>
-          </div>
-        </div>
-        <div class="field" style="margin-top:12px">
-          <label>Comfortable handling busy rushes and difficult customers? *</label>
-          <div class="radio-group">
-            <label><input type="radio" name="comfortRush" value="Yes"> Yes</label>
-            <label><input type="radio" name="comfortRush" value="No"> No</label>
-          </div>
-        </div>
-        <div class="field" style="margin-top:16px">
-          <label>Tell us about yourself and why you're interested in this job *<br><span style="font-weight:400;font-size:12px;color:var(--text-soft)">This is your chance to stand out!</span></label>
-          <textarea name="notes" required placeholder="e.g. I'm a fast learner, love customer service, and have been a SomiSomi fan for years..."></textarea>
-        </div>
-      </div>
+      <div id="dynamic-form-fields"></div>
 
       <div class="card" id="pay-card">
         <div class="info-box">
@@ -361,13 +273,172 @@ const DEFAULT_SETTINGS = {
 };
 
 let settings = DEFAULT_SETTINGS;
+let appQuestions = DEFAULT_APP_QUESTIONS;
+
+const DEFAULT_APP_QUESTIONS = [
+  { key:'student', label:'Are you currently a student?', type:'radio', options:['No','Yes - High School','Yes - College'], required:true, enabled:true },
+  { key:'gradYear', label:'Expected Graduation Year', type:'select', options:['2025','2026','2027','2028','2029','2030'], required:false, enabled:true, conditional:'student:Yes - High School|Yes - College' },
+  { key:'otherJob', label:'Any other jobs or commitments?', type:'radio', options:['No','Yes'], required:true, enabled:true },
+  { key:'otherJobDesc', label:'Describe your other job & schedule', type:'text', placeholder:'e.g. Retail, Tues-Thurs 9am-3pm', required:false, enabled:true, conditional:'otherJob:Yes' },
+  { key:'jobType', label:'Are you looking for a seasonal or long-term position?', type:'radio', options:['Long Term','Seasonal'], required:true, enabled:true },
+  { key:'lastDay', label:'Expected last day', type:'date', required:false, enabled:true, conditional:'jobType:Seasonal' },
+  { key:'machineCleaning', label:'Machine cleaning availability (once/week, 6PM–Midnight)', type:'radio', options:['Open to Both','Thursday Night','Sunday Night','Neither'], required:true, enabled:true },
+  { key:'schedNotes', label:'Scheduling Notes', type:'textarea', placeholder:"Any upcoming vacations or specific dates/times that won't work? If none, write 'None'.", required:true, enabled:true },
+  { key:'hoursPreferred', label:'Preferred hours/week', type:'number', placeholder:'e.g. 20', required:true, enabled:true },
+  { key:'hoursMinimum', label:'Minimum hours/week', type:'number', placeholder:'e.g. 10', required:true, enabled:true },
+  { key:'transport', label:'Do you have reliable transportation?', type:'radio', options:['Yes - own car','Yes - shared car','Yes - rideshare/bus','No'], required:true, enabled:true },
+  { key:'bank', label:'Bank account for direct deposit?', type:'radio', options:['Yes','No'], required:true, enabled:true },
+  { key:'startNow', label:'Can you start immediately?', type:'radio', options:['Yes','No'], required:true, enabled:true },
+  { key:'startDate', label:'When can you start?', type:'date', required:false, enabled:true, conditional:'startNow:No' },
+  { key:'currentlyEmployed', label:"What's your work experience?", type:'radio', options:['Currently employed','Previously employed','First job'], required:true, enabled:true },
+  { key:'currentCompany', label:'Current Company', type:'text', placeholder:'e.g. Target', required:false, enabled:true, conditional:'currentlyEmployed:Currently employed' },
+  { key:'currentTitle', label:'Current Job Title', type:'text', placeholder:'e.g. Cashier', required:false, enabled:true, conditional:'currentlyEmployed:Currently employed' },
+  { key:'currentLength', label:'How long have you been there?', type:'text', placeholder:'e.g. 6 months', required:false, enabled:true, conditional:'currentlyEmployed:Currently employed' },
+  { key:'currentReason', label:'Reason for leaving?', type:'text', placeholder:'e.g. Looking for new opportunities', required:false, enabled:true, conditional:'currentlyEmployed:Currently employed' },
+  { key:'recentCompany', label:'Most Recent Company', type:'text', placeholder:'e.g. Target', required:false, enabled:true, conditional:'currentlyEmployed:Previously employed' },
+  { key:'recentTitle', label:'Most Recent Job Title', type:'text', placeholder:'e.g. Cashier', required:false, enabled:true, conditional:'currentlyEmployed:Previously employed' },
+  { key:'recentWhen', label:'How long ago?', type:'text', placeholder:'e.g. 3 months ago', required:false, enabled:true, conditional:'currentlyEmployed:Previously employed' },
+  { key:'recentLength', label:'How long were you there?', type:'text', placeholder:'e.g. 1 year', required:false, enabled:true, conditional:'currentlyEmployed:Previously employed' },
+  { key:'recentReason', label:'Reason for leaving?', type:'text', placeholder:'e.g. Moved', required:false, enabled:true, conditional:'currentlyEmployed:Previously employed' },
+  { key:'foodExp', label:'Any food industry experience?', type:'radio', options:['Yes','No'], required:true, enabled:true },
+  { key:'comfortPhysical', label:'Comfortable standing for long periods, doing food prep, and cleaning?', type:'radio', options:['Yes','No'], required:true, enabled:true },
+  { key:'comfortRush', label:'Comfortable handling busy rushes and difficult customers?', type:'radio', options:['Yes','No'], required:true, enabled:true },
+  { key:'notes', label:"Tell us about yourself and why you're interested in this job", type:'textarea', placeholder:"e.g. I'm a fast learner, love customer service...", required:true, enabled:true },
+];
+
+function buildDynamicForm() {
+  const container = document.getElementById('dynamic-form-fields');
+  if (!container) return;
+  container.innerHTML = '';
+
+  // Group questions by section
+  const sections = [
+    { id:'availability', title:'📅 Availability', icon:'📅', keys:['student','gradYear','otherJob','otherJobDesc','jobType','lastDay'] },
+    { id:'cleaning', title:'🧹 Machine Cleaning', icon:'🧹', keys:['machineCleaning'] },
+    { id:'schedule-notes', title:'📝 Schedule Details', icon:'📝', keys:['schedNotes','hoursPreferred','hoursMinimum'] },
+    { id:'reliability', title:'✅ Reliability', icon:'✅', keys:['transport','bank','startNow','startDate'] },
+    { id:'experience', title:'💼 Experience', icon:'💼', keys:['currentlyEmployed','currentCompany','currentTitle','currentLength','currentReason','recentCompany','recentTitle','recentWhen','recentLength','recentReason','foodExp'] },
+    { id:'expectations', title:'🍦 Job Expectations', icon:'🍦', keys:['comfortPhysical','comfortRush','notes'] },
+  ];
+
+  const enabledQuestions = appQuestions.filter(q => q.enabled !== false);
+  const keyToQ = {};
+  enabledQuestions.forEach(q => keyToQ[q.key] = q);
+
+  sections.forEach(section => {
+    const sectionQs = section.keys.map(k => keyToQ[k]).filter(Boolean);
+    if (!sectionQs.length) return;
+
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `<div class="card-title"><span class="icon">${section.icon}</span> ${section.title.replace(section.icon,'').trim()}</div>`;
+
+    sectionQs.forEach(q => {
+      const field = buildField(q);
+      if (field) card.appendChild(field);
+    });
+
+    container.appendChild(card);
+  });
+
+  // Also add any custom questions not in sections
+  const allSectionKeys = sections.flatMap(s => s.keys);
+  const extraQs = enabledQuestions.filter(q => !allSectionKeys.includes(q.key));
+  if (extraQs.length) {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = '<div class="card-title"><span class="icon">❓</span> Additional Questions</div>';
+    extraQs.forEach(q => { const f = buildField(q); if(f) card.appendChild(f); });
+    container.appendChild(card);
+  }
+
+  setupConditionals();
+}
+
+function buildField(q) {
+  const div = document.createElement('div');
+  div.className = 'field';
+  div.dataset.key = q.key;
+  if (q.conditional) div.dataset.conditional = q.conditional;
+
+  const label = document.createElement('label');
+  label.textContent = q.label + (q.required ? ' *' : '');
+  div.appendChild(label);
+
+  if (q.type === 'radio') {
+    const group = document.createElement('div');
+    group.className = 'radio-group';
+    (q.options||[]).forEach(opt => {
+      const lbl = document.createElement('label');
+      const inp = document.createElement('input');
+      inp.type = 'radio'; inp.name = q.key; inp.value = opt;
+      inp.addEventListener('change', () => handleConditional(q.key, opt));
+      if (q.key === 'machineCleaning') inp.addEventListener('change', () => {
+        document.getElementById('machineCleaningWarning') && (document.getElementById('machineCleaningWarning').style.display = opt==='Neither'?'block':'none');
+      });
+      lbl.appendChild(inp);
+      lbl.appendChild(document.createTextNode(' '+opt));
+      group.appendChild(lbl);
+    });
+    div.appendChild(group);
+    if (q.key === 'machineCleaning') {
+      const warn = document.createElement('div');
+      warn.className = 'warning-box'; warn.id = 'machineCleaningWarning';
+      warn.innerHTML = '⚠️ <strong>Machine cleaning is a required part of the job.</strong> Not being available may affect your eligibility.';
+      div.appendChild(warn);
+    }
+  } else if (q.type === 'select') {
+    const sel = document.createElement('select');
+    sel.name = q.key;
+    const def = document.createElement('option'); def.value=''; def.textContent='Select...'; sel.appendChild(def);
+    (q.options||[]).forEach(opt => { const o=document.createElement('option');o.value=opt;o.textContent=opt;sel.appendChild(o); });
+    div.appendChild(sel);
+  } else if (q.type === 'textarea') {
+    const ta = document.createElement('textarea');
+    ta.name = q.key; if(q.placeholder) ta.placeholder = q.placeholder;
+    div.appendChild(ta);
+  } else {
+    const inp = document.createElement('input');
+    inp.type = q.type||'text'; inp.name = q.key;
+    if(q.placeholder) inp.placeholder = q.placeholder;
+    div.appendChild(inp);
+  }
+
+  return div;
+}
+
+function setupConditionals() {
+  // Hide all conditional fields initially
+  document.querySelectorAll('[data-conditional]').forEach(field => {
+    field.style.display = 'none';
+  });
+}
+
+function handleConditional(key, value) {
+  document.querySelectorAll('[data-conditional]').forEach(field => {
+    const cond = field.dataset.conditional;
+    if (!cond) return;
+    const [condKey, condVals] = cond.split(':');
+    if (condKey !== key) return;
+    const vals = condVals.split('|');
+    field.style.display = vals.includes(value) ? 'block' : 'none';
+    const inp = field.querySelector('input,select,textarea');
+    if (inp) inp.required = vals.includes(value) && appQuestions.find(q=>q.key===field.dataset.key)?.required;
+  });
+}
 
 async function loadSettings() {
   try {
-    const snap = await getDoc(doc(db, 'config', 'settings'));
-    if (snap.exists()) {
-      settings = { ...DEFAULT_SETTINGS, ...snap.data() };
+    const [settingsSnap, appFormSnap] = await Promise.all([
+      getDoc(doc(db, 'config', 'settings')),
+      getDoc(doc(db, 'config', 'appForm')),
+    ]);
+    if (settingsSnap.exists()) {
+      settings = { ...DEFAULT_SETTINGS, ...settingsSnap.data() };
       if (!settings.schedule) settings.schedule = DEFAULT_SETTINGS.schedule;
+    }
+    if (appFormSnap.exists()) {
+      appQuestions = appFormSnap.data().questions || DEFAULT_APP_QUESTIONS;
     }
   } catch(e) { console.warn('Using default settings', e); }
 
@@ -376,6 +447,7 @@ async function loadSettings() {
   document.getElementById('motto-text').textContent = settings.motto;
   document.getElementById('location-text').textContent = `${settings.locationName} Location — Please fill out the form below!`;
   buildScheduleGrid();
+  buildDynamicForm();
 
   document.getElementById('loading').style.display = 'none';
   document.getElementById('view-apply').style.display = 'block';
