@@ -415,7 +415,14 @@ async function loadSettings() {
       if (!settings.schedule) settings.schedule = DEFAULT_SETTINGS.schedule;
     }
     if (appFormSnap.exists()) {
-      appQuestions = appFormSnap.data().questions || DEFAULT_APP_QUESTIONS;
+      const saved = appFormSnap.data().questions || [];
+      // Merge saved questions with defaults to preserve conditional logic
+      const defaultMap = {};
+      DEFAULT_APP_QUESTIONS.forEach(q => defaultMap[q.key] = q);
+      appQuestions = saved.map(q => ({
+        ...( defaultMap[q.key] || {}), // start with default (has conditional)
+        ...q, // override with saved (label, options, enabled etc)
+      }));
     }
   } catch(e) { console.warn('Using default settings', e); }
 
