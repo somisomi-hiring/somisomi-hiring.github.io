@@ -97,7 +97,7 @@ textarea { resize:vertical; min-height:72px; }
 .sched-row { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-sm); padding:7px 12px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
 .sched-row .day-label { font-weight:600; font-size:12px; width:80px; flex-shrink:0; color:var(--text); text-transform:uppercase; letter-spacing:0.3px; }
 .sched-shifts { display:flex; gap:5px; flex-wrap:wrap; flex:1; }
-.sched-shifts label { display:flex; align-items:center; gap:5px; font-size:12px; font-weight:500; cursor:pointer; padding:4px 10px; border:1px solid var(--border); border-radius:var(--radius-sm); transition:all 0.15s; user-select:none; background:var(--surface); color:var(--text-soft); }
+.sched-shifts label { display:flex; align-items:center; justify-content:center; gap:2px; font-size:12px; font-weight:500; cursor:pointer; padding:6px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); transition:all 0.15s; user-select:none; background:var(--surface); color:var(--text-soft); text-align:center; min-width:64px; }
 .sched-shifts label:has(input:checked) { border-color:var(--accent); background:var(--accent-light); color:var(--accent); font-weight:600; }
 .sched-shifts input { display:none; }
 .sched-row .warning-box { flex-basis:100%; margin-top:4px; }
@@ -187,7 +187,7 @@ textarea { resize:vertical; min-height:72px; }
 
         <div class="field" style="margin-top:16px">
           <label>Available Days &amp; Shifts *</label>
-          <div class="notice-box">⭐ <strong>Open availability is highly preferred</strong> and can impact our decision to move forward.</div>
+          
           <div class="schedule-grid" id="schedule-grid">
             <!-- Dynamically built from Firebase settings -->
           </div>
@@ -398,25 +398,21 @@ function buildScheduleGrid() {
     let shifts = `<div class="sched-shifts">`;
 
     if (cfg.locked) {
-      // Locked day - pre-checked pills + opt-out
-      if (cfg.day) shifts += `<label class="locked-pill" style="cursor:not-allowed;"><input type="checkbox" checked disabled> Day ${formatTime(cfg.day)} ✓</label>`;
-      if (cfg.eve) shifts += `<label class="locked-pill" style="cursor:not-allowed;"><input type="checkbox" checked disabled> Eve ${formatTime(cfg.eve)} ✓</label>`;
-      shifts += `<label><input type="checkbox" name="${day.toLowerCase()}Unavail" value="unavailable" onchange="handleLockedDay('${day.toLowerCase()}')"> Can't work ${day}s</label>`;
+      shifts += `<label class="locked-pill" style="cursor:not-allowed;flex-direction:column;gap:1px;"><input type="checkbox" checked disabled><span>All Day</span><span style="font-size:10px;">${formatTime(cfg.day)} – ${formatTime(cfg.eve)}</span></label>`;
+      shifts += `<label style="flex-direction:column;gap:1px;"><input type="checkbox" name="${day.toLowerCase()}Unavail" value="unavailable" onchange="handleLockedDay('${day.toLowerCase()}')"><span>Can't work</span></label>`;
       shifts += `</div>`;
       shifts += `<div class="warning-box" id="${day.toLowerCase()}Warning">⚠️ <strong>Full ${day} availability is required.</strong> Not being available may affect your eligibility. You may still submit and we will review it.</div>`;
     } else if (cfg.required) {
-      // Required day (Friday) - All day + evening + unavailable, warning if unavailable
-      shifts += `<label><input type="radio" name="${nameKey}" value="allday" onchange="handleRequiredDay(this,'${day.toLowerCase()}')"> All day</label>`;
-      if (cfg.eve) shifts += `<label><input type="radio" name="${nameKey}" value="${cfg.eve}" onchange="handleRequiredDay(this,'${day.toLowerCase()}')"> Eve ${formatTime(cfg.eve)}</label>`;
-      shifts += `<label><input type="radio" name="${nameKey}" value="unavailable" onchange="handleRequiredDay(this,'${day.toLowerCase()}')"> Unavailable</label>`;
+      shifts += `<label style="flex-direction:column;gap:1px;"><input type="radio" name="${nameKey}" value="allday" onchange="handleRequiredDay(this,'${day.toLowerCase()}')"><span>All Day</span></label>`;
+      if (cfg.eve) shifts += `<label style="flex-direction:column;gap:1px;"><input type="radio" name="${nameKey}" value="${cfg.eve}" onchange="handleRequiredDay(this,'${day.toLowerCase()}')"><span>Evening</span><span style="font-size:10px;color:var(--text-xs)">${formatTime(cfg.eve)}</span></label>`;
+      shifts += `<label style="flex-direction:column;gap:1px;"><input type="radio" name="${nameKey}" value="unavailable" onchange="handleRequiredDay(this,'${day.toLowerCase()}')"><span>Unavailable</span></label>`;
       shifts += `</div>`;
       shifts += `<div class="warning-box" id="${day.toLowerCase()}Warning">⚠️ <strong>Friday evening availability is required.</strong> Not being available may affect your eligibility. You may still submit and we will review it.</div>`;
     } else {
-      // Normal day
-      shifts += `<label><input type="radio" name="${nameKey}" value="allday"> Available All Day</label>`;
-      if (cfg.day) shifts += `<label><input type="radio" name="${nameKey}" value="${cfg.day}"> Day ${formatTime(cfg.day)}</label>`;
-      if (cfg.eve) shifts += `<label><input type="radio" name="${nameKey}" value="${cfg.eve}"> Eve ${formatTime(cfg.eve)}</label>`;
-      shifts += `<label><input type="radio" name="${nameKey}" value="unavailable"> Unavailable All Day</label>`;
+      shifts += `<label style="flex-direction:column;gap:1px;"><input type="radio" name="${nameKey}" value="allday"><span>All Day</span></label>`;
+      if (cfg.day) shifts += `<label style="flex-direction:column;gap:1px;"><input type="radio" name="${nameKey}" value="${cfg.day}"><span>Day</span><span style="font-size:10px;color:var(--text-xs)">${formatTime(cfg.day)}</span></label>`;
+      if (cfg.eve) shifts += `<label style="flex-direction:column;gap:1px;"><input type="radio" name="${nameKey}" value="${cfg.eve}"><span>Evening</span><span style="font-size:10px;color:var(--text-xs)">${formatTime(cfg.eve)}</span></label>`;
+      shifts += `<label style="flex-direction:column;gap:1px;"><input type="radio" name="${nameKey}" value="unavailable"><span>Unavailable</span></label>`;
       shifts += `</div>`;
     }
 
