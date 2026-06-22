@@ -427,8 +427,10 @@ function renderProfile(c) {
       <div class="data-row"><span class="label">How Long Ago</span><span class="value">${esc(c.recentWhen)}</span></div>
       <div class="data-row"><span class="label">Duration</span><span class="value">${esc(c.recentLength)}</span></div>
       <div class="data-row"><span class="label">Reason Left</span><span class="value">${esc(c.recentReason)}</span></div>`;
-  } else {
+  } else if (c.currentlyEmployed === 'First job') {
     expHTML = `<div class="data-row"><span class="label">Employment</span><span class="value">First Job</span></div>`;
+  } else if (c.currentlyEmployed) {
+    expHTML = `<div class="data-row"><span class="label">Employment</span><span class="value">${esc(c.currentlyEmployed)}</span></div>`;
   }
   expHTML += `<div class="data-row"><span class="label">Food Industry Exp</span><span class="value">${esc(c.foodExp)}</span></div>`;
 
@@ -513,6 +515,10 @@ function renderProfile(c) {
       <div class="data-row"><span class="label">Transportation</span><span class="value">${esc(c.transport)}</span></div>
       <div class="data-row"><span class="label">Bank Account</span><span class="value">${esc(c.bank)}</span></div>
       <div class="data-row"><span class="label">Start Immediately</span><span class="value">${esc(c.startNow)}${c.startDate?' — '+esc(c.startDate):''}</span></div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon" style="background:var(--green-light);color:var(--green)">✅</span> Reliability</div>
+      <div class="data-row"><span class="label">Let go for no-show/late?</span><span class="value">${esc(c.letGo||'—')}</span></div>
     </div>
     <div class="card">
       <div class="card-title"><span class="icon" style="background:var(--yellow-light);color:var(--yellow)">💼</span> Experience</div>
