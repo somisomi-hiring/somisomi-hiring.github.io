@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SomiSomi — Apply Now</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #FFF8F0;
@@ -42,7 +42,6 @@ h1, h2, h3 { font-family: 'Fraunces', serif; }
 .field { margin-bottom: 16px; }
 .field:last-child { margin-bottom: 0; }
 .field label { display: block; font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 6px; letter-spacing: 0.2px; }
-.field label .optional { font-weight: 400; color: var(--text-soft); font-size: 12px; }
 input[type="text"],input[type="email"],input[type="tel"],input[type="date"],input[type="number"],select,textarea {
   width: 100%; padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 8px;
   font-family: 'DM Sans', sans-serif; font-size: 15px; color: var(--text);
@@ -52,17 +51,14 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
 textarea { resize: vertical; min-height: 80px; }
 .row { display: grid; gap: 12px; }
 .row-2 { grid-template-columns: 1fr 1fr; }
-.row-3 { grid-template-columns: 1fr 1fr 1fr; }
-.radio-group, .check-group { display: flex; gap: 8px; flex-wrap: wrap; }
-.radio-group label, .check-group label {
+.radio-group { display: flex; gap: 8px; flex-wrap: wrap; }
+.radio-group label {
   display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 400;
   cursor: pointer; padding: 8px 14px; border: 1.5px solid var(--border); border-radius: 8px;
   transition: all 0.2s; user-select: none;
 }
-.radio-group label:has(input:checked), .check-group label:has(input:checked) {
-  border-color: var(--accent); background: var(--accent-light); color: var(--accent); font-weight: 500;
-}
-.radio-group input, .check-group input { display: none; }
+.radio-group label:has(input:checked) { border-color: var(--accent); background: var(--accent-light); color: var(--accent); font-weight: 500; }
+.radio-group input { display: none; }
 .btn-primary {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   padding: 14px; border: none; border-radius: 10px; font-family: 'DM Sans', sans-serif;
@@ -73,60 +69,50 @@ textarea { resize: vertical; min-height: 80px; }
 .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
 .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 .info-box { background: var(--surface-alt); border: 1px solid var(--border); border-radius: 10px; padding: 16px; font-size: 14px; line-height: 1.6; }
-.info-box strong { font-weight: 600; }
 .warning-box { background: var(--red-light); border: 1px solid #f5c6c3; border-radius: 10px; padding: 14px 16px; font-size: 14px; line-height: 1.6; color: var(--red); display: none; margin-top: 10px; }
-.warning-box strong { font-weight: 600; }
-.notice-box { background: var(--yellow-light); border: 1px solid #f0d080; border-radius: 10px; padding: 14px 16px; font-size: 14px; line-height: 1.6; color: var(--yellow); margin-bottom: 12px; }
+.notice-box { background: var(--yellow-light); border: 1px solid #f0d080; border-radius: 10px; padding: 14px 16px; font-size: 14px; line-height: 1.6; color: #7a5a00; margin-bottom: 12px; }
 .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--text); color: #fff; padding: 12px 24px; border-radius: 10px; font-size: 14px; font-weight: 500; box-shadow: var(--shadow-lg); z-index: 1000; transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
 .toast.show { transform: translateX(-50%) translateY(0); }
 .schedule-grid { display: flex; flex-direction: column; gap: 5px; }
 .sched-row { background: var(--surface-alt); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-.sched-row .day-label { font-weight: 700; font-size: 13px; width: 78px; flex-shrink: 0; }
+.sched-row .day-label { font-weight: 700; font-size: 13px; width: 90px; flex-shrink: 0; }
 .sched-shifts { display: flex; gap: 6px; flex-wrap: wrap; flex: 1; }
-.sched-shifts label {
-  display: flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 400;
-  cursor: pointer; padding: 5px 10px; border: 1.5px solid var(--border); border-radius: 7px;
-  transition: all 0.2s; user-select: none; background: var(--surface);
-}
+.sched-shifts label { display: flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 400; cursor: pointer; padding: 5px 10px; border: 1.5px solid var(--border); border-radius: 7px; transition: all 0.2s; user-select: none; background: var(--surface); }
 .sched-shifts label:has(input:checked) { border-color: var(--accent); background: var(--accent-light); color: var(--accent); font-weight: 500; }
 .sched-shifts input { display: none; }
 .sched-row .warning-box { flex-basis: 100%; margin-top: 6px; }
-.field-error { outline: 2px solid var(--red); outline-offset: 4px; border-radius: 8px; animation: errPulse 0.4s ease; }
-@keyframes errPulse { 0% { outline-color: transparent; } 100% { outline-color: var(--red); } }
-@media (max-width: 600px) { .sched-row { gap: 6px; } .sched-row .day-label { width: 100%; margin-bottom: 2px; } }
-@media (max-width: 600px) { .row-2 { grid-template-columns: 1fr; } .row-3 { grid-template-columns: 1fr 1fr; } }
+.field-error { outline: 2px solid var(--red); outline-offset: 4px; border-radius: 8px; }
+.loading-screen { display: flex; align-items: center; justify-content: center; min-height: 60vh; flex-direction: column; gap: 12px; }
+.spinner { width: 32px; height: 32px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (max-width: 600px) { .row-2 { grid-template-columns: 1fr; } .sched-row .day-label { width: 100%; margin-bottom: 2px; } }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 </head>
 <body>
 <div class="toast" id="toast"></div>
-<div id="view-apply">
+
+<div id="loading" class="container">
+  <div class="loading-screen"><div class="spinner"></div><p style="color:var(--text-soft)">Loading...</p></div>
+</div>
+
+<div id="view-apply" style="display:none">
   <div class="container">
     <div class="page-header">
       <div class="logo">SomiSomi</div>
       <h1>Job Application</h1>
-      <p>Metropark Square Location — Please fill out the form below!</p>
+      <p id="location-text">Metropark Square Location — Please fill out the form below!</p>
     </div>
     <form id="apply-form">
-      <!-- CONTACT -->
       <div class="card">
         <div class="card-title"><span class="icon" style="background:var(--accent-light);color:var(--accent)">👤</span> Contact Information</div>
         <div class="row row-2">
-          <div class="field">
-            <label>Full Name *</label>
-            <input type="text" name="name" required placeholder="First and Last">
-          </div>
-          <div class="field">
-            <label>Phone Number *</label>
-            <input type="tel" name="phone" required placeholder="(000) 000-0000">
-          </div>
+          <div class="field"><label>Full Name *</label><input type="text" name="name" required placeholder="First and Last"></div>
+          <div class="field"><label>Phone Number *</label><input type="tel" name="phone" required placeholder="(000) 000-0000"></div>
         </div>
-        <div class="field" style="margin-top:12px">
-          <label>Email *</label>
-          <input type="email" name="email" required placeholder="you@email.com">
-        </div>
+        <div class="field" style="margin-top:12px"><label>Email *</label><input type="email" name="email" required placeholder="you@email.com"></div>
       </div>
-      <!-- AVAILABILITY -->
+
       <div class="card">
         <div class="card-title"><span class="icon" style="background:var(--blue-light);color:var(--blue)">📅</span> Availability</div>
         <div class="row row-2">
@@ -137,13 +123,9 @@ textarea { resize: vertical; min-height: 80px; }
               <label><input type="radio" name="student" value="Yes - High School" onchange="handleStudent(this)"> High School</label>
               <label><input type="radio" name="student" value="Yes - College" onchange="handleStudent(this)"> College</label>
             </div>
-            <div id="gradYearField" style="margin-top:12px; display:none">
-              <label style="display:block; font-size:13px; font-weight:600; color:var(--text); margin-bottom:6px;">Expected Graduation Year *</label>
-              <select name="gradYear" id="gradYear">
-                <option value="">Select year</option>
-                <option>2025</option><option>2026</option><option>2027</option>
-                <option>2028</option><option>2029</option><option>2030</option>
-              </select>
+            <div id="gradYearField" style="margin-top:10px;display:none">
+              <label style="font-size:13px;font-weight:600;display:block;margin-bottom:6px;">Expected Graduation Year *</label>
+              <select name="gradYear" id="gradYear"><option value="">Select year</option><option>2025</option><option>2026</option><option>2027</option><option>2028</option><option>2029</option><option>2030</option></select>
             </div>
           </div>
           <div class="field">
@@ -152,14 +134,13 @@ textarea { resize: vertical; min-height: 80px; }
               <label><input type="radio" name="otherJob" value="No" required onchange="handleOtherJob(this)"> No</label>
               <label><input type="radio" name="otherJob" value="Yes" onchange="handleOtherJob(this)"> Yes</label>
             </div>
-            <div id="otherJobDetail" style="margin-top:12px; display:none">
-              <label style="display:block; font-size:13px; font-weight:600; color:var(--text); margin-bottom:6px;">Please describe your other job &amp; schedule *</label>
+            <div id="otherJobDetail" style="margin-top:10px;display:none">
+              <label style="font-size:13px;font-weight:600;display:block;margin-bottom:6px;">Describe your other job &amp; schedule *</label>
               <input type="text" name="otherJobDesc" placeholder="e.g. Retail, Tues-Thurs 9am-3pm">
             </div>
           </div>
         </div>
 
-        <!-- SEASONAL / LONG TERM -->
         <div class="field" style="margin-top:16px">
           <label>Are you looking for a seasonal or long-term position? *</label>
           <div class="radio-group">
@@ -167,119 +148,41 @@ textarea { resize: vertical; min-height: 80px; }
             <label><input type="radio" name="jobType" value="Seasonal" onchange="handleJobType(this)"> Seasonal</label>
           </div>
         </div>
-        <div class="field" id="lastDayField" style="margin-top:8px; display:none">
-          <label>What would be your expected last day? *</label>
+        <div id="lastDayField" style="display:none;margin-top:8px" class="field">
+          <label>Expected last day? *</label>
           <input type="date" name="lastDay">
         </div>
 
-        <!-- SCHEDULE -->
         <div class="field" style="margin-top:16px">
           <label>Available Days &amp; Shifts *</label>
-          <div class="schedule-grid">
-            <div class="sched-row">
-              <div class="day-label">Monday</div>
-              <div class="sched-shifts">
-                <label><input type="radio" name="monShift" value="Available all day" required> All day</label>
-                <label><input type="radio" name="monShift" value="12pm–6pm"> Day 12 PM–6 PM</label>
-                <label><input type="radio" name="monShift" value="6pm–10:30pm"> Eve 6 PM–10:30 PM</label>
-                <label><input type="radio" name="monShift" value="Unavailable all day"> Unavailable</label>
-              </div>
-            </div>
-            <div class="sched-row">
-              <div class="day-label">Tuesday</div>
-              <div class="sched-shifts">
-                <label><input type="radio" name="tueShift" value="Available all day" required> All day</label>
-                <label><input type="radio" name="tueShift" value="12pm–6pm"> Day 12 PM–6 PM</label>
-                <label><input type="radio" name="tueShift" value="6pm–10:30pm"> Eve 6 PM–10:30 PM</label>
-                <label><input type="radio" name="tueShift" value="Unavailable all day"> Unavailable</label>
-              </div>
-            </div>
-            <div class="sched-row">
-              <div class="day-label">Wednesday</div>
-              <div class="sched-shifts">
-                <label><input type="radio" name="wedShift" value="Available all day" required> All day</label>
-                <label><input type="radio" name="wedShift" value="12pm–6pm"> Day 12 PM–6 PM</label>
-                <label><input type="radio" name="wedShift" value="6pm–10:30pm"> Eve 6 PM–10:30 PM</label>
-                <label><input type="radio" name="wedShift" value="Unavailable all day"> Unavailable</label>
-              </div>
-            </div>
-            <div class="sched-row">
-              <div class="day-label">Thursday</div>
-              <div class="sched-shifts">
-                <label><input type="radio" name="thuShift" value="Available all day" required> All day</label>
-                <label><input type="radio" name="thuShift" value="12pm–6pm"> Day 12 PM–6 PM</label>
-                <label><input type="radio" name="thuShift" value="6pm–11:45pm"> Eve 6 PM–11:45 PM</label>
-                <label><input type="radio" name="thuShift" value="Unavailable all day"> Unavailable</label>
-              </div>
-            </div>
-            <div class="sched-row">
-              <div class="day-label" style="width:auto;">Friday <span style="display:block;font-weight:500;font-size:11px;color:var(--text-soft);font-style:italic;">(must be available Friday night)</span></div>
-              <div class="sched-shifts">
-                <label><input type="radio" name="friShift" value="Available all day" onchange="handleRequiredDay(this)"> All day</label>
-                <label><input type="radio" name="friShift" value="6pm–10:30pm" required onchange="handleRequiredDay(this)"> Eve 6 PM–11:30 PM</label>
-                <label><input type="radio" name="friShift" value="Unavailable all day" onchange="handleRequiredDay(this)"> Unavailable</label>
-              </div>
-              <div class="warning-box" id="friWarning">
-                ⚠️ <strong>Friday evening availability is a required part of this role.</strong> Not being available may affect your eligibility. You may still submit and we will review your application.
-              </div>
-            </div>
-            <div class="sched-row">
-              <div class="day-label" style="width:auto;">Saturday <span style="display:block;font-weight:500;font-size:11px;color:var(--text-soft);font-style:italic;">(must be available all day)</span></div>
-              <div class="sched-shifts">
-                <label style="opacity:0.85;cursor:not-allowed;background:var(--accent-light);border-color:var(--accent);color:var(--accent);font-weight:500;"><input type="checkbox" name="satDay" value="11:30am–6pm" checked disabled> Day 11:30 AM–6 PM ✓</label>
-                <label style="opacity:0.85;cursor:not-allowed;background:var(--accent-light);border-color:var(--accent);color:var(--accent);font-weight:500;"><input type="checkbox" name="satEve" value="6pm–11:30pm" checked disabled> Eve 6 PM–11:30 PM ✓</label>
-                <label><input type="checkbox" name="satUnavail" value="Not available all day" onchange="handleLockedDay('sat')"> Can't work Saturdays</label>
-              </div>
-              <div class="warning-box" id="satWarning">
-                ⚠️ <strong>Sorry — full Saturday availability is a required part of this role.</strong> Not being available all day Saturday may affect your eligibility. You may still submit your application and we will review it.
-              </div>
-            </div>
-            <div class="sched-row">
-              <div class="day-label" style="width:auto;">Sunday <span style="display:block;font-weight:500;font-size:11px;color:var(--text-soft);font-style:italic;">(must be available all day)</span></div>
-              <div class="sched-shifts">
-                <label style="opacity:0.85;cursor:not-allowed;background:var(--accent-light);border-color:var(--accent);color:var(--accent);font-weight:500;"><input type="checkbox" name="sunDay" value="11:30am–6pm" checked disabled> Day 11:30 AM–6 PM ✓</label>
-                <label style="opacity:0.85;cursor:not-allowed;background:var(--accent-light);border-color:var(--accent);color:var(--accent);font-weight:500;"><input type="checkbox" name="sunEve" value="6pm–11:45pm" checked disabled> Eve 6 PM–11:45 PM ✓</label>
-                <label><input type="checkbox" name="sunUnavail" value="Not available all day" onchange="handleLockedDay('sun')"> Can't work Sundays</label>
-              </div>
-              <div class="warning-box" id="sunWarning">
-                ⚠️ <strong>Sorry — full Sunday availability is a required part of this role.</strong> Not being available all day Sunday may affect your eligibility. You may still submit your application and we will review it.
-              </div>
-            </div>
+          <div class="notice-box">⭐ <strong>Open availability is highly preferred</strong> and can impact our decision to move forward.</div>
+          <div class="schedule-grid" id="schedule-grid">
+            <!-- Dynamically built from Firebase settings -->
           </div>
         </div>
-        <!-- MACHINE CLEANING -->
+
         <div class="field" style="margin-top:16px">
           <label>Machine Cleaning *</label>
-          <div class="info-box" style="margin-bottom:10px; font-size:13px;">
-            We require all team members to be able to stay for machine cleaning once per week (6:00 PM – Midnight). Please select which night works for you.
-          </div>
+          <div class="info-box" style="margin-bottom:10px;font-size:13px;">We require all team members to stay for machine cleaning once per week (6:00 PM – Midnight). Please select which night works for you.</div>
           <div class="radio-group">
             <label><input type="radio" name="machineCleaning" value="Thursday Night" required onchange="handleMachineCleaning(this)"> Thursday Night</label>
             <label><input type="radio" name="machineCleaning" value="Sunday Night" onchange="handleMachineCleaning(this)"> Sunday Night</label>
             <label><input type="radio" name="machineCleaning" value="Open to Both" onchange="handleMachineCleaning(this)"> Open to Both</label>
             <label><input type="radio" name="machineCleaning" value="Neither" onchange="handleMachineCleaning(this)"> Neither</label>
           </div>
-          <div class="warning-box" id="machineCleaningWarning">
-            ⚠️ <strong>Unfortunately, machine cleaning is a required part of the job.</strong> Not being available for either night may affect your eligibility. You may still submit your application and we will review it.
-          </div>
+          <div class="warning-box" id="machineCleaningWarning">⚠️ <strong>Machine cleaning is a required part of the job.</strong> Not being available may affect your eligibility. You may still submit and we will review it.</div>
         </div>
-        <!-- SCHEDULING NOTES -->
+
         <div class="field" style="margin-top:16px">
           <label>Scheduling Notes *</label>
-          <textarea name="schedNotes" required placeholder="Do you have any upcoming vacations or specific dates/times that would not work for you? If none, please write 'None'."></textarea>
+          <textarea name="schedNotes" required placeholder="Any upcoming vacations or specific dates/times that won't work? If none, write 'None'."></textarea>
         </div>
         <div class="row row-2" style="margin-top:16px">
-          <div class="field">
-            <label>Preferred hours/week *</label>
-            <input type="number" name="hoursPreferred" required placeholder="e.g. 20" min="1" max="40">
-          </div>
-          <div class="field">
-            <label>Minimum hours/week *</label>
-            <input type="number" name="hoursMinimum" required placeholder="e.g. 10" min="1" max="40">
-          </div>
+          <div class="field"><label>Preferred hours/week *</label><input type="number" name="hoursPreferred" required placeholder="e.g. 20" min="1" max="40"></div>
+          <div class="field"><label>Minimum hours/week *</label><input type="number" name="hoursMinimum" required placeholder="e.g. 10" min="1" max="40"></div>
         </div>
       </div>
-      <!-- RELIABILITY -->
+
       <div class="card">
         <div class="card-title"><span class="icon" style="background:var(--green-light);color:var(--green)">✅</span> Reliability</div>
         <div class="field">
@@ -293,37 +196,34 @@ textarea { resize: vertical; min-height: 80px; }
         </div>
         <div class="row row-2" style="margin-top:16px">
           <div class="field">
-            <label>Do you have a bank account for direct deposit? *</label>
+            <label>Bank account for direct deposit? *</label>
             <div class="radio-group">
               <label><input type="radio" name="bank" value="Yes" required> Yes</label>
               <label><input type="radio" name="bank" value="No"> No</label>
             </div>
           </div>
           <div class="field">
-            <label>Are you able to start immediately? *</label>
+            <label>Can you start immediately? *</label>
             <div class="radio-group">
               <label><input type="radio" name="startNow" value="Yes" required onchange="handleStartNow(this)"> Yes</label>
               <label><input type="radio" name="startNow" value="No" onchange="handleStartNow(this)"> No</label>
             </div>
           </div>
         </div>
-        <div class="field" id="startDateField" style="margin-top:12px; display:none">
-          <label>When can you start? *</label>
-          <input type="date" name="startDate">
-        </div>
+        <div class="field" id="startDateField" style="margin-top:12px;display:none"><label>When can you start? *</label><input type="date" name="startDate"></div>
       </div>
-      <!-- EXPERIENCE -->
+
       <div class="card">
         <div class="card-title"><span class="icon" style="background:var(--yellow-light);color:var(--yellow)">💼</span> Experience</div>
         <div class="field">
           <label>What's your work experience? *</label>
           <div class="radio-group">
             <label><input type="radio" name="currentlyEmployed" value="Currently employed" required onchange="handleEmployed(this)"> Currently employed</label>
-            <label><input type="radio" name="currentlyEmployed" value="Previously employed (not working now)" onchange="handleEmployed(this)"> Previously employed</label>
-            <label><input type="radio" name="currentlyEmployed" value="This would be my first job" onchange="handleEmployed(this)"> First job</label>
+            <label><input type="radio" name="currentlyEmployed" value="Previously employed" onchange="handleEmployed(this)"> Previously employed</label>
+            <label><input type="radio" name="currentlyEmployed" value="First job" onchange="handleEmployed(this)"> First job</label>
           </div>
         </div>
-        <div id="employedFields" style="display:none; margin-top:12px">
+        <div id="employedFields" style="display:none;margin-top:12px">
           <div class="row row-2">
             <div class="field"><label>Company *</label><input type="text" name="currentCompany" placeholder="e.g. Target"></div>
             <div class="field"><label>Job Title *</label><input type="text" name="currentTitle" placeholder="e.g. Cashier"></div>
@@ -331,7 +231,7 @@ textarea { resize: vertical; min-height: 80px; }
           <div class="field" style="margin-top:12px"><label>How long have you been there? *</label><input type="text" name="currentLength" placeholder="e.g. 6 months"></div>
           <div class="field" style="margin-top:12px"><label>Reason for leaving? *</label><input type="text" name="currentReason" placeholder="e.g. Looking for new opportunities"></div>
         </div>
-        <div id="notEmployedFields" style="display:none; margin-top:12px">
+        <div id="notEmployedFields" style="display:none;margin-top:12px">
           <div class="row row-2">
             <div class="field"><label>Most Recent Company *</label><input type="text" name="recentCompany" placeholder="e.g. Target"></div>
             <div class="field"><label>Most Recent Job Title *</label><input type="text" name="recentTitle" placeholder="e.g. Cashier"></div>
@@ -342,182 +242,287 @@ textarea { resize: vertical; min-height: 80px; }
           </div>
           <div class="field" style="margin-top:12px"><label>Reason for leaving? *</label><input type="text" name="recentReason" placeholder="e.g. Moved"></div>
         </div>
-        <div class="field" style="margin-top:20px; padding-top:16px; border-top:1px solid var(--border)">
-          <label>Do you have any food industry experience? *</label>
+        <div class="field" style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border)">
+          <label>Any food industry experience? *</label>
           <div class="radio-group">
             <label><input type="radio" name="foodExp" value="Yes" required> Yes</label>
             <label><input type="radio" name="foodExp" value="No"> No</label>
           </div>
         </div>
       </div>
-      <!-- JOB EXPECTATIONS -->
+
       <div class="card">
         <div class="card-title"><span class="icon" style="background:var(--accent-light);color:var(--accent)">🍦</span> Job Expectations</div>
         <div class="field">
-          <label>Are you comfortable standing for long periods, doing food prep, and cleaning? *</label>
+          <label>Comfortable standing for long periods, doing food prep, and cleaning? *</label>
           <div class="radio-group">
             <label><input type="radio" name="comfortPhysical" value="Yes" required> Yes</label>
             <label><input type="radio" name="comfortPhysical" value="No"> No</label>
           </div>
         </div>
         <div class="field" style="margin-top:12px">
-          <label>Are you comfortable handling busy rushes and difficult customers? *</label>
+          <label>Comfortable handling busy rushes and difficult customers? *</label>
           <div class="radio-group">
             <label><input type="radio" name="comfortRush" value="Yes" required> Yes</label>
             <label><input type="radio" name="comfortRush" value="No"> No</label>
           </div>
         </div>
         <div class="field" style="margin-top:16px">
-          <label>Anything else you'd like us to know? *<br><span style="font-weight:400;font-size:12px;color:var(--text-soft)">We highly recommend telling us a little about yourself and why you're interested in this job!</span></label>
-          <textarea name="notes" required></textarea>
+          <label>Tell us about yourself and why you're interested in this job *<br><span style="font-weight:400;font-size:12px;color:var(--text-soft)">This is your chance to stand out!</span></label>
+          <textarea name="notes" required placeholder="e.g. I'm a fast learner, love customer service, and have been a SomiSomi fan for years..."></textarea>
         </div>
       </div>
-      <!-- PAY INFO -->
-      <div class="card">
+
+      <div class="card" id="pay-card">
         <div class="info-box">
           <strong>💵 Pay Info</strong><br><br>
-          <strong>Pay:</strong> $7.25/hour for your first 35 training hours. After training you will receive tips which put you anywhere between $11–$14/hr.<br><br>
-          <strong>Our Motto:</strong> Be on time, ready to learn, and work with a positive attitude.
+          <span id="pay-info-text">Loading pay info...</span><br><br>
+          <strong>Our Motto:</strong> <span id="motto-text">Be on time, ready to learn, and work with a positive attitude.</span>
         </div>
       </div>
+
       <button type="submit" class="btn-primary" id="apply-btn">Submit Application</button>
     </form>
   </div>
 </div>
-<!-- THANK YOU -->
-<div id="view-thankyou" style="display:none;">
+
+<div id="view-thankyou" style="display:none">
   <div class="container" style="display:flex;align-items:center;justify-content:center;min-height:70vh;">
     <div style="text-align:center;">
       <div style="font-size:56px;margin-bottom:16px;">🎉</div>
       <h1 style="font-family:'Fraunces',serif;font-size:26px;margin-bottom:8px;">Application Submitted!</h1>
-      <p style="color:var(--text-soft);font-size:16px;max-width:400px;margin:0 auto;line-height:1.6;">
-        Thank you for applying to SomiSomi! We'll review your application and reach out about next steps.
-      </p>
+      <p style="color:var(--text-soft);font-size:16px;max-width:400px;margin:0 auto;line-height:1.6;">Thank you for applying to SomiSomi! We'll review your application and reach out about next steps.</p>
     </div>
   </div>
 </div>
-<script>
-const CONFIG = {
-  API_URL: 'https://script.google.com/macros/s/AKfycbzz_4awmlNpt3gOdz5kc1qnjCcSBALVCPiDQQGrviuaApAagcCIjyVi5fpiHTFLlQek3Q/exec'
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getFirestore, collection, addDoc, doc, getDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCPCaPkMTaig9oNAfIJc1Za9fIWVl-cjcY",
+  authDomain: "somisomi-hiring.firebaseapp.com",
+  projectId: "somisomi-hiring",
+  storageBucket: "somisomi-hiring.firebasestorage.app",
+  messagingSenderId: "6359504148",
+  appId: "1:6359504148:web:5ae570e52298062dd65e01"
 };
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// Default settings fallback
+const DEFAULT_SETTINGS = {
+  payInfo: "$7.25/hour for your first 35 training hours. After training you will receive tips which put you anywhere between $11–$14/hr.",
+  motto: "Be on time, ready to learn, and work with a positive attitude.",
+  locationName: "Metropark Square",
+  schedule: {
+    Monday:    { day: "12pm–6pm", eve: "6pm–10:30pm", locked: false },
+    Tuesday:   { day: "12pm–6pm", eve: "6pm–10:30pm", locked: false },
+    Wednesday: { day: "12pm–6pm", eve: "6pm–10:30pm", locked: false },
+    Thursday:  { day: "12pm–6pm", eve: "6pm–11:45pm", locked: false },
+    Friday:    { day: null,       eve: "6pm–10:30pm", locked: false, required: true, requiredShift: "evening" },
+    Saturday:  { day: "11:30am–6pm", eve: "6pm–11:30pm", locked: true },
+    Sunday:    { day: "11:30am–6pm", eve: "6pm–11:45pm", locked: true }
+  }
+};
+
+let settings = DEFAULT_SETTINGS;
+
+async function loadSettings() {
+  try {
+    const snap = await getDoc(doc(db, 'config', 'settings'));
+    if (snap.exists()) {
+      settings = { ...DEFAULT_SETTINGS, ...snap.data() };
+      if (!settings.schedule) settings.schedule = DEFAULT_SETTINGS.schedule;
+    }
+  } catch(e) { console.warn('Using default settings', e); }
+
+  // Apply settings to page
+  document.getElementById('pay-info-text').textContent = settings.payInfo;
+  document.getElementById('motto-text').textContent = settings.motto;
+  document.getElementById('location-text').textContent = `${settings.locationName} Location — Please fill out the form below!`;
+  buildScheduleGrid();
+
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('view-apply').style.display = 'block';
+}
+
+function buildScheduleGrid() {
+  const grid = document.getElementById('schedule-grid');
+  grid.innerHTML = '';
+  const sched = settings.schedule;
+
+  Object.entries(sched).forEach(([day, cfg]) => {
+    const row = document.createElement('div');
+    row.className = 'sched-row';
+    row.dataset.day = day;
+
+    const nameKey = day.toLowerCase().slice(0,3) + 'Shift';
+    const note = cfg.required ? `<span style="display:block;font-weight:500;font-size:11px;color:var(--text-soft);font-style:italic;">(must be available ${cfg.requiredShift === 'evening' ? 'Friday night' : 'all day'})</span>` : '';
+
+    let label = `<div class="day-label" style="width:auto;">${day}${note}</div>`;
+    let shifts = `<div class="sched-shifts">`;
+
+    if (cfg.locked) {
+      // Locked day - pre-checked pills + opt-out
+      if (cfg.day) shifts += `<label style="opacity:0.85;cursor:not-allowed;background:var(--accent-light);border-color:var(--accent);color:var(--accent);font-weight:500;"><input type="checkbox" checked disabled> Day ${formatTime(cfg.day)} ✓</label>`;
+      if (cfg.eve) shifts += `<label style="opacity:0.85;cursor:not-allowed;background:var(--accent-light);border-color:var(--accent);color:var(--accent);font-weight:500;"><input type="checkbox" checked disabled> Eve ${formatTime(cfg.eve)} ✓</label>`;
+      shifts += `<label><input type="checkbox" name="${day.toLowerCase()}Unavail" value="unavailable" onchange="handleLockedDay('${day.toLowerCase()}')"> Can't work ${day}s</label>`;
+      shifts += `</div>`;
+      shifts += `<div class="warning-box" id="${day.toLowerCase()}Warning">⚠️ <strong>Full ${day} availability is required.</strong> Not being available may affect your eligibility. You may still submit and we will review it.</div>`;
+    } else if (cfg.required) {
+      // Required day (Friday) - no "All day" option, show warning if unavailable selected
+      if (cfg.day) shifts += `<label><input type="radio" name="${nameKey}" value="allday"> All day</label>`;
+      if (cfg.eve) shifts += `<label><input type="radio" name="${nameKey}" value="${cfg.eve}" onchange="handleRequiredDay(this,'${day.toLowerCase()}')"> Eve ${formatTime(cfg.eve)}</label>`;
+      shifts += `<label><input type="radio" name="${nameKey}" value="unavailable" onchange="handleRequiredDay(this,'${day.toLowerCase()}')"> Unavailable</label>`;
+      shifts += `</div>`;
+      shifts += `<div class="warning-box" id="${day.toLowerCase()}Warning">⚠️ <strong>Friday evening availability is required.</strong> Not being available may affect your eligibility. You may still submit and we will review it.</div>`;
+    } else {
+      // Normal day
+      shifts += `<label><input type="radio" name="${nameKey}" value="allday" required> ⭐ Either Shift</label>`;
+      if (cfg.day) shifts += `<label><input type="radio" name="${nameKey}" value="${cfg.day}"> Day ${formatTime(cfg.day)}</label>`;
+      if (cfg.eve) shifts += `<label><input type="radio" name="${nameKey}" value="${cfg.eve}"> Eve ${formatTime(cfg.eve)}</label>`;
+      shifts += `<label><input type="radio" name="${nameKey}" value="unavailable"> Unavailable All Day</label>`;
+      shifts += `</div>`;
+    }
+
+    row.innerHTML = label + shifts;
+    grid.appendChild(row);
+  });
+}
+
+function formatTime(t) {
+  if (!t) return '';
+  return t.replace('am','AM').replace('pm','PM').replace('–','–');
+}
+
+function getScheduleData() {
+  const sched = settings.schedule;
+  const parts = [];
+  Object.entries(sched).forEach(([day, cfg]) => {
+    const key = day.toLowerCase().slice(0,3) + 'Shift';
+    if (cfg.locked) {
+      const unavail = document.querySelector(`input[name="${day.toLowerCase()}Unavail"]`);
+      parts.push(`${day}: ${unavail && unavail.checked ? 'Not available' : 'Available all day'}`);
+    } else {
+      const sel = document.querySelector(`input[name="${key}"]:checked`);
+      parts.push(`${day}: ${sel ? sel.value : 'No answer'}`);
+    }
+  });
+  return parts.join(' | ');
+}
+
+// Form handlers (exposed globally)
+window.handleStudent = (r) => {
+  const show = r.value.includes('High School') || r.value.includes('College');
+  document.getElementById('gradYearField').style.display = show ? 'block' : 'none';
+  document.getElementById('gradYear').required = show;
+};
+window.handleOtherJob = (r) => {
+  const show = r.value === 'Yes' && r.checked;
+  document.getElementById('otherJobDetail').style.display = show ? 'block' : 'none';
+  document.querySelector('input[name="otherJobDesc"]').required = show;
+};
+window.handleJobType = (r) => {
+  const show = r.value === 'Seasonal' && r.checked;
+  document.getElementById('lastDayField').style.display = show ? 'block' : 'none';
+  document.querySelector('input[name="lastDay"]').required = show;
+};
+window.handleMachineCleaning = (r) => {
+  document.getElementById('machineCleaningWarning').style.display = r.value === 'Neither' ? 'block' : 'none';
+};
+window.handleRequiredDay = (r, prefix) => {
+  document.getElementById(prefix + 'Warning').style.display = r.value === 'unavailable' ? 'block' : 'none';
+};
+window.handleLockedDay = (prefix) => {
+  const unavail = document.querySelector(`input[name="${prefix}Unavail"]`);
+  document.getElementById(prefix + 'Warning').style.display = unavail.checked ? 'block' : 'none';
+};
+window.handleStartNow = (r) => {
+  const show = r.value === 'No' && r.checked;
+  document.getElementById('startDateField').style.display = show ? 'block' : 'none';
+  document.querySelector('input[name="startDate"]').required = show;
+};
+window.handleEmployed = (r) => {
+  const isCurrent = r.value === 'Currently employed' && r.checked;
+  const isPrev = r.value === 'Previously employed' && r.checked;
+  document.getElementById('employedFields').style.display = isCurrent ? 'block' : 'none';
+  document.getElementById('notEmployedFields').style.display = isPrev ? 'block' : 'none';
+  document.querySelectorAll('#employedFields input').forEach(i => i.required = isCurrent);
+  document.querySelectorAll('#notEmployedFields input').forEach(i => i.required = isPrev);
+};
+
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg; t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 3500);
 }
-function handleStudent(r) {
-  const show = r.value === 'Yes - High School' || r.value === 'Yes - College';
-  const field = document.getElementById('gradYearField');
-  const sel = document.getElementById('gradYear');
-  field.style.display = show ? 'block' : 'none';
-  sel.required = show;
-}
-function handleOtherJob(r) {
-  const field = document.getElementById('otherJobDetail');
-  const input = field.querySelector('input');
-  field.style.display = r.value === 'Yes' && r.checked ? 'block' : 'none';
-  input.required = r.value === 'Yes' && r.checked;
-}
-function handleJobType(r) {
-  const field = document.getElementById('lastDayField');
-  const input = field.querySelector('input');
-  field.style.display = r.value === 'Seasonal' && r.checked ? 'block' : 'none';
-  input.required = r.value === 'Seasonal' && r.checked;
-}
-function handleMachineCleaning(r) {
-  document.getElementById('machineCleaningWarning').style.display = r.value === 'Neither' ? 'block' : 'none';
-}
-function handleRequiredDay(r) {
-  if (r.name === 'friShift') {
-    document.getElementById('friWarning').style.display = r.value === 'Unavailable all day' ? 'block' : 'none';
-  }
-}
-function handleLockedDay(prefix) {
-  const unavail = document.querySelector(`input[name="${prefix}Unavail"]`);
-  document.getElementById(prefix + 'Warning').style.display = unavail.checked ? 'block' : 'none';
-}
-function handleStartNow(r) {
-  const field = document.getElementById('startDateField');
-  const input = field.querySelector('input');
-  field.style.display = r.value === 'No' && r.checked ? 'block' : 'none';
-  input.required = r.value === 'No' && r.checked;
-}
-function handleEmployed(r) {
-  const empFields = document.getElementById('employedFields');
-  const notEmpFields = document.getElementById('notEmployedFields');
-  const isCurrent = r.value === 'Currently employed' && r.checked;
-  const isPrevious = r.value === 'Previously employed (not working now)' && r.checked;
-  empFields.style.display = isCurrent ? 'block' : 'none';
-  notEmpFields.style.display = isPrevious ? 'block' : 'none';
-  empFields.querySelectorAll('input').forEach(i => i.required = isCurrent);
-  notEmpFields.querySelectorAll('input').forEach(i => i.required = isPrevious);
-}
-function getScheduleData() {
-  const radioDays = ['mon','tue','wed','thu','fri'];
-  const labels = {mon:'Monday',tue:'Tuesday',wed:'Wednesday',thu:'Thursday',fri:'Friday',sat:'Saturday',sun:'Sunday'};
-  const results = [];
-  radioDays.forEach(d => {
-    const sel = document.querySelector(`input[name="${d}Shift"]:checked`);
-    if (sel) results.push(labels[d] + ': ' + sel.value);
-    else results.push(labels[d] + ': No answer');
-  });
-  ['sat','sun'].forEach(d => {
-    const unavail = document.querySelector(`input[name="${d}Unavail"]`);
-    results.push(labels[d] + ': ' + (unavail && unavail.checked ? 'Not available all day' : 'Available all day'));
-  });
-  return results.join(' | ');
-}
+
 document.getElementById('apply-form').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const form = e.target;
   document.querySelectorAll('.field-error').forEach(el => el.classList.remove('field-error'));
-  const dayLabels = { monShift:'Monday',tueShift:'Tuesday',wedShift:'Wednesday',thuShift:'Thursday',friShift:'Friday' };
-  const requiredEls = form.querySelectorAll('[required]');
+
+  // Manual check for schedule days
+  const sched = settings.schedule;
+  for (const [day, cfg] of Object.entries(sched)) {
+    if (!cfg.locked) {
+      const key = day.toLowerCase().slice(0,3) + 'Shift';
+      const checked = document.querySelector(`input[name="${key}"]:checked`);
+      if (!checked) {
+        const row = document.querySelector(`.sched-row[data-day="${day}"]`);
+        if (row) { row.classList.add('field-error'); row.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+        showToast(`Please select your availability for ${day}.`);
+        return;
+      }
+    }
+  }
+
+  // Check other required fields
+  const requiredEls = e.target.querySelectorAll('[required]');
   const checkedNames = new Set();
-  let firstMissing = null, missingLabel = '';
   for (const el of requiredEls) {
     if (el.disabled) continue;
     if (el.type === 'radio' || el.type === 'checkbox') {
       if (checkedNames.has(el.name)) continue;
-      const anyChecked = form.querySelector(`input[name="${el.name}"]:checked`);
       checkedNames.add(el.name);
-      if (!anyChecked) {
-        firstMissing = el;
-        if (dayLabels[el.name]) missingLabel = `Please select your availability for ${dayLabels[el.name]}.`;
-        else {
-          const lbl = el.closest('.field')?.querySelector('label');
-          missingLabel = lbl ? `Please complete: ${lbl.textContent.replace('*','').trim()}` : 'Please complete all required fields.';
-        }
-        break;
+      if (!e.target.querySelector(`input[name="${el.name}"]:checked`)) {
+        const field = el.closest('.field') || el.closest('.card');
+        if (field) { field.classList.add('field-error'); field.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+        const lbl = el.closest('.field')?.querySelector('label');
+        showToast(lbl ? `Please complete: ${lbl.textContent.replace('*','').trim()}` : 'Please complete all required fields.');
+        return;
       }
     } else if (!el.value.trim()) {
-      firstMissing = el;
+      el.classList.add('field-error');
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
       const lbl = el.closest('.field')?.querySelector('label');
-      missingLabel = lbl ? `Please complete: ${lbl.textContent.replace('*','').trim()}` : 'Please complete all required fields.';
-      break;
+      showToast(lbl ? `Please complete: ${lbl.textContent.replace('*','').trim()}` : 'Please complete all required fields.');
+      return;
     }
   }
-  if (firstMissing) {
-    const card = firstMissing.closest('.field') || firstMissing.closest('.card');
-    if (card) { card.classList.add('field-error'); card.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
-    showToast(missingLabel);
-    return;
-  }
+
   const btn = document.getElementById('apply-btn');
   btn.disabled = true; btn.textContent = 'Submitting...';
-  const fd = new FormData(form);
-  const data = { type: 'application', days: getScheduleData() };
+
+  const fd = new FormData(e.target);
+  const data = { status: 'Applied', timestamp: serverTimestamp(), days: getScheduleData() };
   for (const [key, val] of fd.entries()) data[key] = val;
+
   try {
-    await fetch(CONFIG.API_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(data) });
+    await addDoc(collection(db, 'candidates'), data);
     document.getElementById('view-apply').style.display = 'none';
     document.getElementById('view-thankyou').style.display = 'block';
     window.scrollTo(0, 0);
   } catch (err) {
+    console.error(err);
     showToast('Error submitting. Please try again.');
     btn.disabled = false; btn.textContent = 'Submit Application';
   }
 });
+
+loadSettings();
 </script>
 </body>
 </html>
