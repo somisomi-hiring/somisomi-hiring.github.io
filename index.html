@@ -466,9 +466,10 @@ function buildScheduleGrid() {
     row.dataset.day = day;
 
     const nameKey = day.toLowerCase().slice(0,3) + 'Shift';
-    const note = cfg.required ? `<span style="display:block;font-weight:500;font-size:11px;color:var(--text-soft);font-style:italic;">(must be available ${cfg.requiredShift === 'evening' ? 'Friday night' : 'all day'})</span>` : '';
+    const note = cfg.required ? `<span style="display:block;font-weight:400;font-size:11px;color:var(--text-soft);font-style:italic;">Must be available<br>Friday night</span>` : '';
 
-    let label = `<div class="day-label" style="width:auto;">${day}${note}</div>`;
+    const lockedNote = cfg.locked ? `<span style="display:block;font-weight:400;font-size:11px;color:var(--text-soft);font-style:italic;">Must be available<br>all day</span>` : '';
+    let label = `<div class="day-label" style="width:auto;">${day}${note}${lockedNote}</div>`;
     let shifts = `<div class="sched-shifts">`;
 
     if (cfg.locked) {
@@ -565,6 +566,15 @@ function showToast(msg) {
 document.getElementById('apply-form').addEventListener('submit', async (e) => {
   e.preventDefault();
   document.querySelectorAll('.field-error').forEach(el => el.classList.remove('field-error'));
+
+  // Manual check for Friday shift (required day)
+  const friChecked = document.querySelector('input[name="friShift"]:checked');
+  if (friChecked === null && document.querySelector('input[name="friShift"]')) {
+    const friRow = document.querySelector('.sched-row[data-day="Friday"]');
+    if (friRow) { friRow.classList.add('field-error'); friRow.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+    showToast('Please select your availability for Friday.');
+    return;
+  }
 
   // Manual check for all radio groups
   const radioNames = ['student','otherJob','jobType','machineCleaning','transport','bank','startNow','currentlyEmployed','foodExp','comfortPhysical','comfortRush'];
