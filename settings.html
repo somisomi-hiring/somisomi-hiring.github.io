@@ -418,7 +418,7 @@ function renderAppQuestions() {
       <div class="q-actions">
         <button class="btn btn-secondary btn-sm btn-icon" onclick="editQuestion(${i},'app')" title="Edit">✏️</button>
         <button class="btn btn-danger btn-sm btn-icon" onclick="deleteQuestion(${i},'app')" title="Delete">🗑️</button>
-        <label class="toggle-switch" title="${q.enabled!==false?'Enabled':'Disabled'}">
+        <label class="toggle-switch" title="toggle">
           <input type="checkbox" ${q.enabled!==false?'checked':''} onchange="toggleQuestion(${i},'app',this.checked)">
           <span class="toggle-slider"></span>
         </label>
