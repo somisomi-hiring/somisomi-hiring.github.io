@@ -145,6 +145,8 @@ textarea { resize:vertical; min-height:72px; }
         <div class="field" style="margin-top:12px"><label>Email *</label><input type="email" name="email" required placeholder="you@email.com"></div>
       </div>
 
+      <div id="dynamic-form-fields-top"></div>
+
       <div class="card" id="schedule-card">
         <div class="card-title"><span class="icon">📅</span> Available Days &amp; Shifts</div>
         <div class="schedule-grid" id="schedule-grid">
@@ -216,7 +218,7 @@ const DEFAULT_APP_QUESTIONS = [
   { key:'otherJobDesc', label:'Describe your other job & schedule', type:'text', placeholder:'e.g. Retail, Tues-Thurs 9am-3pm', required:false, enabled:true, conditional:'otherJob:Yes' },
   { key:'jobType', label:'Are you looking for a seasonal or long-term position?', type:'radio', options:['Long Term','Seasonal'], required:true, enabled:true },
   { key:'lastDay', label:'Expected last day', type:'date', required:false, enabled:true, conditional:'jobType:Seasonal' },
-  { key:'machineCleaning', label:'Machine cleaning availability (once/week, 6PM–Midnight)', type:'radio', options:['Open to Both','Thursday Night','Sunday Night','Neither'], required:true, enabled:true },
+  { key:'machineCleaning', label:'Machine cleaning is required for every employee once per week (6:00 PM – Midnight). Please select which night you are available for.', type:'radio', options:['Open to Both','Thursday Night','Sunday Night','Neither'], required:true, enabled:true },
   { key:'schedNotes', label:'Scheduling Notes', type:'textarea', placeholder:"Any upcoming vacations or specific dates/times that won't work? If none, write 'None'.", required:true, enabled:true },
   { key:'hoursPreferred', label:'Preferred hours/week', type:'number', placeholder:'e.g. 20', required:true, enabled:true },
   { key:'hoursMinimum', label:'Minimum hours/week', type:'number', placeholder:'e.g. 10', required:true, enabled:true },
@@ -224,6 +226,7 @@ const DEFAULT_APP_QUESTIONS = [
   { key:'bank', label:'Bank account for direct deposit?', type:'radio', options:['Yes','No'], required:true, enabled:true },
   { key:'startNow', label:'Can you start immediately?', type:'radio', options:['Yes','No'], required:true, enabled:true },
   { key:'startDate', label:'When can you start?', type:'date', required:false, enabled:true, conditional:'startNow:No' },
+  { key:'letGo', label:'Have you ever been let go due to a no-show or being late?', type:'radio', options:['Yes','No'], required:true, enabled:true },
   { key:'currentlyEmployed', label:"What's your work experience?", type:'radio', options:['Currently employed','Previously employed','First job'], required:true, enabled:true },
   { key:'currentCompany', label:'Current Company', type:'text', placeholder:'e.g. Target', required:false, enabled:true, conditional:'currentlyEmployed:Currently employed' },
   { key:'currentTitle', label:'Current Job Title', type:'text', placeholder:'e.g. Cashier', required:false, enabled:true, conditional:'currentlyEmployed:Currently employed' },
@@ -245,15 +248,20 @@ let appQuestions = DEFAULT_APP_QUESTIONS;
 
 function buildDynamicForm() {
   const container = document.getElementById('dynamic-form-fields');
+  const topContainer = document.getElementById('dynamic-form-fields-top');
   if (!container) return;
   container.innerHTML = '';
+  if (topContainer) topContainer.innerHTML = '';
 
-  // Group questions by section
-  const sections = [
+  // Availability goes ABOVE the schedule grid
+  const topSections = [
     { id:'availability', title:'📅 Availability', icon:'📅', keys:['student','gradYear','otherJob','otherJobDesc','jobType','lastDay'] },
-    { id:'cleaning', title:'🧹 Machine Cleaning', icon:'🧹', keys:['machineCleaning'] },
-    { id:'schedule-notes', title:'📝 Schedule Details', icon:'📝', keys:['schedNotes','hoursPreferred','hoursMinimum'] },
-    { id:'reliability', title:'✅ Reliability', icon:'✅', keys:['transport','bank','startNow','startDate'] },
+  ];
+
+  // Everything else goes BELOW the schedule grid
+  const sections = [
+    { id:'availability-bottom', title:'📅 Availability', icon:'📅', keys:['machineCleaning','schedNotes','hoursPreferred','hoursMinimum','transport','bank','startNow','startDate'] },
+    { id:'reliability', title:'✅ Reliability', icon:'✅', keys:['letGo'] },
     { id:'experience', title:'💼 Experience', icon:'💼', keys:['currentlyEmployed','currentCompany','currentTitle','currentLength','currentReason','recentCompany','recentTitle','recentWhen','recentLength','recentReason','foodExp'] },
     { id:'expectations', title:'🍦 Job Expectations', icon:'🍦', keys:['comfortPhysical','comfortRush','notes'] },
   ];
@@ -262,6 +270,18 @@ function buildDynamicForm() {
   const keyToQ = {};
   enabledQuestions.forEach(q => keyToQ[q.key] = q);
 
+  // Render top sections (above schedule grid)
+  topSections.forEach(section => {
+    const sectionQs = section.keys.map(k => keyToQ[k]).filter(Boolean);
+    if (!sectionQs.length) return;
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `<div class="card-title"><span class="icon">${section.icon}</span> ${section.title.replace(section.icon,'').trim()}</div>`;
+    sectionQs.forEach(q => { const field = buildField(q); if (field) card.appendChild(field); });
+    if (topContainer) topContainer.appendChild(card);
+  });
+
+  // Render bottom sections (below schedule grid)
   sections.forEach(section => {
     const sectionQs = section.keys.map(k => keyToQ[k]).filter(Boolean);
     if (!sectionQs.length) return;
@@ -514,7 +534,7 @@ document.getElementById('apply-form').addEventListener('submit', async (e) => {
   }
 
   // Manual check for all radio groups
-  const radioNames = ['student','otherJob','jobType','machineCleaning','transport','bank','startNow','currentlyEmployed','foodExp','comfortPhysical','comfortRush'];
+  const radioNames = ['student','otherJob','jobType','machineCleaning','transport','bank','startNow','letGo','currentlyEmployed','foodExp','comfortPhysical','comfortRush'];
   for (const name of radioNames) {
     const el = e.target.querySelector(`input[name="${name}"]`);
     if (!el) continue;
