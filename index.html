@@ -376,6 +376,10 @@ function setupConditionals() {
   // Hide all conditional fields initially
   document.querySelectorAll('[data-conditional]').forEach(field => {
     field.style.display = 'none';
+    // Also clear required from hidden fields
+    field.querySelectorAll('input,select,textarea').forEach(inp => {
+      inp.required = false;
+    });
   });
 }
 
