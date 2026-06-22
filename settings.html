@@ -136,7 +136,6 @@ textarea{resize:vertical;min-height:60px;}
     <div class="section-nav">
       <button class="nav-btn active" onclick="showSection('appform',this)">📋 Application Form</button>
       <button class="nav-btn" onclick="showSection('interview',this)">🎯 Interview Form</button>
-      <button class="nav-btn" onclick="showSection('schedule',this)">🕐 Shift Times</button>
       <button class="nav-btn" onclick="showSection('general',this)">⚙️ General</button>
       <button class="nav-btn" onclick="showSection('pin',this)">🔒 PIN</button>
     </div>
@@ -154,6 +153,16 @@ textarea{resize:vertical;min-height:60px;}
       </div>
       <div class="question-list" id="app-question-list"></div>
       <button class="btn btn-primary" style="margin-top:12px;width:100%" onclick="saveAppForm()">💾 Save Application Form</button>
+
+      <div class="card" style="margin-top:16px">
+        <strong style="font-size:15px;display:block;margin-bottom:4px">📅 Shift Times</strong>
+        <p style="font-size:12px;color:var(--text-xs);margin-bottom:14px">Set the available shifts for each day. The Type controls how the day appears on the form.</p>
+        <table class="sched-table" id="sched-table">
+          <thead><tr><th>Day</th><th>Day Shift</th><th>Evening Shift</th><th>Type</th></tr></thead>
+          <tbody id="sched-body"></tbody>
+        </table>
+        <button class="btn btn-primary btn-sm" style="margin-top:14px" onclick="saveSchedule()">💾 Save Shift Times</button>
+      </div>
     </div>
 
     <!-- INTERVIEW SECTION -->
@@ -176,18 +185,7 @@ textarea{resize:vertical;min-height:60px;}
       <button class="btn btn-primary" style="margin-top:12px;width:100%" onclick="saveInterviewForm()">💾 Save Interview Form</button>
     </div>
 
-    <!-- SCHEDULE SECTION -->
-    <div id="section-schedule" class="settings-section">
-      <div class="card">
-        <strong style="font-size:15px;display:block;margin-bottom:4px">Shift Times</strong>
-        <p style="font-size:12px;color:var(--text-xs);margin-bottom:14px">Edit available shifts per day. Leave blank to hide that shift.</p>
-        <table class="sched-table" id="sched-table">
-          <thead><tr><th>Day</th><th>Day Shift</th><th>Evening Shift</th><th>Type</th></tr></thead>
-          <tbody id="sched-body"></tbody>
-        </table>
-        <button class="btn btn-primary btn-sm" style="margin-top:14px" onclick="saveSchedule()">💾 Save Shift Times</button>
-      </div>
-    </div>
+
 
     <!-- GENERAL SECTION -->
     <div id="section-general" class="settings-section">
@@ -587,16 +585,24 @@ window.saveInterviewForm = async () => {
 // ── SCHEDULE ──
 function buildSchedTable() {
   const tbody = document.getElementById('sched-body');
+  if (!tbody) return;
   tbody.innerHTML = '';
-  Object.entries(settings.schedule||{}).forEach(([day,cfg]) => {
+  const dayOrder = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  dayOrder.forEach(day => {
+    const cfg = (settings.schedule||{})[day];
+    if (!cfg) return;
+    const typeVal = cfg.locked ? 'locked' : cfg.required ? 'required' : 'normal';
     const tr = document.createElement('tr');
-    const badge = cfg.locked ? '<span class="badge badge-locked">🔒 Required all day</span>'
-      : cfg.required ? '<span class="badge badge-required">⚠️ Evening required</span>'
-      : '<span style="font-size:11px;color:var(--text-xs)">Normal</span>';
     tr.innerHTML = `<td><strong>${day}</strong></td>
       <td><input type="text" value="${cfg.day||''}" data-day="${day}" data-field="day" placeholder="e.g. 12pm–6pm"></td>
       <td><input type="text" value="${cfg.eve||''}" data-day="${day}" data-field="eve" placeholder="e.g. 6pm–10:30pm"></td>
-      <td>${badge}</td>`;
+      <td>
+        <select data-day="${day}" data-field="type" style="padding:5px 8px;font-size:12px;border:1px solid var(--border);border-radius:6px;background:var(--surface)">
+          <option value="normal" ${typeVal==='normal'?'selected':''}>Normal</option>
+          <option value="locked" ${typeVal==='locked'?'selected':''}>🔒 Locked (required all day)</option>
+          <option value="required" ${typeVal==='required'?'selected':''}>⚠️ Evening required</option>
+        </select>
+      </td>`;
     tbody.appendChild(tr);
   });
 }
@@ -605,6 +611,15 @@ window.saveSchedule = async () => {
     const day=inp.dataset.day, field=inp.dataset.field;
     if (!settings.schedule[day]) settings.schedule[day]={};
     settings.schedule[day][field] = inp.value.trim()||null;
+  });
+  document.querySelectorAll('#sched-body select[data-field="type"]').forEach(sel => {
+    const day = sel.dataset.day;
+    if (!settings.schedule[day]) settings.schedule[day]={};
+    const t = sel.value;
+    settings.schedule[day].locked = t === 'locked';
+    settings.schedule[day].required = t === 'required';
+    if (t === 'required') settings.schedule[day].requiredShift = 'evening';
+    else delete settings.schedule[day].requiredShift;
   });
   await setDoc(doc(db,'config','settings'), settings);
   showToast('✅ Shift times saved!', true);
