@@ -508,7 +508,14 @@ window.saveQuestion = () => {
 window.closeQuestionModal = () => { document.getElementById('question-modal').style.display='none'; };
 
 window.saveAppForm = async () => {
-  await setDoc(doc(db,'config','appForm'), { questions: appQuestions });
+  // Preserve conditional logic from defaults when saving
+  const defaultMap = {};
+  DEFAULT_APP_QUESTIONS.forEach(q => defaultMap[q.key] = q);
+  const toSave = appQuestions.map(q => ({
+    ...(defaultMap[q.key] ? { conditional: defaultMap[q.key].conditional } : {}),
+    ...q,
+  }));
+  await setDoc(doc(db,'config','appForm'), { questions: toSave });
   showToast('✅ Application form saved!', true);
 };
 
