@@ -272,9 +272,6 @@ const DEFAULT_SETTINGS = {
   }
 };
 
-let settings = DEFAULT_SETTINGS;
-let appQuestions = DEFAULT_APP_QUESTIONS;
-
 const DEFAULT_APP_QUESTIONS = [
   { key:'student', label:'Are you currently a student?', type:'radio', options:['No','Yes - High School','Yes - College'], required:true, enabled:true },
   { key:'gradYear', label:'Expected Graduation Year', type:'select', options:['2025','2026','2027','2028','2029','2030'], required:false, enabled:true, conditional:'student:Yes - High School|Yes - College' },
@@ -305,6 +302,9 @@ const DEFAULT_APP_QUESTIONS = [
   { key:'comfortRush', label:'Comfortable handling busy rushes and difficult customers?', type:'radio', options:['Yes','No'], required:true, enabled:true },
   { key:'notes', label:"Tell us about yourself and why you're interested in this job", type:'textarea', placeholder:"e.g. I'm a fast learner, love customer service...", required:true, enabled:true },
 ];
+
+let settings = DEFAULT_SETTINGS;
+let appQuestions = DEFAULT_APP_QUESTIONS;
 
 function buildDynamicForm() {
   const container = document.getElementById('dynamic-form-fields');
