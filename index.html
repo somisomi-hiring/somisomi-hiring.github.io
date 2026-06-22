@@ -477,16 +477,16 @@ function buildScheduleGrid() {
       shifts += `</div>`;
       shifts += `<div class="warning-box" id="${day.toLowerCase()}Warning">⚠️ <strong>Full ${day} availability is required.</strong> Not being available may affect your eligibility. You may still submit and we will review it.</div>`;
     } else if (cfg.required) {
-      shifts += `<label style="flex-direction:column;gap:1px;"><input type="radio" name="${nameKey}" value="allday" onchange="handleRequiredDay(this,'${day.toLowerCase()}')"><span>All Day</span></label>`;
+      shifts += `<label style="flex-direction:column;gap:1px;"><input type="radio" name="${nameKey}" value="allday" onchange="handleRequiredDay(this,'${day.toLowerCase()}')"><span>${cfg.allDayLabel||'All Day'}</span></label>`;
       if (cfg.eve) shifts += `<label style="flex-direction:column;gap:1px;"><input type="radio" name="${nameKey}" value="${cfg.eve}" onchange="handleRequiredDay(this,'${day.toLowerCase()}')"><span>Evening</span><span style="font-size:10px;color:var(--text-xs)">${formatTime(cfg.eve)}</span></label>`;
-      shifts += `<label style="flex-direction:column;gap:1px;"><input type="radio" name="${nameKey}" value="unavailable" onchange="handleRequiredDay(this,'${day.toLowerCase()}')"><span>Unavailable</span></label>`;
+      shifts += `<label style="flex-direction:column;gap:1px;"><input type="radio" name="${nameKey}" value="unavailable" onchange="handleRequiredDay(this,'${day.toLowerCase()}')"><span>${cfg.unavailLabel||'Unavailable'}</span></label>`;
       shifts += `</div>`;
       shifts += `<div class="warning-box" id="${day.toLowerCase()}Warning">⚠️ <strong>Friday evening availability is required.</strong> Not being available may affect your eligibility. You may still submit and we will review it.</div>`;
     } else {
-      shifts += `<label style="flex-direction:column;gap:1px;"><input type="radio" name="${nameKey}" value="allday"><span>All Day</span></label>`;
+      shifts += `<label style="flex-direction:column;gap:1px;"><input type="radio" name="${nameKey}" value="allday"><span>${cfg.allDayLabel||'Available All Day'}</span></label>`;
       if (cfg.day) shifts += `<label style="flex-direction:column;gap:1px;"><input type="radio" name="${nameKey}" value="${cfg.day}"><span>Day</span><span style="font-size:10px;color:var(--text-xs)">${formatTime(cfg.day)}</span></label>`;
       if (cfg.eve) shifts += `<label style="flex-direction:column;gap:1px;"><input type="radio" name="${nameKey}" value="${cfg.eve}"><span>Evening</span><span style="font-size:10px;color:var(--text-xs)">${formatTime(cfg.eve)}</span></label>`;
-      shifts += `<label style="flex-direction:column;gap:1px;"><input type="radio" name="${nameKey}" value="unavailable"><span>Unavailable</span></label>`;
+      shifts += `<label style="flex-direction:column;gap:1px;"><input type="radio" name="${nameKey}" value="unavailable"><span>${cfg.unavailLabel||'Unavailable'}</span></label>`;
       shifts += `</div>`;
     }
 
