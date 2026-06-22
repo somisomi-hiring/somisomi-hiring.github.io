@@ -197,9 +197,9 @@ textarea { resize:vertical; min-height:72px; }
           <label>Machine Cleaning *</label>
           <div class="info-box" style="margin-bottom:10px;font-size:13px;">We require all team members to stay for machine cleaning once per week (6:00 PM – Midnight). Please select which night works for you.</div>
           <div class="radio-group">
+            <label><input type="radio" name="machineCleaning" value="Open to Both" onchange="handleMachineCleaning(this)"> Open to Both</label>
             <label><input type="radio" name="machineCleaning" value="Thursday Night" onchange="handleMachineCleaning(this)"> Thursday Night</label>
             <label><input type="radio" name="machineCleaning" value="Sunday Night" onchange="handleMachineCleaning(this)"> Sunday Night</label>
-            <label><input type="radio" name="machineCleaning" value="Open to Both" onchange="handleMachineCleaning(this)"> Open to Both</label>
             <label><input type="radio" name="machineCleaning" value="Neither" onchange="handleMachineCleaning(this)"> Neither</label>
           </div>
           <div class="warning-box" id="machineCleaningWarning">⚠️ <strong>Machine cleaning is a required part of the job.</strong> Not being available may affect your eligibility. You may still submit and we will review it.</div>
