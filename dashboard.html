@@ -120,7 +120,7 @@ textarea{resize:vertical;min-height:80px;}
 </div>
 
 <!-- DASHBOARD -->
-<div id="view-dashboard" class="view">
+<div id="view-dashboard" class="view" style="display:none">
   <div class="container wide">
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:20px;padding-top:24px;">
       <div><div style="font-family:'Fraunces',serif;font-size:24px;font-weight:800;color:var(--accent)">SomiSomi</div><h1 style="font-size:20px;font-weight:600">Hiring Dashboard</h1></div>
@@ -291,8 +291,10 @@ function showToast(msg,ok=false) {
 }
 
 function showView(name) {
-  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  document.getElementById('view-'+name).classList.add('active');
+  document.querySelectorAll('.view').forEach(v=>{ v.classList.remove('active'); v.style.display='none'; });
+  const el = document.getElementById('view-'+name);
+  el.style.display = 'block';
+  el.classList.add('active');
   window.scrollTo(0,0);
   if(name==='dashboard') loadCandidates();
 }
