@@ -327,7 +327,7 @@ function buildField(q) {
   div.dataset.key = q.key;
   if (q.conditional) {
     div.dataset.conditional = q.conditional;
-    div.classList.add('field-hidden');
+    div.setAttribute('style', 'display:none !important');
   }
 
   const label = document.createElement('label');
@@ -379,8 +379,7 @@ function buildField(q) {
 function setupConditionals() {
   // Hide all conditional fields initially
   document.querySelectorAll('[data-conditional]').forEach(field => {
-    field.classList.add('field-hidden');
-    field.style.display = 'none';
+    field.setAttribute('style', 'display:none !important');
     field.querySelectorAll('input,select,textarea').forEach(inp => {
       inp.required = false;
     });
@@ -396,8 +395,8 @@ function handleConditional(key, value) {
     const condVals = cond.substring(colonIdx + 1).split('|');
     if (condKey !== key) return;
     const show = condVals.includes(value);
-    if (show) { field.classList.remove('field-hidden'); field.style.display = 'block'; }
-    else { field.classList.add('field-hidden'); field.style.display = 'none'; }
+    if (show) { field.removeAttribute('style'); field.style.display = 'block'; }
+    else { field.setAttribute('style', 'display:none !important'); }
     const q = appQuestions.find(qq=>qq.key===field.dataset.key);
     field.querySelectorAll('input,select,textarea').forEach(inp => {
       inp.required = show && q?.required === true;
