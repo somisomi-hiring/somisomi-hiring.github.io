@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SomiSomi — Settings</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FFF8F0; --surface: #FFFFFF; --surface-alt: #FFF1E6; --border: #F0E0D0;
+  --text: #2D1B0E; --text-soft: #8B7355; --accent: #E8572A; --accent-hover: #D04A20;
+  --accent-light: #FEF0EB; --green: #2D8B46; --green-light: #EDFAF1;
+  --red: #C4342A; --red-light: #FEF0EF; --radius: 12px;
+  --shadow: 0 1px 3px rgba(45,27,14,0.06), 0 4px 12px rgba(45,27,14,0.04);
+  --shadow-lg: 0 4px 12px rgba(45,27,14,0.08), 0 12px 32px rgba(45,27,14,0.06);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; -webkit-font-smoothing:antialiased; }
+.container { max-width:760px; margin:0 auto; padding:24px 16px 80px; }
+h1,h2,h3 { font-family:'Fraunces',serif; }
+.card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:24px; margin-bottom:16px; box-shadow:var(--shadow); }
+.card-title { font-family:'Fraunces',serif; font-size:17px; font-weight:700; margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+.field { margin-bottom:14px; }
+.field label { display:block; font-size:13px; font-weight:600; margin-bottom:6px; }
+input[type="text"],input[type="password"],textarea,select {
+  width:100%; padding:10px 14px; border:1.5px solid var(--border); border-radius:8px;
+  font-family:'DM Sans',sans-serif; font-size:14px; color:var(--text); background:var(--surface);
+  transition:border-color 0.2s; outline:none;
+}
+input:focus,textarea:focus,select:focus { border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-light); }
+textarea { resize:vertical; min-height:70px; }
+.btn { display:inline-flex; align-items:center; justify-content:center; gap:6px; padding:10px 20px; border:none; border-radius:8px; font-family:'DM Sans',sans-serif; font-size:14px; font-weight:600; cursor:pointer; transition:all 0.2s; }
+.btn-primary { background:var(--accent); color:#fff; box-shadow:0 2px 8px rgba(232,87,42,0.25); }
+.btn-primary:hover { background:var(--accent-hover); }
+.btn-primary:disabled { opacity:0.6; cursor:not-allowed; }
+.btn-secondary { background:var(--surface); color:var(--text); border:1.5px solid var(--border); }
+.btn-secondary:hover { background:var(--surface-alt); }
+.btn-sm { padding:7px 14px; font-size:13px; }
+.btn-danger { background:var(--red-light); color:var(--red); border:1px solid #f5c6c3; }
+.toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(100px); background:var(--text); color:#fff; padding:12px 24px; border-radius:10px; font-size:14px; font-weight:500; box-shadow:var(--shadow-lg); z-index:1000; transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+.toast.show { transform:translateX(-50%) translateY(0); }
+.spinner { width:28px; height:28px; border:3px solid var(--border); border-top-color:var(--accent); border-radius:50%; animation:spin 0.7s linear infinite; margin:40px auto; display:block; }
+@keyframes spin { to { transform:rotate(360deg); } }
+
+/* Login */
+#view-login { display:flex; align-items:center; justify-content:center; min-height:80vh; }
+.login-card { width:100%; max-width:340px; text-align:center; }
+.login-card .logo { font-family:'Fraunces',serif; font-size:28px; font-weight:800; color:var(--accent); }
+.pin-input { text-align:center; font-size:22px; letter-spacing:8px; font-weight:700; padding:14px; }
+.login-error { color:var(--red); font-size:13px; margin-top:8px; display:none; }
+
+/* Schedule table */
+.sched-table { width:100%; border-collapse:collapse; }
+.sched-table th { text-align:left; font-size:12px; font-weight:600; color:var(--text-soft); padding:8px 10px; border-bottom:2px solid var(--border); }
+.sched-table td { padding:8px 10px; border-bottom:1px solid var(--border); vertical-align:middle; }
+.sched-table tr:last-child td { border-bottom:none; }
+.sched-table input[type="text"] { padding:6px 10px; font-size:13px; }
+.sched-table input[type="checkbox"] { width:16px; height:16px; accent-color:var(--accent); cursor:pointer; }
+.badge { display:inline-flex; align-items:center; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:600; }
+.badge-locked { background:#e8f4fd; color:#2B6CB0; }
+.badge-required { background:#fff8e7; color:#D4930D; }
+.section-nav { display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+.nav-btn { padding:8px 16px; border:1.5px solid var(--border); border-radius:20px; background:var(--surface); font-family:'DM Sans',sans-serif; font-size:13px; font-weight:500; color:var(--text-soft); cursor:pointer; transition:all 0.2s; }
+.nav-btn.active { border-color:var(--accent); background:var(--accent-light); color:var(--accent); font-weight:600; }
+.settings-section { display:none; }
+.settings-section.active { display:block; }
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+
+<!-- LOGIN -->
+<div id="view-login" style="display:none">
+  <div class="container">
+    <div class="login-card card">
+      <div class="logo">SomiSomi</div>
+      <p style="color:var(--text-soft);margin:4px 0 20px;font-size:14px;">Settings Panel</p>
+      <div class="field">
+        <input type="password" class="pin-input" id="pin-input" placeholder="PIN" maxlength="10">
+      </div>
+      <div class="login-error" id="login-error">Incorrect PIN.</div>
+      <button class="btn btn-primary" style="width:100%;margin-top:12px" onclick="checkPin()">Enter</button>
+    </div>
+  </div>
+</div>
+
+<!-- SETTINGS -->
+<div id="view-settings" style="display:none">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:10px;">
+      <div>
+        <div style="font-family:'Fraunces',serif;font-size:24px;font-weight:800;color:var(--accent)">SomiSomi</div>
+        <h1 style="font-size:20px;font-weight:600">Settings</h1>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <a href="index.html" class="btn btn-secondary btn-sm">📋 View Form</a>
+        <a href="dashboard.html" class="btn btn-secondary btn-sm">📊 Dashboard</a>
+        <button class="btn btn-secondary btn-sm" onclick="logout()">🔒 Log Out</button>
+      </div>
+    </div>
+
+    <div class="section-nav">
+      <button class="nav-btn active" onclick="showSection('schedule',this)">🕐 Shift Times</button>
+      <button class="nav-btn" onclick="showSection('general',this)">⚙️ General</button>
+      <button class="nav-btn" onclick="showSection('pay',this)">💵 Pay Info</button>
+      <button class="nav-btn" onclick="showSection('pin',this)">🔒 PIN</button>
+    </div>
+
+    <!-- SCHEDULE SECTION -->
+    <div id="section-schedule" class="settings-section active">
+      <div class="card">
+        <div class="card-title">🕐 Shift Times</div>
+        <p style="font-size:13px;color:var(--text-soft);margin-bottom:16px;">Edit the available shifts for each day. Changes will appear on the application form immediately. Leave a shift blank to hide it.</p>
+        <table class="sched-table" id="sched-table">
+          <thead><tr><th>Day</th><th>Day Shift</th><th>Evening Shift</th><th>Type</th></tr></thead>
+          <tbody id="sched-body"></tbody>
+        </table>
+        <button class="btn btn-primary btn-sm" style="margin-top:16px" onclick="saveSchedule()">💾 Save Shift Times</button>
+      </div>
+    </div>
+
+    <!-- GENERAL SECTION -->
+    <div id="section-general" class="settings-section">
+      <div class="card">
+        <div class="card-title">⚙️ General Settings</div>
+        <div class="field">
+          <label>Location Name</label>
+          <input type="text" id="locationName" placeholder="e.g. Metropark Square">
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="saveGeneral()">💾 Save</button>
+      </div>
+    </div>
+
+    <!-- PAY SECTION -->
+    <div id="section-pay" class="settings-section">
+      <div class="card">
+        <div class="card-title">💵 Pay Info</div>
+        <div class="field">
+          <label>Pay Description</label>
+          <textarea id="payInfo" rows="3"></textarea>
+        </div>
+        <div class="field">
+          <label>Our Motto</label>
+          <input type="text" id="motto">
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="savePay()">💾 Save Pay Info</button>
+      </div>
+    </div>
+
+    <!-- PIN SECTION -->
+    <div id="section-pin" class="settings-section">
+      <div class="card">
+        <div class="card-title">🔒 Change PIN</div>
+        <div class="field"><label>Current PIN</label><input type="password" id="currentPin" placeholder="Current PIN"></div>
+        <div class="field"><label>New PIN</label><input type="password" id="newPin" placeholder="New PIN (min 4 digits)"></div>
+        <div class="field"><label>Confirm New PIN</label><input type="password" id="confirmPin" placeholder="Confirm new PIN"></div>
+        <button class="btn btn-primary btn-sm" onclick="changePin()">🔒 Update PIN</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getFirestore, doc, getDoc, setDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCPCaPkMTaig9oNAfIJc1Za9fIWVl-cjcY",
+  authDomain: "somisomi-hiring.firebaseapp.com",
+  projectId: "somisomi-hiring",
+  storageBucket: "somisomi-hiring.firebasestorage.app",
+  messagingSenderId: "6359504148",
+  appId: "1:6359504148:web:5ae570e52298062dd65e01"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const DEFAULT_SETTINGS = {
+  payInfo: "$7.25/hour for your first 35 training hours. After training you will receive tips which put you anywhere between $11–$14/hr.",
+  motto: "Be on time, ready to learn, and work with a positive attitude.",
+  locationName: "Metropark Square",
+  pin: "1234",
+  schedule: {
+    Monday:    { day: "12pm–6pm", eve: "6pm–10:30pm", locked: false },
+    Tuesday:   { day: "12pm–6pm", eve: "6pm–10:30pm", locked: false },
+    Wednesday: { day: "12pm–6pm", eve: "6pm–10:30pm", locked: false },
+    Thursday:  { day: "12pm–6pm", eve: "6pm–11:45pm", locked: false },
+    Friday:    { day: null, eve: "6pm–10:30pm", locked: false, required: true, requiredShift: "evening" },
+    Saturday:  { day: "11:30am–6pm", eve: "6pm–11:30pm", locked: true },
+    Sunday:    { day: "11:30am–6pm", eve: "6pm–11:45pm", locked: true }
+  }
+};
+
+let settings = { ...DEFAULT_SETTINGS };
+
+function showToast(msg, ok=false) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.background = ok ? '#2D8B46' : '#2D1B0E';
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+window.showSection = (name, btn) => {
+  document.querySelectorAll('.settings-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('section-' + name).classList.add('active');
+  btn.classList.add('active');
+};
+
+window.checkPin = async () => {
+  const pin = document.getElementById('pin-input').value;
+  try {
+    const snap = await getDoc(doc(db, 'config', 'settings'));
+    const storedPin = snap.exists() ? (snap.data().pin || '1234') : '1234';
+    if (pin === storedPin) {
+      sessionStorage.setItem('settingsAuth', 'true');
+      document.getElementById('view-login').style.display = 'none';
+      document.getElementById('view-settings').style.display = 'block';
+      loadSettings();
+    } else {
+      document.getElementById('login-error').style.display = 'block';
+      document.getElementById('pin-input').value = '';
+    }
+  } catch(e) {
+    // fallback
+    if (pin === '1234') {
+      sessionStorage.setItem('settingsAuth', 'true');
+      document.getElementById('view-login').style.display = 'none';
+      document.getElementById('view-settings').style.display = 'block';
+      loadSettings();
+    } else {
+      document.getElementById('login-error').style.display = 'block';
+    }
+  }
+};
+
+document.getElementById('pin-input')?.addEventListener('keydown', e => { if (e.key === 'Enter') window.checkPin(); });
+
+window.logout = () => { sessionStorage.removeItem('settingsAuth'); location.reload(); };
+
+async function loadSettings() {
+  try {
+    const snap = await getDoc(doc(db, 'config', 'settings'));
+    if (snap.exists()) settings = { ...DEFAULT_SETTINGS, ...snap.data(), schedule: { ...DEFAULT_SETTINGS.schedule, ...(snap.data().schedule||{}) } };
+  } catch(e) { console.warn('Using defaults'); }
+
+  document.getElementById('payInfo').value = settings.payInfo || '';
+  document.getElementById('motto').value = settings.motto || '';
+  document.getElementById('locationName').value = settings.locationName || '';
+  buildSchedTable();
+}
+
+function buildSchedTable() {
+  const tbody = document.getElementById('sched-body');
+  tbody.innerHTML = '';
+  Object.entries(settings.schedule).forEach(([day, cfg]) => {
+    const tr = document.createElement('tr');
+    const typeBadge = cfg.locked
+      ? '<span class="badge badge-locked">🔒 Locked (required all day)</span>'
+      : cfg.required
+      ? '<span class="badge badge-required">⚠️ Evening required</span>'
+      : '<span style="font-size:12px;color:var(--text-soft)">Normal</span>';
+    tr.innerHTML = `
+      <td><strong>${day}</strong></td>
+      <td><input type="text" value="${cfg.day||''}" data-day="${day}" data-field="day" placeholder="e.g. 12pm–6pm" ${cfg.locked?'':''}></td>
+      <td><input type="text" value="${cfg.eve||''}" data-day="${day}" data-field="eve" placeholder="e.g. 6pm–10:30pm"></td>
+      <td>${typeBadge}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+window.saveSchedule = async () => {
+  document.querySelectorAll('#sched-body input[type="text"]').forEach(input => {
+    const day = input.dataset.day;
+    const field = input.dataset.field;
+    if (!settings.schedule[day]) settings.schedule[day] = {};
+    settings.schedule[day][field] = input.value.trim() || null;
+  });
+  await saveToFirebase();
+  showToast('✅ Shift times saved!', true);
+};
+
+window.saveGeneral = async () => {
+  settings.locationName = document.getElementById('locationName').value.trim();
+  await saveToFirebase();
+  showToast('✅ Settings saved!', true);
+};
+
+window.savePay = async () => {
+  settings.payInfo = document.getElementById('payInfo').value.trim();
+  settings.motto = document.getElementById('motto').value.trim();
+  await saveToFirebase();
+  showToast('✅ Pay info saved!', true);
+};
+
+window.changePin = async () => {
+  const current = document.getElementById('currentPin').value;
+  const newPin = document.getElementById('newPin').value;
+  const confirm = document.getElementById('confirmPin').value;
+  if (current !== settings.pin) { showToast('Current PIN is incorrect'); return; }
+  if (newPin.length < 4) { showToast('New PIN must be at least 4 digits'); return; }
+  if (newPin !== confirm) { showToast('PINs do not match'); return; }
+  settings.pin = newPin;
+  await saveToFirebase();
+  showToast('✅ PIN updated!', true);
+  document.getElementById('currentPin').value = '';
+  document.getElementById('newPin').value = '';
+  document.getElementById('confirmPin').value = '';
+};
+
+async function saveToFirebase() {
+  await setDoc(doc(db, 'config', 'settings'), settings);
+}
+
+// Init
+if (sessionStorage.getItem('settingsAuth')) {
+  document.getElementById('view-settings').style.display = 'block';
+  loadSettings();
+} else {
+  document.getElementById('view-login').style.display = 'flex';
+}
+</script>
+</body>
+</html>
