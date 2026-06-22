@@ -458,7 +458,9 @@ function buildScheduleGrid() {
   grid.innerHTML = '';
   const sched = settings.schedule;
 
-  Object.entries(sched).forEach(([day, cfg]) => {
+  const dayOrder = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  const sortedEntries = dayOrder.map(d => [d, sched[d]]).filter(([,v]) => v);
+  sortedEntries.forEach(([day, cfg]) => {
     const row = document.createElement('div');
     row.className = 'sched-row';
     row.dataset.day = day;
