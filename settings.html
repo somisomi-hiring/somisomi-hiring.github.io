@@ -413,7 +413,7 @@ function renderAppQuestions() {
       <span class="drag-handle">⠿</span>
       <div class="q-body">
         <div class="q-label">${q.label}</div>
-        <div class="q-meta">${q.type}${q.conditional?' · conditional':''}${q.options?` · ${q.options.slice(0,3).join(', ')}${q.options.length>3?'…':''}':''}</div>
+        <div class="q-meta">${q.type}${q.conditional?' · conditional':''}${q.options?' · '+q.options.slice(0,3).join(', ')+(q.options.length>3?'…':''):''}</div>
       </div>
       <div class="q-actions">
         <button class="btn btn-secondary btn-sm btn-icon" onclick="editQuestion(${i},'app')" title="Edit">✏️</button>
