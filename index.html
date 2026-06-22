@@ -253,14 +253,14 @@ function buildDynamicForm() {
   container.innerHTML = '';
   if (topContainer) topContainer.innerHTML = '';
 
-  // Availability goes ABOVE the schedule grid
+  // Availability questions ABOVE the schedule grid
   const topSections = [
-    { id:'availability', title:'📅 Availability', icon:'📅', keys:['student','gradYear','otherJob','otherJobDesc','jobType','lastDay'] },
+    { id:'availability-top', title:'📅 Availability', icon:'📅', keys:['student','gradYear','otherJob','otherJobDesc','jobType','lastDay'] },
   ];
 
-  // Everything else goes BELOW the schedule grid
+  // Everything BELOW the schedule grid - machine cleaning merged into availability
   const sections = [
-    { id:'availability-bottom', title:'📅 Availability', icon:'📅', keys:['machineCleaning','schedNotes','hoursPreferred','hoursMinimum','transport','bank','startNow','startDate'] },
+    { id:'availability-bottom', title:'📅 Availability', icon:'📅', keys:['machineCleaning','schedNotes','hoursPreferred','hoursMinimum','transport','bank','startNow','startDate'], noHeader:true },
     { id:'reliability', title:'✅ Reliability', icon:'✅', keys:['letGo'] },
     { id:'experience', title:'💼 Experience', icon:'💼', keys:['currentlyEmployed','currentCompany','currentTitle','currentLength','currentReason','recentCompany','recentTitle','recentWhen','recentLength','recentReason','foodExp'] },
     { id:'expectations', title:'🍦 Job Expectations', icon:'🍦', keys:['comfortPhysical','comfortRush','notes'] },
@@ -270,7 +270,7 @@ function buildDynamicForm() {
   const keyToQ = {};
   enabledQuestions.forEach(q => keyToQ[q.key] = q);
 
-  // Render top sections (above schedule grid)
+  // Render top availability questions (above schedule grid)
   topSections.forEach(section => {
     const sectionQs = section.keys.map(k => keyToQ[k]).filter(Boolean);
     if (!sectionQs.length) return;
@@ -282,20 +282,27 @@ function buildDynamicForm() {
   });
 
   // Render bottom sections (below schedule grid)
+  // Merge consecutive sections with same title into one card
+  let lastTitle = null;
+  let lastCard = null;
   sections.forEach(section => {
     const sectionQs = section.keys.map(k => keyToQ[k]).filter(Boolean);
     if (!sectionQs.length) return;
 
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.innerHTML = `<div class="card-title"><span class="icon">${section.icon}</span> ${section.title.replace(section.icon,'').trim()}</div>`;
-
-    sectionQs.forEach(q => {
-      const field = buildField(q);
-      if (field) card.appendChild(field);
-    });
-
-    container.appendChild(card);
+    if (section.title === lastTitle && lastCard) {
+      // Append to existing card instead of creating new one
+      sectionQs.forEach(q => { const field = buildField(q); if (field) lastCard.appendChild(field); });
+    } else {
+      const card = document.createElement('div');
+      card.className = 'card';
+      if (!section.noHeader) {
+        card.innerHTML = `<div class="card-title"><span class="icon">${section.icon}</span> ${section.title.replace(section.icon,'').trim()}</div>`;
+      }
+      sectionQs.forEach(q => { const field = buildField(q); if (field) card.appendChild(field); });
+      container.appendChild(card);
+      lastCard = card;
+      lastTitle = section.title;
+    }
   });
 
   // Also add any custom questions not in sections
@@ -375,13 +382,13 @@ function handleConditional(key, value) {
   document.querySelectorAll('[data-conditional]').forEach(field => {
     const cond = field.dataset.conditional;
     if (!cond) return;
-    const parts = cond.split(':');
-    const condKey = parts[0];
-    const condVals = parts.slice(1).join(':').split('|');
+    const colonIdx = cond.indexOf(':');
+    const condKey = cond.substring(0, colonIdx);
+    const condVals = cond.substring(colonIdx + 1).split('|');
     if (condKey !== key) return;
-    const show = condVals.some(v => value === v || value.includes(v) || v.includes(value));
+    const show = condVals.includes(value);
     field.style.display = show ? 'block' : 'none';
-    const q = appQuestions.find(q=>q.key===field.dataset.key);
+    const q = appQuestions.find(qq=>qq.key===field.dataset.key);
     field.querySelectorAll('input,select,textarea').forEach(inp => {
       inp.required = show && q?.required === true;
     });
