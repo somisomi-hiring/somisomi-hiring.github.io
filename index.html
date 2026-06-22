@@ -119,7 +119,7 @@ textarea { resize: vertical; min-height: 80px; }
           <div class="field">
             <label>Are you currently a student? *</label>
             <div class="radio-group">
-              <label><input type="radio" name="student" value="No" required onchange="handleStudent(this)"> No</label>
+              <label><input type="radio" name="student" value="No" onchange="handleStudent(this)"> No</label>
               <label><input type="radio" name="student" value="Yes - High School" onchange="handleStudent(this)"> High School</label>
               <label><input type="radio" name="student" value="Yes - College" onchange="handleStudent(this)"> College</label>
             </div>
@@ -131,7 +131,7 @@ textarea { resize: vertical; min-height: 80px; }
           <div class="field">
             <label>Any other jobs or commitments? *</label>
             <div class="radio-group">
-              <label><input type="radio" name="otherJob" value="No" required onchange="handleOtherJob(this)"> No</label>
+              <label><input type="radio" name="otherJob" value="No" onchange="handleOtherJob(this)"> No</label>
               <label><input type="radio" name="otherJob" value="Yes" onchange="handleOtherJob(this)"> Yes</label>
             </div>
             <div id="otherJobDetail" style="margin-top:10px;display:none">
@@ -144,7 +144,7 @@ textarea { resize: vertical; min-height: 80px; }
         <div class="field" style="margin-top:16px">
           <label>Are you looking for a seasonal or long-term position? *</label>
           <div class="radio-group">
-            <label><input type="radio" name="jobType" value="Long Term" required onchange="handleJobType(this)"> Long Term</label>
+            <label><input type="radio" name="jobType" value="Long Term" onchange="handleJobType(this)"> Long Term</label>
             <label><input type="radio" name="jobType" value="Seasonal" onchange="handleJobType(this)"> Seasonal</label>
           </div>
         </div>
@@ -165,7 +165,7 @@ textarea { resize: vertical; min-height: 80px; }
           <label>Machine Cleaning *</label>
           <div class="info-box" style="margin-bottom:10px;font-size:13px;">We require all team members to stay for machine cleaning once per week (6:00 PM – Midnight). Please select which night works for you.</div>
           <div class="radio-group">
-            <label><input type="radio" name="machineCleaning" value="Thursday Night" required onchange="handleMachineCleaning(this)"> Thursday Night</label>
+            <label><input type="radio" name="machineCleaning" value="Thursday Night" onchange="handleMachineCleaning(this)"> Thursday Night</label>
             <label><input type="radio" name="machineCleaning" value="Sunday Night" onchange="handleMachineCleaning(this)"> Sunday Night</label>
             <label><input type="radio" name="machineCleaning" value="Open to Both" onchange="handleMachineCleaning(this)"> Open to Both</label>
             <label><input type="radio" name="machineCleaning" value="Neither" onchange="handleMachineCleaning(this)"> Neither</label>
@@ -188,7 +188,7 @@ textarea { resize: vertical; min-height: 80px; }
         <div class="field">
           <label>Do you have reliable transportation? *</label>
           <div class="radio-group">
-            <label><input type="radio" name="transport" value="Yes - own car" required> Own car</label>
+            <label><input type="radio" name="transport" value="Yes - own car"> Own car</label>
             <label><input type="radio" name="transport" value="Yes - shared car"> Shared car</label>
             <label><input type="radio" name="transport" value="Yes - rideshare/bus"> Rideshare/Bus</label>
             <label><input type="radio" name="transport" value="No"> No</label>
@@ -198,14 +198,14 @@ textarea { resize: vertical; min-height: 80px; }
           <div class="field">
             <label>Bank account for direct deposit? *</label>
             <div class="radio-group">
-              <label><input type="radio" name="bank" value="Yes" required> Yes</label>
+              <label><input type="radio" name="bank" value="Yes"> Yes</label>
               <label><input type="radio" name="bank" value="No"> No</label>
             </div>
           </div>
           <div class="field">
             <label>Can you start immediately? *</label>
             <div class="radio-group">
-              <label><input type="radio" name="startNow" value="Yes" required onchange="handleStartNow(this)"> Yes</label>
+              <label><input type="radio" name="startNow" value="Yes" onchange="handleStartNow(this)"> Yes</label>
               <label><input type="radio" name="startNow" value="No" onchange="handleStartNow(this)"> No</label>
             </div>
           </div>
@@ -218,7 +218,7 @@ textarea { resize: vertical; min-height: 80px; }
         <div class="field">
           <label>What's your work experience? *</label>
           <div class="radio-group">
-            <label><input type="radio" name="currentlyEmployed" value="Currently employed" required onchange="handleEmployed(this)"> Currently employed</label>
+            <label><input type="radio" name="currentlyEmployed" value="Currently employed" onchange="handleEmployed(this)"> Currently employed</label>
             <label><input type="radio" name="currentlyEmployed" value="Previously employed" onchange="handleEmployed(this)"> Previously employed</label>
             <label><input type="radio" name="currentlyEmployed" value="First job" onchange="handleEmployed(this)"> First job</label>
           </div>
@@ -245,7 +245,7 @@ textarea { resize: vertical; min-height: 80px; }
         <div class="field" style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border)">
           <label>Any food industry experience? *</label>
           <div class="radio-group">
-            <label><input type="radio" name="foodExp" value="Yes" required> Yes</label>
+            <label><input type="radio" name="foodExp" value="Yes"> Yes</label>
             <label><input type="radio" name="foodExp" value="No"> No</label>
           </div>
         </div>
@@ -256,14 +256,14 @@ textarea { resize: vertical; min-height: 80px; }
         <div class="field">
           <label>Comfortable standing for long periods, doing food prep, and cleaning? *</label>
           <div class="radio-group">
-            <label><input type="radio" name="comfortPhysical" value="Yes" required> Yes</label>
+            <label><input type="radio" name="comfortPhysical" value="Yes"> Yes</label>
             <label><input type="radio" name="comfortPhysical" value="No"> No</label>
           </div>
         </div>
         <div class="field" style="margin-top:12px">
           <label>Comfortable handling busy rushes and difficult customers? *</label>
           <div class="radio-group">
-            <label><input type="radio" name="comfortRush" value="Yes" required> Yes</label>
+            <label><input type="radio" name="comfortRush" value="Yes"> Yes</label>
             <label><input type="radio" name="comfortRush" value="No"> No</label>
           </div>
         </div>
@@ -373,15 +373,15 @@ function buildScheduleGrid() {
       shifts += `</div>`;
       shifts += `<div class="warning-box" id="${day.toLowerCase()}Warning">⚠️ <strong>Full ${day} availability is required.</strong> Not being available may affect your eligibility. You may still submit and we will review it.</div>`;
     } else if (cfg.required) {
-      // Required day (Friday) - no "All day" option, show warning if unavailable selected
-      if (cfg.day) shifts += `<label><input type="radio" name="${nameKey}" value="allday"> All day</label>`;
+      // Required day (Friday) - All day + evening + unavailable, warning if unavailable
+      shifts += `<label><input type="radio" name="${nameKey}" value="allday" onchange="handleRequiredDay(this,'${day.toLowerCase()}')"> All day</label>`;
       if (cfg.eve) shifts += `<label><input type="radio" name="${nameKey}" value="${cfg.eve}" onchange="handleRequiredDay(this,'${day.toLowerCase()}')"> Eve ${formatTime(cfg.eve)}</label>`;
       shifts += `<label><input type="radio" name="${nameKey}" value="unavailable" onchange="handleRequiredDay(this,'${day.toLowerCase()}')"> Unavailable</label>`;
       shifts += `</div>`;
       shifts += `<div class="warning-box" id="${day.toLowerCase()}Warning">⚠️ <strong>Friday evening availability is required.</strong> Not being available may affect your eligibility. You may still submit and we will review it.</div>`;
     } else {
       // Normal day
-      shifts += `<label><input type="radio" name="${nameKey}" value="allday" required> ⭐ Either Shift</label>`;
+      shifts += `<label><input type="radio" name="${nameKey}" value="allday"> ⭐ Either Shift</label>`;
       if (cfg.day) shifts += `<label><input type="radio" name="${nameKey}" value="${cfg.day}"> Day ${formatTime(cfg.day)}</label>`;
       if (cfg.eve) shifts += `<label><input type="radio" name="${nameKey}" value="${cfg.eve}"> Eve ${formatTime(cfg.eve)}</label>`;
       shifts += `<label><input type="radio" name="${nameKey}" value="unavailable"> Unavailable All Day</label>`;
@@ -463,6 +463,21 @@ function showToast(msg) {
 document.getElementById('apply-form').addEventListener('submit', async (e) => {
   e.preventDefault();
   document.querySelectorAll('.field-error').forEach(el => el.classList.remove('field-error'));
+
+  // Manual check for all radio groups
+  const radioNames = ['student','otherJob','jobType','machineCleaning','transport','bank','startNow','currentlyEmployed','foodExp','comfortPhysical','comfortRush'];
+  for (const name of radioNames) {
+    const el = e.target.querySelector(`input[name="${name}"]`);
+    if (!el) continue;
+    const checked = e.target.querySelector(`input[name="${name}"]:checked`);
+    if (!checked) {
+      const field = el.closest('.field') || el.closest('.card');
+      if (field) { field.classList.add('field-error'); field.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+      const lbl = el.closest('.field')?.querySelector('label');
+      showToast(lbl ? `Please complete: ${lbl.textContent.replace('*','').trim()}` : 'Please complete all required fields.');
+      return;
+    }
+  }
 
   // Manual check for schedule days
   const sched = settings.schedule;
