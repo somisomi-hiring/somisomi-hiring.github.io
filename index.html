@@ -375,12 +375,16 @@ function handleConditional(key, value) {
   document.querySelectorAll('[data-conditional]').forEach(field => {
     const cond = field.dataset.conditional;
     if (!cond) return;
-    const [condKey, condVals] = cond.split(':');
+    const parts = cond.split(':');
+    const condKey = parts[0];
+    const condVals = parts.slice(1).join(':').split('|');
     if (condKey !== key) return;
-    const vals = condVals.split('|');
-    field.style.display = vals.includes(value) ? 'block' : 'none';
-    const inp = field.querySelector('input,select,textarea');
-    if (inp) inp.required = vals.includes(value) && appQuestions.find(q=>q.key===field.dataset.key)?.required;
+    const show = condVals.some(v => value === v || value.includes(v) || v.includes(value));
+    field.style.display = show ? 'block' : 'none';
+    const q = appQuestions.find(q=>q.key===field.dataset.key);
+    field.querySelectorAll('input,select,textarea').forEach(inp => {
+      inp.required = show && q?.required === true;
+    });
   });
 }
 
