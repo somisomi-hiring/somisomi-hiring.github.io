@@ -375,7 +375,11 @@ function renderUpcoming() {
     if (!c.interviewDate) return false;
     const d = new Date(c.interviewDate + 'T00:00:00');
     return !isNaN(d) && d >= now;
-  }).sort((a,b) => a.interviewDate.localeCompare(b.interviewDate));
+  }).sort((a,b) => {
+    const da = (a.interviewDate||'') + (a.interviewTime||'');
+    const db = (b.interviewDate||'') + (b.interviewTime||'');
+    return da.localeCompare(db);
+  });
   if (!upcoming.length) { panel.innerHTML=''; return; }
   panel.innerHTML = `<div class="upcoming-panel">
     <div style="font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--blue);display:flex;align-items:center;gap:8px;margin-bottom:14px">📅 Upcoming Interviews</div>
