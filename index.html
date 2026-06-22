@@ -145,73 +145,10 @@ textarea { resize:vertical; min-height:72px; }
         <div class="field" style="margin-top:12px"><label>Email *</label><input type="email" name="email" required placeholder="you@email.com"></div>
       </div>
 
-      <div class="card">
-        <div class="card-title"><span class="icon">📅</span> Availability</div>
-        <div class="row row-2">
-          <div class="field">
-            <label>Are you currently a student? *</label>
-            <div class="radio-group">
-              <label><input type="radio" name="student" value="No" onchange="handleStudent(this)"> No</label>
-              <label><input type="radio" name="student" value="Yes - High School" onchange="handleStudent(this)"> High School</label>
-              <label><input type="radio" name="student" value="Yes - College" onchange="handleStudent(this)"> College</label>
-            </div>
-            <div id="gradYearField" style="margin-top:10px;display:none">
-              <label style="font-size:13px;font-weight:600;display:block;margin-bottom:6px;">Expected Graduation Year *</label>
-              <select name="gradYear" id="gradYear"><option value="">Select year</option><option>2025</option><option>2026</option><option>2027</option><option>2028</option><option>2029</option><option>2030</option></select>
-            </div>
-          </div>
-          <div class="field">
-            <label>Any other jobs or commitments? *</label>
-            <div class="radio-group">
-              <label><input type="radio" name="otherJob" value="No" onchange="handleOtherJob(this)"> No</label>
-              <label><input type="radio" name="otherJob" value="Yes" onchange="handleOtherJob(this)"> Yes</label>
-            </div>
-            <div id="otherJobDetail" style="margin-top:10px;display:none">
-              <label style="font-size:13px;font-weight:600;display:block;margin-bottom:6px;">Describe your other job &amp; schedule *</label>
-              <input type="text" name="otherJobDesc" placeholder="e.g. Retail, Tues-Thurs 9am-3pm">
-            </div>
-          </div>
-        </div>
-
-        <div class="field" style="margin-top:16px">
-          <label>Are you looking for a seasonal or long-term position? *</label>
-          <div class="radio-group">
-            <label><input type="radio" name="jobType" value="Long Term" onchange="handleJobType(this)"> Long Term</label>
-            <label><input type="radio" name="jobType" value="Seasonal" onchange="handleJobType(this)"> Seasonal</label>
-          </div>
-        </div>
-        <div id="lastDayField" style="display:none;margin-top:8px" class="field">
-          <label>Expected last day? *</label>
-          <input type="date" name="lastDay">
-        </div>
-
-        <div class="field" style="margin-top:16px">
-          <label>Available Days &amp; Shifts *</label>
-          
-          <div class="schedule-grid" id="schedule-grid">
-            <!-- Dynamically built from Firebase settings -->
-          </div>
-        </div>
-
-        <div class="field" style="margin-top:16px">
-          <label>Machine Cleaning *</label>
-          <div class="info-box" style="margin-bottom:10px;font-size:13px;">We require all team members to stay for machine cleaning once per week (6:00 PM – Midnight). Please select which night works for you.</div>
-          <div class="radio-group">
-            <label><input type="radio" name="machineCleaning" value="Open to Both" onchange="handleMachineCleaning(this)"> Open to Both</label>
-            <label><input type="radio" name="machineCleaning" value="Thursday Night" onchange="handleMachineCleaning(this)"> Thursday Night</label>
-            <label><input type="radio" name="machineCleaning" value="Sunday Night" onchange="handleMachineCleaning(this)"> Sunday Night</label>
-            <label><input type="radio" name="machineCleaning" value="Neither" onchange="handleMachineCleaning(this)"> Neither</label>
-          </div>
-          <div class="warning-box" id="machineCleaningWarning">⚠️ <strong>Machine cleaning is a required part of the job.</strong> Not being available may affect your eligibility. You may still submit and we will review it.</div>
-        </div>
-
-        <div class="field" style="margin-top:16px">
-          <label>Scheduling Notes *</label>
-          <textarea name="schedNotes" required placeholder="Any upcoming vacations or specific dates/times that won't work? If none, write 'None'."></textarea>
-        </div>
-        <div class="row row-2" style="margin-top:16px">
-          <div class="field"><label>Preferred hours/week *</label><input type="number" name="hoursPreferred" required placeholder="e.g. 20" min="1" max="40"></div>
-          <div class="field"><label>Minimum hours/week *</label><input type="number" name="hoursMinimum" required placeholder="e.g. 10" min="1" max="40"></div>
+      <div class="card" id="schedule-card">
+        <div class="card-title"><span class="icon">📅</span> Available Days &amp; Shifts</div>
+        <div class="schedule-grid" id="schedule-grid">
+          <!-- Dynamically built from Firebase settings -->
         </div>
       </div>
 
