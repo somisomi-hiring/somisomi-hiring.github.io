@@ -255,12 +255,12 @@ function buildDynamicForm() {
 
   // Availability questions ABOVE the schedule grid
   const topSections = [
-    { id:'availability-top', title:'📅 Availability', icon:'📅', keys:['student','gradYear','otherJob','otherJobDesc','jobType','lastDay'] },
+    { id:'availability-top', title:'📅 Availability', icon:'📅', keys:['student','gradYear','otherJob','otherJobDesc','jobType','lastDay','transport','bank','startNow','startDate'] },
   ];
 
   // Everything BELOW the schedule grid - machine cleaning merged into availability
   const sections = [
-    { id:'availability-bottom', title:'📅 Availability', icon:'📅', keys:['machineCleaning','schedNotes','hoursPreferred','hoursMinimum','transport','bank','startNow','startDate'], noHeader:true },
+    { id:'availability-bottom', title:'📅 Availability', icon:'📅', keys:['machineCleaning','schedNotes','hoursPreferred','hoursMinimum'], noHeader:true },
     { id:'reliability', title:'✅ Reliability', icon:'✅', keys:['letGo'] },
     { id:'experience', title:'💼 Experience', icon:'💼', keys:['currentlyEmployed','currentCompany','currentTitle','currentLength','currentReason','recentCompany','recentTitle','recentWhen','recentLength','recentReason','foodExp'] },
     { id:'expectations', title:'🍦 Job Expectations', icon:'🍦', keys:['comfortPhysical','comfortRush','notes'] },
@@ -298,23 +298,24 @@ function buildDynamicForm() {
       if (!section.noHeader) {
         card.innerHTML = `<div class="card-title"><span class="icon">${section.icon}</span> ${section.title.replace(section.icon,'').trim()}</div>`;
       }
-      sectionQs.forEach(q => { const field = buildField(q); if (field) card.appendChild(field); });
+      const hourKeys = ['hoursPreferred','hoursMinimum'];
+      let hourRow = null;
+      sectionQs.forEach(q => {
+        if (hourKeys.includes(q.key)) {
+          if (!hourRow) { hourRow = document.createElement('div'); hourRow.className = 'row row-2'; card.appendChild(hourRow); }
+          const field = buildField(q); if (field) hourRow.appendChild(field);
+        } else {
+          hourRow = null;
+          const field = buildField(q); if (field) card.appendChild(field);
+        }
+      });
       container.appendChild(card);
       lastCard = card;
       lastTitle = section.title;
     }
   });
 
-  // Also add any custom questions not in sections
-  const allSectionKeys = sections.flatMap(s => s.keys);
-  const extraQs = enabledQuestions.filter(q => !allSectionKeys.includes(q.key));
-  if (extraQs.length) {
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.innerHTML = '<div class="card-title"><span class="icon">❓</span> Additional Questions</div>';
-    extraQs.forEach(q => { const f = buildField(q); if(f) card.appendChild(f); });
-    container.appendChild(card);
-  }
+
 
   setupConditionals();
 }
