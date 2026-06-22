@@ -324,7 +324,10 @@ function buildField(q) {
   const div = document.createElement('div');
   div.className = 'field';
   div.dataset.key = q.key;
-  if (q.conditional) div.dataset.conditional = q.conditional;
+  if (q.conditional) {
+    div.dataset.conditional = q.conditional;
+    div.style.display = 'none'; // hide immediately on creation
+  }
 
   const label = document.createElement('label');
   label.textContent = q.label + (q.required ? ' *' : '');
@@ -490,45 +493,12 @@ function getScheduleData() {
   return parts.join(' | ');
 }
 
-// Form handlers (exposed globally)
-window.handleStudent = (r) => {
-  const show = r.value.includes('High School') || r.value.includes('College');
-  document.getElementById('gradYearField').style.display = show ? 'block' : 'none';
-  document.getElementById('gradYear').required = show;
-};
-window.handleOtherJob = (r) => {
-  const show = r.value === 'Yes' && r.checked;
-  document.getElementById('otherJobDetail').style.display = show ? 'block' : 'none';
-  document.querySelector('input[name="otherJobDesc"]').required = show;
-};
-window.handleJobType = (r) => {
-  const show = r.value === 'Seasonal' && r.checked;
-  document.getElementById('lastDayField').style.display = show ? 'block' : 'none';
-  document.querySelector('input[name="lastDay"]').required = show;
-};
-window.handleMachineCleaning = (r) => {
-  document.getElementById('machineCleaningWarning').style.display = r.value === 'Neither' ? 'block' : 'none';
-};
-window.handleRequiredDay = (r, prefix) => {
-  document.getElementById(prefix + 'Warning').style.display = r.value === 'unavailable' ? 'block' : 'none';
-};
-window.handleLockedDay = (prefix) => {
-  const unavail = document.querySelector(`input[name="${prefix}Unavail"]`);
-  document.getElementById(prefix + 'Warning').style.display = unavail.checked ? 'block' : 'none';
-};
-window.handleStartNow = (r) => {
-  const show = r.value === 'No' && r.checked;
-  document.getElementById('startDateField').style.display = show ? 'block' : 'none';
-  document.querySelector('input[name="startDate"]').required = show;
-};
-window.handleEmployed = (r) => {
-  const isCurrent = r.value === 'Currently employed' && r.checked;
-  const isPrev = r.value === 'Previously employed' && r.checked;
-  document.getElementById('employedFields').style.display = isCurrent ? 'block' : 'none';
-  document.getElementById('notEmployedFields').style.display = isPrev ? 'block' : 'none';
-  document.querySelectorAll('#employedFields input').forEach(i => i.required = isCurrent);
-  document.querySelectorAll('#notEmployedFields input').forEach(i => i.required = isPrev);
-};
+// Form handlers - all handled dynamically via handleConditional
+window.handleStudent = (r) => handleConditional('student', r.value);
+window.handleOtherJob = (r) => handleConditional('otherJob', r.value);
+window.handleJobType = (r) => handleConditional('jobType', r.value);
+window.handleStartNow = (r) => handleConditional('startNow', r.value);
+window.handleEmployed = (r) => handleConditional('currentlyEmployed', r.value);
 
 function showToast(msg) {
   const t = document.getElementById('toast');
