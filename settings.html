@@ -158,7 +158,7 @@ textarea{resize:vertical;min-height:60px;}
         <strong style="font-size:15px;display:block;margin-bottom:4px">📅 Shift Times</strong>
         <p style="font-size:12px;color:var(--text-xs);margin-bottom:14px">Set the available shifts for each day. The Type controls how the day appears on the form.</p>
         <table class="sched-table" id="sched-table">
-          <thead><tr><th>Day</th><th>Day Shift</th><th>Evening Shift</th><th>Type</th></tr></thead>
+          <thead><tr><th>Day</th><th>Day Shift</th><th>Evening Shift</th><th>"All Day" Label</th><th>"Unavailable" Label</th><th>Type</th></tr></thead>
           <tbody id="sched-body"></tbody>
         </table>
         <button class="btn btn-primary btn-sm" style="margin-top:14px" onclick="saveSchedule()">💾 Save Shift Times</button>
@@ -596,6 +596,8 @@ function buildSchedTable() {
     tr.innerHTML = `<td><strong>${day}</strong></td>
       <td><input type="text" value="${cfg.day||''}" data-day="${day}" data-field="day" placeholder="e.g. 12pm–6pm"></td>
       <td><input type="text" value="${cfg.eve||''}" data-day="${day}" data-field="eve" placeholder="e.g. 6pm–10:30pm"></td>
+      <td><input type="text" value="${cfg.allDayLabel||'Available All Day'}" data-day="${day}" data-field="allDayLabel" placeholder="Available All Day"></td>
+      <td><input type="text" value="${cfg.unavailLabel||'Unavailable'}" data-day="${day}" data-field="unavailLabel" placeholder="Unavailable"></td>
       <td>
         <select data-day="${day}" data-field="type" style="padding:5px 8px;font-size:12px;border:1px solid var(--border);border-radius:6px;background:var(--surface)">
           <option value="normal" ${typeVal==='normal'?'selected':''}>Normal</option>
@@ -610,7 +612,11 @@ window.saveSchedule = async () => {
   document.querySelectorAll('#sched-body input[type="text"]').forEach(inp => {
     const day=inp.dataset.day, field=inp.dataset.field;
     if (!settings.schedule[day]) settings.schedule[day]={};
-    settings.schedule[day][field] = inp.value.trim()||null;
+    if (field === 'allDayLabel' || field === 'unavailLabel') {
+      settings.schedule[day][field] = inp.value.trim() || (field === 'allDayLabel' ? 'Available All Day' : 'Unavailable');
+    } else {
+      settings.schedule[day][field] = inp.value.trim()||null;
+    }
   });
   document.querySelectorAll('#sched-body select[data-field="type"]').forEach(sel => {
     const day = sel.dataset.day;
