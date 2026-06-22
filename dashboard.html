@@ -654,7 +654,11 @@ function formatTime(str) {
 }
 
 // INIT
-if (sessionStorage.getItem('dashAuth')) showView('dashboard');
+if (sessionStorage.getItem('dashAuth')) {
+  showView('dashboard');
+} else {
+  showView('login');
+}
 </script>
 </body>
 </html>
