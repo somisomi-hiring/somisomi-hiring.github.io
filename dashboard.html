@@ -350,7 +350,7 @@ function renderCandidates() {
     const init = (c.name||'?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
     const sc = 'status-'+(c.status||'applied').toLowerCase();
     const date = c.timestamp?.toDate ? c.timestamp.toDate().toLocaleDateString() : '';
-    const studentLabel = c.student === 'Yes - High School' ? '🏫 High School' : c.student === 'Yes - College' ? '🎓 College' : c.student === 'No' ? '' : '';
+    const studentLabel = c.student === 'Yes - High School' ? '🏫 HS Student' : c.student === 'Yes - College' ? '🎓 College' : c.student === 'No' ? '👤 Not a student' : '';
     const jobTypeLabel = c.jobType ? c.jobType : '';
     const meta = [c.phone||'', date?'Applied '+date:'', studentLabel, jobTypeLabel].filter(Boolean).join(' · ');
     return `<div class="candidate-row" onclick="openProfile('${c.id}')" style="animation-delay:${i*0.04}s">
