@@ -196,7 +196,6 @@ textarea{resize:vertical;min-height:70px;}
     </div>
   </div>
   <div class="container" style="padding-top:20px">
-    <div class="stats-bar" id="stats-bar"></div>
     <div class="toolbar">
       <div class="search-box">
         <span class="icon">🔍</span>
@@ -404,7 +403,6 @@ async function loadCandidates() {
     const q=query(collection(db,'candidates'),orderBy('timestamp','desc'));
     const snap=await getDocs(q);
     candidates=snap.docs.map(d=>({id:d.id,...d.data()}));
-    renderStats();
     renderCandidates();
   } catch(e) {
     list.innerHTML='<div class="empty"><div class="icon">⚠️</div><p>Could not load candidates.</p></div>';
@@ -413,15 +411,7 @@ async function loadCandidates() {
 
 window.refreshDash=()=>{loadCandidates();showToast('Refreshed!',true);};
 
-function renderStats() {
-  const counts={Applied:0,Interviewed:0,Hired:0,Rejected:0};
-  candidates.forEach(c=>{ if(counts[c.status]!==undefined) counts[c.status]++; });
-  document.getElementById('stats-bar').innerHTML=`
-    <div class="stat-card stat-applied"><div class="num">${counts.Applied}</div><div class="label">Applied</div></div>
-    <div class="stat-card stat-interviewed"><div class="num">${counts.Interviewed}</div><div class="label">Interviewed</div></div>
-    <div class="stat-card stat-hired"><div class="num">${counts.Hired}</div><div class="label">Hired</div></div>
-    <div class="stat-card stat-rejected"><div class="num">${counts.Rejected}</div><div class="label">Rejected</div></div>`;
-}
+
 
 window.setFilter=(filter,btn)=>{
   currentFilter=filter;
@@ -529,12 +519,23 @@ function renderProfile(c) {
 
   // Format available days nicely
   const daysRaw=c.days||'';
-  const daysFormatted=daysRaw.split('|').map(d=>d.trim()).filter(Boolean).map(d=>{
-    const [day,val]=(d+':').split(':');
-    const v=(val||'').trim();
+  const dayOrder=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  const dayMap={};
+  daysRaw.split('|').forEach(d=>{
+    const idx=d.indexOf(':');
+    if(idx===-1)return;
+    const day=d.substring(0,idx).trim();
+    const val=d.substring(idx+1).trim();
+    dayMap[day]=val;
+  });
+  const daysFormatted=dayOrder.map(day=>{
+    const v=dayMap[day];
     if(!v||v==='No answer')return null;
-    const label=v==='allday'?'All Day':v==='unavailable'?'❌ Unavailable':v;
-    return `<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--border);font-size:12px"><span style="color:var(--text-soft)">${day.trim()}</span><span style="font-weight:500">${label}</span></div>`;
+    let label=v;
+    if(v==='allday'||v==='Available all day'||v==='Available All Day')label='All Day';
+    else if(v==='unavailable'||v==='Unavailable'||v==='Unavailable All Day')label='❌ Unavailable';
+    else if(v==='Not available'||v==='Not available all day')label='❌ Unavailable';
+    return `<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:13px"><span style="color:var(--text-soft)">${day}</span><span style="font-weight:500">${label}</span></div>`;
   }).filter(Boolean).join('');
 
   // Experience
