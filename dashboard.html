@@ -7,100 +7,168 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:#FFF8F0;--surface:#FFFFFF;--surface-alt:#FFF1E6;--border:#F0E0D0;
-  --text:#2D1B0E;--text-soft:#8B7355;--accent:#E8572A;--accent-hover:#D04A20;
-  --accent-light:#FEF0EB;--green:#2D8B46;--green-light:#EDFAF1;
-  --yellow:#D4930D;--yellow-light:#FFF8E7;--red:#C4342A;--red-light:#FEF0EF;
-  --blue:#2B6CB0;--blue-light:#EBF4FF;--radius:12px;
-  --shadow:0 1px 3px rgba(45,27,14,0.06),0 4px 12px rgba(45,27,14,0.04);
-  --shadow-lg:0 4px 12px rgba(45,27,14,0.08),0 12px 32px rgba(45,27,14,0.06);
+  --bg:#F7F8FA;--surface:#FFFFFF;--border:#E5E7EB;--border-focus:#E8572A;
+  --text:#111827;--text-soft:#6B7280;--text-xs:#9CA3AF;
+  --accent:#E8572A;--accent-hover:#D04A20;--accent-light:#FEF3EF;
+  --green:#059669;--green-light:#ECFDF5;--green-border:#A7F3D0;
+  --yellow:#D97706;--yellow-light:#FFFBEB;--yellow-border:#FDE68A;
+  --red:#DC2626;--red-light:#FEF2F2;--red-border:#FECACA;
+  --blue:#2563EB;--blue-light:#EFF6FF;--blue-border:#BFDBFE;
+  --purple:#7C3AED;--purple-light:#F5F3FF;
+  --radius:10px;--radius-sm:6px;
+  --shadow:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg:0 8px 24px rgba(0,0,0,0.1);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;}
-.container{max-width:760px;margin:0 auto;padding:24px 16px 80px;}
-.wide{max-width:960px;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;font-size:14px;}
+.container{max-width:1100px;margin:0 auto;padding:0 20px 60px;}
 h1,h2,h3{font-family:'Fraunces',serif;}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:16px;box-shadow:var(--shadow);animation:fadeUp 0.35s ease both;}
-.card-title{font-family:'Fraunces',serif;font-size:17px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
-.card-title .icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
-.field{margin-bottom:14px;}
-.field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;}
-input[type="text"],input[type="password"],select,textarea{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:15px;color:var(--text);background:var(--surface);transition:border-color 0.2s;outline:none;}
-input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-light);}
-textarea{resize:vertical;min-height:80px;}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 20px;border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s;}
-.btn-primary{background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(232,87,42,0.25);}
-.btn-primary:hover{background:var(--accent-hover);}
+
+/* Top bar */
+.topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100;}
+.topbar .logo{font-family:'Fraunces',serif;font-size:18px;font-weight:800;color:var(--accent);}
+.topbar-actions{display:flex;gap:8px;align-items:center;}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:7px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans';font-size:13px;font-weight:600;cursor:pointer;transition:all 0.15s;background:var(--surface);color:var(--text);}
+.btn:hover{background:var(--bg);}
+.btn-primary{background:var(--accent);color:#fff;border-color:var(--accent);}
+.btn-primary:hover{background:var(--accent-hover);border-color:var(--accent-hover);}
 .btn-primary:disabled{opacity:0.6;cursor:not-allowed;}
-.btn-secondary{background:var(--surface);color:var(--text);border:1.5px solid var(--border);}
-.btn-secondary:hover{background:var(--surface-alt);}
-.btn-sm{padding:7px 14px;font-size:13px;}
-.btn-full{width:100%;padding:14px;font-size:16px;border-radius:10px;}
-.radio-group{display:flex;gap:8px;flex-wrap:wrap;}
-.radio-group label{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:400;cursor:pointer;padding:8px 14px;border:1.5px solid var(--border);border-radius:8px;transition:all 0.2s;user-select:none;}
-.radio-group label:has(input:checked){border-color:var(--accent);background:var(--accent-light);color:var(--accent);font-weight:500;}
+.btn-sm{padding:5px 10px;font-size:12px;}
+.btn-icon{padding:6px;width:30px;height:30px;}
+.btn-ghost{background:transparent;border-color:transparent;color:var(--text-soft);}
+.btn-ghost:hover{background:var(--bg);color:var(--text);}
+
+/* Stats bar */
+.stats-bar{display:flex;gap:12px;padding:20px 0 16px;flex-wrap:wrap;}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;flex:1;min-width:100px;box-shadow:var(--shadow);}
+.stat-card .num{font-family:'Fraunces',serif;font-size:24px;font-weight:700;line-height:1;}
+.stat-card .label{font-size:12px;color:var(--text-soft);margin-top:3px;}
+.stat-applied .num{color:var(--blue);}
+.stat-interviewed .num{color:var(--yellow);}
+.stat-hired .num{color:var(--green);}
+.stat-rejected .num{color:var(--red);}
+
+/* Search + filters */
+.toolbar{display:flex;gap:10px;align-items:center;margin-bottom:16px;flex-wrap:wrap;}
+.search-box{position:relative;flex:1;min-width:200px;}
+.search-box input{width:100%;padding:8px 12px 8px 34px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans';font-size:14px;outline:none;background:var(--surface);}
+.search-box input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-light);}
+.search-box .icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-xs);font-size:14px;}
+.filters{display:flex;gap:6px;flex-wrap:wrap;}
+.filter-btn{padding:6px 12px;border:1px solid var(--border);border-radius:20px;background:var(--surface);font-family:'DM Sans';font-size:12px;font-weight:500;color:var(--text-soft);cursor:pointer;transition:all 0.15s;}
+.filter-btn.active{border-color:var(--accent);background:var(--accent-light);color:var(--accent);font-weight:600;}
+
+/* Status chips */
+.chip{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap;}
+.chip-applied{background:var(--blue-light);color:var(--blue);border:1px solid var(--blue-border);}
+.chip-interviewed{background:var(--yellow-light);color:var(--yellow);border:1px solid var(--yellow-border);}
+.chip-hired{background:var(--green-light);color:var(--green);border:1px solid var(--green-border);}
+.chip-rejected{background:var(--red-light);color:var(--red);border:1px solid var(--red-border);}
+
+/* Candidate list */
+.candidate-list{display:flex;flex-direction:column;gap:8px;}
+.candidate-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;cursor:pointer;transition:all 0.15s;box-shadow:var(--shadow);display:flex;align-items:center;gap:12px;}
+.candidate-card:hover{border-color:var(--accent);box-shadow:var(--shadow-md);transform:translateY(-1px);}
+.candidate-card .avatar{width:40px;height:40px;border-radius:50%;background:var(--accent-light);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;font-family:'Fraunces',serif;flex-shrink:0;}
+.candidate-card .info{flex:1;min-width:0;}
+.candidate-card .name{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.candidate-card .meta{font-size:12px;color:var(--text-soft);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.candidate-card .right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0;}
+.interview-tag{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:500;color:var(--blue);background:var(--blue-light);padding:2px 7px;border-radius:4px;}
+
+/* Upcoming panel */
+.upcoming-panel{background:var(--blue-light);border:1px solid var(--blue-border);border-radius:var(--radius);padding:16px;margin-bottom:16px;}
+.upcoming-panel .panel-title{font-family:'Fraunces',serif;font-size:14px;font-weight:700;color:var(--blue);margin-bottom:12px;display:flex;align-items:center;gap:6px;}
+.upcoming-item{display:flex;align-items:center;gap:10px;padding:10px;background:#fff;border-radius:8px;margin-bottom:6px;cursor:pointer;border:1px solid var(--blue-border);transition:all 0.15s;}
+.upcoming-item:last-child{margin-bottom:0;}
+.upcoming-item:hover{border-color:var(--blue);box-shadow:var(--shadow);}
+.date-badge{background:var(--blue);color:#fff;border-radius:8px;padding:6px 8px;text-align:center;min-width:46px;flex-shrink:0;}
+.date-badge .month{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;}
+.date-badge .day{font-size:18px;font-weight:800;font-family:'Fraunces',serif;line-height:1.1;}
+
+/* Profile */
+.profile-layout{display:grid;grid-template-columns:280px 1fr;gap:16px;align-items:start;}
+@media(max-width:768px){.profile-layout{grid-template-columns:1fr;}}
+.profile-sidebar{position:sticky;top:72px;}
+.profile-sidebar .avatar{width:64px;height:64px;border-radius:50%;background:var(--accent-light);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:24px;font-family:'Fraunces',serif;margin:0 auto 12px;}
+.profile-sidebar .name{font-family:'Fraunces',serif;font-size:20px;font-weight:700;text-align:center;}
+.profile-sidebar .contact{font-size:13px;color:var(--text-soft);text-align:center;margin-top:4px;line-height:1.6;}
+.sidebar-actions{display:flex;flex-direction:column;gap:6px;margin-top:14px;}
+.sidebar-actions .btn{width:100%;justify-content:center;}
+.status-select{width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans';font-size:13px;font-weight:600;cursor:pointer;background:var(--surface);outline:none;margin-top:6px;}
+.status-select:focus{border-color:var(--accent);}
+
+/* Cards */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:10px;box-shadow:var(--shadow);}
+.card-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-soft);margin-bottom:12px;display:flex;align-items:center;gap:6px;}
+.data-row{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;gap:12px;}
+.data-row:last-child{border-bottom:none;padding-bottom:0;}
+.data-row .label{color:var(--text-soft);flex-shrink:0;}
+.data-row .value{font-weight:500;text-align:right;max-width:60%;}
+.data-row .value.long{max-width:100%;text-align:left;margin-top:4px;}
+
+/* Interview schedule card */
+.interview-card{background:var(--blue-light);border:1px solid var(--blue-border);border-radius:var(--radius);padding:14px;margin-bottom:10px;}
+.interview-card .card-title{color:var(--blue);}
+
+/* Vibe eval */
+.scenario-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:8px;}
+.scenario-card .question{font-weight:600;font-size:13px;margin-bottom:6px;}
+.scenario-card .hint{font-size:12px;color:var(--green);background:var(--green-light);padding:5px 8px;border-radius:5px;margin-bottom:10px;display:block;}
+.rating-btns{display:flex;gap:5px;flex-wrap:wrap;}
+.rating-btns button{padding:5px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);font-family:'DM Sans';font-size:12px;cursor:pointer;transition:all 0.15s;}
+.rating-btns button.selected{border-color:var(--accent);background:var(--accent-light);color:var(--accent);font-weight:600;}
+.grade-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);}
+.grade-row:last-child{border-bottom:none;}
+.grade-row .label{font-size:13px;color:var(--text-soft);width:150px;flex-shrink:0;}
+.grade-dots{display:flex;gap:4px;}
+.grade-dots button{width:32px;height:32px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);font-size:13px;font-weight:600;cursor:pointer;transition:all 0.15s;color:var(--text-soft);}
+.grade-dots button.selected{border-color:var(--accent);background:var(--accent);color:#fff;}
+.vibe-bar-wrap{margin:12px 0;}
+.vibe-bar{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.vibe-bar .label{font-size:12px;color:var(--text-soft);width:130px;flex-shrink:0;}
+.vibe-bar .bar{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden;}
+.vibe-bar .fill{height:100%;border-radius:3px;}
+.vibe-bar .score{font-size:12px;font-weight:600;width:20px;text-align:right;}
+.radio-group{display:flex;gap:6px;flex-wrap:wrap;}
+.radio-group label{display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer;padding:6px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);transition:all 0.15s;user-select:none;}
+.radio-group label:has(input:checked){border-color:var(--accent);background:var(--accent-light);color:var(--accent);font-weight:600;}
 .radio-group input{display:none;}
-.status-chip{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:600;}
-.status-applied{background:var(--blue-light);color:var(--blue);}
-.status-interviewed{background:var(--yellow-light);color:var(--yellow);}
-.status-hired{background:var(--green-light);color:var(--green);}
-.status-rejected{background:var(--red-light);color:var(--red);}
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--text);color:#fff;padding:12px 24px;border-radius:10px;font-size:14px;font-weight:500;box-shadow:var(--shadow-lg);z-index:1000;transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1);}
+.field{margin-bottom:12px;}
+.field label{display:block;font-size:12px;font-weight:600;color:var(--text-soft);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.3px;}
+input[type="text"],input[type="password"],input[type="date"],input[type="time"],select,textarea{width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans';font-size:13px;color:var(--text);background:var(--surface);outline:none;transition:border-color 0.15s;}
+input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-light);}
+textarea{resize:vertical;min-height:70px;}
+
+/* Modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:500;display:flex;align-items:center;justify-content:center;padding:16px;}
+.modal{background:var(--surface);border-radius:var(--radius);padding:24px;width:100%;max-width:400px;box-shadow:var(--shadow-lg);}
+.modal h3{font-family:'Fraunces',serif;font-size:17px;margin-bottom:16px;}
+
+/* Toast */
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:#111827;color:#fff;padding:10px 20px;border-radius:var(--radius-sm);font-size:13px;font-weight:500;box-shadow:var(--shadow-lg);z-index:1000;transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1);}
 .toast.show{transform:translateX(-50%) translateY(0);}
-.spinner{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.7s linear infinite;}
+
+/* Misc */
+.spinner{width:28px;height:28px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.7s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
 .loading{display:flex;align-items:center;justify-content:center;padding:60px;}
-.empty-state{text-align:center;padding:48px 24px;color:var(--text-soft);}
-.empty-state .icon{font-size:40px;margin-bottom:12px;}
-#view-login{display:flex;align-items:center;justify-content:center;min-height:80vh;}
-.login-card{width:100%;max-width:340px;text-align:center;}
-.login-card .logo{font-family:'Fraunces',serif;font-size:28px;font-weight:800;color:var(--accent);}
-.pin-input{text-align:center;font-size:22px;letter-spacing:8px;font-weight:700;padding:14px;}
-.login-error{color:var(--red);font-size:13px;margin-top:8px;display:none;}
-.dash-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;}
-.filter-btn{padding:6px 14px;border:1.5px solid var(--border);border-radius:20px;background:var(--surface);font-family:'DM Sans';font-size:13px;font-weight:500;color:var(--text-soft);cursor:pointer;transition:all 0.2s;}
-.filter-btn.active{border-color:var(--accent);background:var(--accent-light);color:var(--accent);font-weight:600;}
-.candidate-list{display:flex;flex-direction:column;gap:10px;}
-.candidate-row{display:flex;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;cursor:pointer;transition:all 0.2s;box-shadow:var(--shadow);gap:12px;animation:fadeUp 0.35s ease both;}
-.candidate-row:hover{border-color:var(--accent);box-shadow:var(--shadow-lg);transform:translateY(-1px);}
-.avatar{width:42px;height:42px;border-radius:50%;background:var(--accent-light);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex-shrink:0;}
-.avatar-lg{width:56px;height:56px;font-size:22px;font-family:'Fraunces',serif;}
-.profile-back{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:var(--text-soft);cursor:pointer;margin-bottom:16px;padding:6px 0;border:none;background:none;font-family:'DM Sans';}
-.profile-back:hover{color:var(--accent);}
-.data-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px;}
-.data-row:last-child{border-bottom:none;}
-.data-row .label{color:var(--text-soft);flex-shrink:0;margin-right:12px;}
-.data-row .value{font-weight:500;text-align:right;max-width:65%;}
-.vibe-score-bar{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
-.vibe-score-bar .label{font-size:13px;color:var(--text-soft);width:130px;flex-shrink:0;}
-.vibe-score-bar .bar{flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden;}
-.vibe-score-bar .bar-fill{height:100%;border-radius:4px;transition:width 0.5s ease;}
-.vibe-score-bar .score{font-size:13px;font-weight:600;width:24px;text-align:right;}
-.scenario-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:12px;box-shadow:var(--shadow);}
-.scenario-card .question{font-weight:600;font-size:15px;margin-bottom:6px;}
-.scenario-card .hint{font-size:13px;color:var(--green);background:var(--green-light);padding:6px 10px;border-radius:6px;margin-bottom:12px;display:inline-block;}
-.rating-btns{display:flex;gap:6px;flex-wrap:wrap;}
-.rating-btns button{padding:7px 13px;border:1.5px solid var(--border);border-radius:8px;background:var(--surface);font-family:'DM Sans';font-size:13px;cursor:pointer;transition:all 0.2s;}
-.rating-btns button.selected{border-color:var(--accent);background:var(--accent-light);color:var(--accent);font-weight:600;}
-.grade-dots{display:flex;gap:4px;}
-.grade-dots button{width:36px;height:36px;border:1.5px solid var(--border);border-radius:8px;background:var(--surface);font-size:14px;font-weight:600;cursor:pointer;transition:all 0.15s;font-family:'DM Sans';color:var(--text-soft);}
-.grade-dots button.selected{border-color:var(--accent);background:var(--accent);color:#fff;}
-.grade-item{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
-.grade-item .label{font-size:14px;width:150px;flex-shrink:0;}
-.upcoming-panel{background:var(--blue-light);border:1.5px solid #c3dafe;border-radius:var(--radius);padding:20px;margin-bottom:20px;}
-.upcoming-item{display:flex;align-items:center;gap:12px;padding:12px;background:#fff;border-radius:10px;margin-bottom:8px;cursor:pointer;border:1px solid #e2ecf7;transition:all 0.2s;}
-.upcoming-item:hover{border-color:var(--blue);}
-.upcoming-item:last-child{margin-bottom:0;}
-.date-badge{background:var(--blue);color:#fff;border-radius:10px;padding:8px 10px;text-align:center;min-width:52px;flex-shrink:0;}
-.date-badge .month{font-size:10px;font-weight:700;text-transform:uppercase;}
-.date-badge .day{font-size:20px;font-weight:800;font-family:'Fraunces',serif;line-height:1.1;}
-.modal-overlay{position:fixed;inset:0;background:rgba(45,27,14,0.4);z-index:500;display:flex;align-items:center;justify-content:center;padding:16px;}
-.modal{background:var(--surface);border-radius:var(--radius);padding:28px;width:100%;max-width:400px;box-shadow:var(--shadow-lg);}
-.modal h3{font-family:'Fraunces',serif;font-size:18px;margin-bottom:20px;}
+.empty{text-align:center;padding:48px 24px;color:var(--text-soft);}
+.empty .icon{font-size:36px;margin-bottom:8px;}
+.back-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:var(--text-soft);cursor:pointer;padding:8px 0;border:none;background:none;font-family:'DM Sans';margin-bottom:16px;}
+.back-btn:hover{color:var(--accent);}
 .view{display:none;}
 .view.active{display:block;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
-@media(max-width:600px){.grade-item{flex-direction:column;align-items:flex-start;gap:6px;}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+/* Login */
+#view-login{display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--bg);}
+.login-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:32px;width:100%;max-width:320px;text-align:center;box-shadow:var(--shadow-md);}
+.pin-input{text-align:center;font-size:22px;letter-spacing:8px;font-weight:700;}
+.login-error{color:var(--red);font-size:12px;margin-top:8px;display:none;}
 </style>
 </head>
 <body>
@@ -108,30 +176,33 @@ textarea{resize:vertical;min-height:80px;}
 
 <!-- LOGIN -->
 <div id="view-login" class="view active">
-  <div class="container">
-    <div class="login-card card">
-      <div class="logo">SomiSomi</div>
-      <p style="color:var(--text-soft);margin:4px 0 20px;font-size:14px;">Hiring Dashboard</p>
-      <div class="field"><input type="password" class="pin-input" id="pin-input" placeholder="PIN" maxlength="10"></div>
-      <div class="login-error" id="login-error">Incorrect PIN.</div>
-      <button class="btn btn-primary btn-full" style="margin-top:12px" onclick="checkPin()">Enter</button>
-    </div>
+  <div class="login-box">
+    <div style="font-family:'Fraunces',serif;font-size:22px;font-weight:800;color:var(--accent);margin-bottom:4px">SomiSomi</div>
+    <p style="color:var(--text-soft);font-size:13px;margin-bottom:20px">Hiring Dashboard</p>
+    <div class="field"><input type="password" class="pin-input" id="pin-input" placeholder="PIN" maxlength="10"></div>
+    <div class="login-error" id="login-error">Incorrect PIN. Try again.</div>
+    <button class="btn btn-primary" style="width:100%;margin-top:12px;padding:10px 14px;font-size:14px" onclick="checkPin()">Enter</button>
   </div>
 </div>
 
 <!-- DASHBOARD -->
 <div id="view-dashboard" class="view" style="display:none">
-  <div class="container wide">
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:20px;padding-top:24px;">
-      <div><div style="font-family:'Fraunces',serif;font-size:24px;font-weight:800;color:var(--accent)">SomiSomi</div><h1 style="font-size:20px;font-weight:600">Hiring Dashboard</h1></div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;">
-        <a href="settings.html" class="btn btn-secondary btn-sm">⚙️ Settings</a>
-        <button class="btn btn-secondary btn-sm" onclick="refreshDash()">↻ Refresh</button>
-        <button class="btn btn-secondary btn-sm" onclick="logoutDash()">🔒 Log Out</button>
-      </div>
+  <div class="topbar">
+    <div class="logo">SomiSomi</div>
+    <div class="topbar-actions">
+      <a href="settings.html" class="btn btn-sm">⚙️ Settings</a>
+      <button class="btn btn-sm" onclick="refreshDash()">↻ Refresh</button>
+      <button class="btn btn-sm" onclick="logoutDash()">🔒 Log Out</button>
     </div>
-    <div class="dash-toolbar">
-      <div style="display:flex;gap:6px;flex-wrap:wrap;">
+  </div>
+  <div class="container" style="padding-top:20px">
+    <div class="stats-bar" id="stats-bar"></div>
+    <div class="toolbar">
+      <div class="search-box">
+        <span class="icon">🔍</span>
+        <input type="text" id="search-input" placeholder="Search by name or phone..." oninput="renderCandidates()">
+      </div>
+      <div class="filters">
         <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
         <button class="filter-btn" onclick="setFilter('Applied',this)">📩 Applied</button>
         <button class="filter-btn" onclick="setFilter('Interviewed',this)">💬 Interviewed</button>
@@ -145,53 +216,58 @@ textarea{resize:vertical;min-height:80px;}
 </div>
 
 <!-- PROFILE -->
-<div id="view-profile" class="view">
-  <div class="container">
-    <button class="profile-back" onclick="showView('dashboard')">← Back</button>
-    <div id="profile-content"></div>
+<div id="view-profile" class="view" style="display:none">
+  <div class="topbar">
+    <div class="logo">SomiSomi</div>
+    <div class="topbar-actions">
+      <a href="settings.html" class="btn btn-sm">⚙️ Settings</a>
+      <button class="btn btn-sm" onclick="logoutDash()">🔒 Log Out</button>
+    </div>
+  </div>
+  <div class="container" style="padding-top:20px">
+    <button class="back-btn" onclick="showView('dashboard')">← Back to Dashboard</button>
+    <div class="profile-layout">
+      <div class="profile-sidebar">
+        <div id="sidebar-content"></div>
+      </div>
+      <div id="profile-main"></div>
+    </div>
   </div>
 </div>
 
 <!-- VIBE EVAL -->
-<div id="view-vibe" class="view">
-  <div class="container">
-    <button class="profile-back" id="vibe-back-btn">← Back to Profile</button>
-    <div style="padding-top:0;margin-bottom:20px;">
-      <h1 style="font-size:20px;">🎯 Vibe Evaluation</h1>
-      <p id="vibe-candidate-name" style="color:var(--text-soft);font-size:14px;margin-top:4px;"></p>
-    </div>
+<div id="view-vibe" class="view" style="display:none">
+  <div class="topbar">
+    <div class="logo">SomiSomi</div>
+  </div>
+  <div class="container" style="padding-top:20px">
+    <button class="back-btn" id="vibe-back-btn">← Back to Profile</button>
+    <h1 style="font-size:20px;margin-bottom:4px">🎯 Vibe Evaluation</h1>
+    <p id="vibe-candidate-name" style="color:var(--text-soft);font-size:13px;margin-bottom:20px"></p>
     <form id="vibe-form">
       <div class="card">
         <div class="card-title">👤 Interviewer</div>
         <div class="field"><label>Your Name *</label><input type="text" name="interviewerName" required placeholder="Who is conducting this interview?"></div>
       </div>
-      <div class="card" style="padding:0;overflow:hidden;">
-        <div style="background:var(--surface-alt);padding:16px 24px;display:flex;align-items:center;gap:10px;cursor:pointer;" onclick="document.getElementById('jobOverviewBody').style.display=document.getElementById('jobOverviewBody').style.display==='none'?'block':'none'">
-          <span style="font-size:18px">📖</span>
-          <span style="font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--accent)">Job Overview – Read to Candidate</span>
+      <div class="card" style="padding:0;overflow:hidden">
+        <div style="background:var(--bg);padding:14px 16px;display:flex;align-items:center;gap:8px;cursor:pointer;" onclick="const b=document.getElementById('jobOverviewBody');b.style.display=b.style.display==='none'?'block':'none'">
+          <span>📖</span><strong style="font-size:13px">Job Overview — Read to Candidate</strong>
           <span style="margin-left:auto;font-size:12px;color:var(--text-soft)">tap to expand</span>
         </div>
-        <div id="jobOverviewBody" style="padding:20px 24px;">
-          <div style="margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border)"><strong style="color:var(--accent)">💰 Register</strong><p style="font-size:13px;color:var(--text-soft);line-height:1.6;margin-top:4px;">Front of house — you're the face of SomiSomi. Explain the menu, answer questions, make recommendations. <strong>This person makes tips for everyone</strong>, so your energy directly affects the team's earnings.</p></div>
-          <div style="margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border)"><strong style="color:var(--accent)">🧇 Taiyaki & Ahboong</strong><p style="font-size:13px;color:var(--text-soft);line-height:1.6;margin-top:4px;">Hot surfaces — like making waffles. Pour batter, fill, press. <strong>Speed is everything</strong> during rushes.</p></div>
-          <div style="margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border)"><strong style="color:var(--accent)">🍦 Ice Cream Station</strong><p style="font-size:13px;color:var(--text-soft);line-height:1.6;margin-top:4px;">Last station in training. Swirling soft serve <strong>requires practice</strong>. Help with fillings and toppings in the meantime.</p></div>
-          <div><strong style="color:var(--accent)">💵 Pay</strong><p style="font-size:13px;color:var(--text-soft);line-height:1.6;margin-top:4px;">$7.25/hour for your first 35 training hours. After training: tips put you between $11–$14/hr. <em>Motto: "Be on time, ready to learn, and work with a positive attitude."</em></p></div>
+        <div id="jobOverviewBody" style="padding:16px;display:none">
+          <div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border)"><strong style="color:var(--accent);font-size:13px">💰 Register</strong><p style="font-size:13px;color:var(--text-soft);margin-top:4px;line-height:1.6">Front of house — you're the face of SomiSomi. Explain the menu, make recommendations. <strong>This person makes tips for everyone</strong> — your energy affects the whole team's earnings.</p></div>
+          <div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border)"><strong style="color:var(--accent);font-size:13px">🧇 Taiyaki & Ahboong</strong><p style="font-size:13px;color:var(--text-soft);margin-top:4px;line-height:1.6">Hot surfaces, like making waffles. Pour batter, fill, press. <strong>Speed is everything</strong> during rushes.</p></div>
+          <div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border)"><strong style="color:var(--accent);font-size:13px">🍦 Ice Cream Station</strong><p style="font-size:13px;color:var(--text-soft);margin-top:4px;line-height:1.6">Last station in training. Swirling soft serve <strong>requires practice</strong>. Help with fillings and toppings in the meantime.</p></div>
+          <div><strong style="color:var(--accent);font-size:13px">💵 Pay</strong><p style="font-size:13px;color:var(--text-soft);margin-top:4px;line-height:1.6">$7.25/hr for first 35 training hours. After training: tips put you between $11–$14/hr.<br><em>Motto: "Be on time, ready to learn, work with a positive attitude."</em></p></div>
         </div>
       </div>
       <div id="scenario-cards"></div>
       <div class="card">
-        <div class="card-title"><span class="icon" style="background:var(--yellow-light);color:var(--yellow)">⭐</span> Overall Grades (0–5)</div>
-        <div id="grade-items">
-          <div class="grade-item"><span class="label">Attitude</span><div class="grade-dots" data-grade="gradeAttitude"></div></div>
-          <div class="grade-item"><span class="label">Communication</span><div class="grade-dots" data-grade="gradeCommunication"></div></div>
-          <div class="grade-item"><span class="label">Reliability</span><div class="grade-dots" data-grade="gradeReliability"></div></div>
-          <div class="grade-item"><span class="label">Customer Service</span><div class="grade-dots" data-grade="gradeCustomerService"></div></div>
-          <div class="grade-item"><span class="label">Energy & Enthusiasm</span><div class="grade-dots" data-grade="gradeEnergy"></div></div>
-          <div class="grade-item"><span class="label">Problem Solving</span><div class="grade-dots" data-grade="gradeProblemSolving"></div></div>
-        </div>
+        <div class="card-title">⭐ Overall Grades (0–5)</div>
+        <div id="grade-items"></div>
       </div>
       <div class="card">
-        <div class="card-title"><span class="icon" style="background:var(--green-light);color:var(--green)">🤝</span> Final Assessment</div>
+        <div class="card-title">🤝 Final Assessment</div>
         <div class="field">
           <label>Would you enjoy working with them?</label>
           <div class="radio-group">
@@ -200,36 +276,36 @@ textarea{resize:vertical;min-height:80px;}
             <label><input type="radio" name="enjoyWorking" value="No"> No</label>
           </div>
         </div>
-        <div class="field" style="margin-top:12px">
-          <label>Would you trust them with closing duties?</label>
+        <div class="field" style="margin-top:10px">
+          <label>Trust with closing duties?</label>
           <div class="radio-group">
             <label><input type="radio" name="trustClosing" value="Yes" required> Yes</label>
             <label><input type="radio" name="trustClosing" value="Maybe"> Maybe</label>
             <label><input type="radio" name="trustClosing" value="No"> No</label>
           </div>
         </div>
-        <div class="field" style="margin-top:12px">
-          <label>If you had to have a tough conversation about not pulling their weight, how would they handle it?</label>
+        <div class="field" style="margin-top:10px">
+          <label>If you had a tough conversation about not pulling their weight, how would they handle it?</label>
           <div class="radio-group">
             <label><input type="radio" name="coachability" value="Defensive" required> 😤 Defensive</label>
             <label><input type="radio" name="coachability" value="Would get offended"> 😟 Get offended</label>
             <label><input type="radio" name="coachability" value="Would take it well"> 💪 Take it well</label>
           </div>
         </div>
-        <div class="field" style="margin-top:12px">
+        <div class="field" style="margin-top:10px">
           <label>Hire Decision *</label>
           <div class="radio-group">
             <label><input type="radio" name="hireDecision" value="Yes" required> ✅ Yes</label>
-            <label><input type="radio" name="hireDecision" value="Yes – with conditions"> ⚠️ Yes, with conditions</label>
+            <label><input type="radio" name="hireDecision" value="Yes – with conditions"> ⚠️ With conditions</label>
             <label><input type="radio" name="hireDecision" value="No"> ❌ No</label>
           </div>
         </div>
-        <div class="field" style="margin-top:12px">
-          <label>Notes <span style="font-weight:400;font-size:12px;color:var(--text-soft)">(optional)</span></label>
+        <div class="field" style="margin-top:10px">
+          <label>Notes <span style="font-weight:400;text-transform:none">(optional)</span></label>
           <textarea name="vibeNotes" placeholder="Any other thoughts..."></textarea>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary btn-full" id="vibe-btn">Submit Evaluation</button>
+      <button type="submit" class="btn btn-primary" style="width:100%;padding:12px;font-size:15px" id="vibe-btn">Submit Evaluation</button>
     </form>
   </div>
 </div>
@@ -240,9 +316,9 @@ textarea{resize:vertical;min-height:80px;}
     <h3>📅 Schedule Interview</h3>
     <div class="field"><label>Date *</label><input type="date" id="sched-date"></div>
     <div class="field"><label>Time *</label><input type="time" id="sched-time"></div>
-    <div class="field"><label>Notes</label><input type="text" id="sched-notes" placeholder="e.g. Ask about weekends"></div>
-    <div style="display:flex;gap:8px;margin-top:16px;">
-      <button class="btn btn-secondary" style="flex:1" onclick="closeScheduleModal()">Cancel</button>
+    <div class="field"><label>Notes</label><input type="text" id="sched-notes" placeholder="e.g. Ask about weekend availability"></div>
+    <div style="display:flex;gap:8px;margin-top:16px">
+      <button class="btn" style="flex:1" onclick="closeScheduleModal()">Cancel</button>
       <button class="btn btn-primary" style="flex:1" onclick="saveInterview()">Save</button>
     </div>
   </div>
@@ -273,41 +349,42 @@ let scenarioRatings = {};
 let storedPin = '1234';
 
 const SCENARIOS = [
-  { q: "Your car breaks down and your shift starts in an hour — what do you do?", hint: "✅ Calls/texts the store right away, finds a ride (Uber, friend, family), doesn't just no-show" },
-  { q: "A customer is upset and yelling about their order being wrong — how do you handle it?", hint: "✅ Stays calm, apologizes, remakes the order or gets a manager, doesn't argue back" },
-  { q: "Being on time is one of our core values. You're always punctual, but this one time you're running 5 minutes late — what do you do?", hint: "✅ Contacts the store immediately, gives a heads up and ETA, takes responsibility instead of making excuses" },
-  { q: "This team runs on equal contribution. You'll get honest feedback often — how do you handle it? Say the manager tells you to work on speed.", hint: "✅ Takes it positively, acknowledges feedback, has a plan to improve, doesn't make excuses or take it personally" },
-  { q: "You notice your coworker is slacking off and not doing their fair share — what do you do?", hint: "✅ Picks up slack without drama, talks to them if needed, lets a manager know if it keeps happening" },
-  { q: "It's 2 minutes to closing and a big family walks in — how do you greet them?", hint: "✅ Welcomes them warmly, serves with a good attitude, doesn't make them feel like a burden" },
-  { q: "You notice a coworker isn't wearing gloves while handling food — what do you do?", hint: "✅ Politely reminds them, doesn't ignore it, food safety comes first" },
-  { q: "A customer asks for something that's not on the menu — what do you do?", hint: "✅ Is polite, checks with a manager if unsure, suggests similar items we do have" }
+  { q:"Your car breaks down and your shift starts in an hour — what do you do?", hint:"✅ Calls/texts the store right away, finds a ride (Uber, friend, family), doesn't just no-show" },
+  { q:"A customer is upset and yelling about their order being wrong — how do you handle it?", hint:"✅ Stays calm, apologizes, remakes the order or gets a manager, doesn't argue back" },
+  { q:"Being on time is one of our core values. You're always punctual, but this one time you're running 5 minutes late — what do you do?", hint:"✅ Contacts the store immediately, gives a heads up and ETA, takes responsibility" },
+  { q:"This team runs on equal contribution. You'll get honest feedback often — how do you handle it? Say the manager tells you to work on speed.", hint:"✅ Takes it positively, acknowledges feedback, has a plan to improve, no excuses" },
+  { q:"You notice your coworker is slacking off and not doing their fair share — what do you do?", hint:"✅ Picks up slack without drama, talks to them if needed, lets a manager know if it keeps happening" },
+  { q:"It's 2 minutes to closing and a big family walks in — how do you greet them?", hint:"✅ Welcomes them warmly, serves with a good attitude, doesn't make them feel like a burden" },
+  { q:"You notice a coworker isn't wearing gloves while handling food — what do you do?", hint:"✅ Politely reminds them, doesn't ignore it, food safety comes first" },
+  { q:"A customer asks for something that's not on the menu — what do you do?", hint:"✅ Is polite, checks with a manager if unsure, suggests similar items we do have" }
 ];
 
-function esc(str) { if(!str)return'—'; const d=document.createElement('div');d.textContent=str;return d.innerHTML; }
+const GRADES = ['Attitude','Communication','Reliability','Customer Service','Energy & Enthusiasm','Problem Solving'];
+
+function esc(str) { if(!str)return''; const d=document.createElement('div');d.textContent=String(str);return d.innerHTML; }
 function showToast(msg,ok=false) {
   const t=document.getElementById('toast');
-  t.textContent=msg; t.style.background=ok?'#2D8B46':'#2D1B0E';
-  t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),3000);
+  t.textContent=msg;t.style.background=ok?'#059669':'#111827';
+  t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);
 }
 
 function showView(name) {
-  document.querySelectorAll('.view').forEach(v=>{ v.classList.remove('active'); v.style.display='none'; });
-  const el = document.getElementById('view-'+name);
-  el.style.display = 'block';
-  el.classList.add('active');
+  document.querySelectorAll('.view').forEach(v=>{v.classList.remove('active');v.style.display='none';});
+  const el=document.getElementById('view-'+name);
+  el.style.display='block';el.classList.add('active');
   window.scrollTo(0,0);
   if(name==='dashboard') loadCandidates();
 }
-window.showView = showView;
+window.showView=showView;
 
 // LOGIN
 window.checkPin = async () => {
-  const pin = document.getElementById('pin-input').value;
+  const pin=document.getElementById('pin-input').value;
   try {
-    const snap = await getDoc(doc(db,'config','settings'));
-    storedPin = snap.exists() ? (snap.data().pin||'1234') : '1234';
-  } catch(e) { storedPin = '1234'; }
-  if (pin === storedPin) {
+    const snap=await getDoc(doc(db,'config','settings'));
+    storedPin=snap.exists()?(snap.data().pin||'1234'):'1234';
+  } catch(e){storedPin='1234';}
+  if(pin===storedPin){
     sessionStorage.setItem('dashAuth','true');
     document.getElementById('login-error').style.display='none';
     showView('dashboard');
@@ -316,248 +393,279 @@ window.checkPin = async () => {
     document.getElementById('pin-input').value='';
   }
 };
-document.getElementById('pin-input').addEventListener('keydown',e=>{ if(e.key==='Enter') window.checkPin(); });
-window.logoutDash = () => { sessionStorage.removeItem('dashAuth'); showView('login'); };
+document.getElementById('pin-input').addEventListener('keydown',e=>{if(e.key==='Enter')window.checkPin();});
+window.logoutDash=()=>{sessionStorage.removeItem('dashAuth');showView('login');};
 
 // DASHBOARD
 async function loadCandidates() {
-  const list = document.getElementById('candidate-list');
-  list.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
+  const list=document.getElementById('candidate-list');
+  list.innerHTML='<div class="loading"><div class="spinner"></div></div>';
   try {
-    const q = query(collection(db,'candidates'), orderBy('timestamp','desc'));
-    const snap = await getDocs(q);
-    candidates = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    const q=query(collection(db,'candidates'),orderBy('timestamp','desc'));
+    const snap=await getDocs(q);
+    candidates=snap.docs.map(d=>({id:d.id,...d.data()}));
+    renderStats();
     renderCandidates();
   } catch(e) {
-    list.innerHTML = '<div class="empty-state"><div class="icon">⚠️</div><p>Could not load candidates.</p></div>';
+    list.innerHTML='<div class="empty"><div class="icon">⚠️</div><p>Could not load candidates.</p></div>';
   }
 }
 
-window.refreshDash = () => { loadCandidates(); showToast('Refreshed!',true); };
+window.refreshDash=()=>{loadCandidates();showToast('Refreshed!',true);};
 
-window.setFilter = (filter, btn) => {
-  currentFilter = filter;
+function renderStats() {
+  const counts={Applied:0,Interviewed:0,Hired:0,Rejected:0};
+  candidates.forEach(c=>{ if(counts[c.status]!==undefined) counts[c.status]++; });
+  document.getElementById('stats-bar').innerHTML=`
+    <div class="stat-card stat-applied"><div class="num">${counts.Applied}</div><div class="label">Applied</div></div>
+    <div class="stat-card stat-interviewed"><div class="num">${counts.Interviewed}</div><div class="label">Interviewed</div></div>
+    <div class="stat-card stat-hired"><div class="num">${counts.Hired}</div><div class="label">Hired</div></div>
+    <div class="stat-card stat-rejected"><div class="num">${counts.Rejected}</div><div class="label">Rejected</div></div>`;
+}
+
+window.setFilter=(filter,btn)=>{
+  currentFilter=filter;
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   renderCandidates();
 };
 
-function renderCandidates() {
-  const list = document.getElementById('candidate-list');
-  let filtered = currentFilter==='all' ? candidates : candidates.filter(c=>c.status===currentFilter);
-  if (!filtered.length) { list.innerHTML='<div class="empty-state"><div class="icon">📋</div><p>No candidates found.</p></div>'; renderUpcoming(); return; }
-  list.innerHTML = filtered.map((c,i) => {
-    const init = (c.name||'?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
-    const sc = 'status-'+(c.status||'applied').toLowerCase();
-    const date = c.timestamp?.toDate ? c.timestamp.toDate().toLocaleDateString() : '';
-    const studentLabel = c.student === 'Yes - High School' ? '🏫 HS Student' : c.student === 'Yes - College' ? '🎓 College' : c.student === 'No' ? '👤 Not a student' : '';
-    const jobTypeLabel = c.jobType ? c.jobType : '';
-    const meta = [c.phone||'', date?'Applied '+date:'', studentLabel, jobTypeLabel].filter(Boolean).join(' · ');
-    return `<div class="candidate-row" onclick="openProfile('${c.id}')" style="animation-delay:${i*0.04}s">
+window.renderCandidates=()=>{
+  const list=document.getElementById('candidate-list');
+  const search=(document.getElementById('search-input')?.value||'').toLowerCase();
+  let filtered=currentFilter==='all'?candidates:candidates.filter(c=>c.status===currentFilter);
+  if(search) filtered=filtered.filter(c=>(c.name||'').toLowerCase().includes(search)||(c.phone||'').includes(search));
+  
+  if(!filtered.length){
+    list.innerHTML='<div class="empty"><div class="icon">📋</div><p>No candidates found.</p></div>';
+    renderUpcoming();return;
+  }
+
+  list.innerHTML=filtered.map((c,i)=>{
+    const init=(c.name||'?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+    const sc='chip-'+(c.status||'applied').toLowerCase();
+    const date=c.timestamp?.toDate?c.timestamp.toDate().toLocaleDateString():'';
+    const studentLabel=c.student==='Yes - High School'?'🏫 HS':c.student==='Yes - College'?'🎓 College':'';
+    const meta=[c.phone||'',date?'Applied '+date:'',studentLabel,c.jobType||''].filter(Boolean).join(' · ');
+    return `<div class="candidate-card" onclick="openProfile('${c.id}')" style="animation:fadeUp 0.2s ease ${i*0.03}s both">
       <div class="avatar">${init}</div>
-      <div style="flex:1;min-width:0">
-        <div style="font-weight:600;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(c.name)}</div>
-        <div style="font-size:13px;color:var(--text-soft);margin-top:2px">${esc(meta)}</div>
-      </div>
-      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
-        <span class="status-chip ${sc}">${esc(c.status||'Applied')}</span>
-        ${c.interviewDate?`<span style="font-size:11px;color:var(--blue)">📅 ${formatDate(c.interviewDate)}</span>`:''}
+      <div class="info"><div class="name">${esc(c.name)}</div><div class="meta">${esc(meta)}</div></div>
+      <div class="right">
+        <span class="chip ${sc}">${esc(c.status||'Applied')}</span>
+        ${c.interviewDate?`<span class="interview-tag">📅 ${formatDate(c.interviewDate)} ${c.interviewTime?formatTime(c.interviewTime):''}</span>`:''}
       </div>
     </div>`;
   }).join('');
   renderUpcoming();
-}
+};
 
 function renderUpcoming() {
-  const panel = document.getElementById('upcoming-interviews');
-  const now = new Date(); now.setHours(0,0,0,0);
-  const upcoming = candidates.filter(c => {
-    if (!c.interviewDate) return false;
-    const d = new Date(c.interviewDate + 'T00:00:00');
-    return !isNaN(d) && d >= now;
-  }).sort((a,b) => {
-    const da = (a.interviewDate||'') + (a.interviewTime||'');
-    const db = (b.interviewDate||'') + (b.interviewTime||'');
+  const panel=document.getElementById('upcoming-interviews');
+  const now=new Date();now.setHours(0,0,0,0);
+  const upcoming=candidates.filter(c=>{
+    if(!c.interviewDate)return false;
+    const d=new Date(c.interviewDate+'T00:00:00');
+    return !isNaN(d)&&d>=now;
+  }).sort((a,b)=>{
+    const da=(a.interviewDate||'')+(a.interviewTime||'');
+    const db=(b.interviewDate||'')+(b.interviewTime||'');
     return da.localeCompare(db);
   });
-  if (!upcoming.length) { panel.innerHTML=''; return; }
-  panel.innerHTML = `<div class="upcoming-panel">
-    <div style="font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--blue);display:flex;align-items:center;gap:8px;margin-bottom:14px">📅 Upcoming Interviews</div>
-    ${upcoming.map(c => {
-      const d = new Date(c.interviewDate + 'T12:00:00');
-      const month = d.toLocaleDateString('en-US',{month:'short',timeZone:'America/Chicago'});
-      const day = d.toLocaleDateString('en-US',{day:'numeric',timeZone:'America/Chicago'});
+  if(!upcoming.length){panel.innerHTML='';return;}
+  panel.innerHTML=`<div class="upcoming-panel">
+    <div class="panel-title">📅 Upcoming Interviews (${upcoming.length})</div>
+    ${upcoming.map(c=>{
+      const d=new Date(c.interviewDate+'T12:00:00');
+      const month=d.toLocaleDateString('en-US',{month:'short',timeZone:'America/Chicago'});
+      const day=d.toLocaleDateString('en-US',{day:'numeric',timeZone:'America/Chicago'});
       return `<div class="upcoming-item" onclick="openProfile('${c.id}')">
         <div class="date-badge"><div class="month">${month}</div><div class="day">${day}</div></div>
-        <div style="flex:1;min-width:0"><div style="font-weight:600;font-size:14px">${esc(c.name)}</div><div style="font-size:13px;color:var(--text-soft)">${c.interviewTime?formatTime(c.interviewTime):''}${c.interviewNotes?' · '+esc(c.interviewNotes):''}</div></div>
-        <span class="status-chip status-${(c.status||'applied').toLowerCase()}">${esc(c.status||'Applied')}</span>
+        <div style="flex:1;min-width:0"><div style="font-weight:600;font-size:13px">${esc(c.name)}</div><div style="font-size:12px;color:var(--text-soft)">${c.interviewTime?formatTime(c.interviewTime):''}${c.interviewNotes?' · '+esc(c.interviewNotes):''}</div></div>
+        <span class="chip chip-${(c.status||'applied').toLowerCase()}">${esc(c.status||'Applied')}</span>
       </div>`;
     }).join('')}
   </div>`;
 }
 
 // PROFILE
-window.openProfile = async (id) => {
+window.openProfile=async(id)=>{
   showView('profile');
-  currentCandidateId = id;
-  const content = document.getElementById('profile-content');
-  content.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
+  currentCandidateId=id;
+  document.getElementById('sidebar-content').innerHTML='<div class="loading"><div class="spinner"></div></div>';
+  document.getElementById('profile-main').innerHTML='';
   try {
-    const snap = await getDoc(doc(db,'candidates',id));
-    currentCandidate = { id, ...snap.data() };
+    const snap=await getDoc(doc(db,'candidates',id));
+    currentCandidate={id,...snap.data()};
     renderProfile(currentCandidate);
-  } catch(e) { content.innerHTML = '<div class="empty-state"><p>Error loading profile.</p></div>'; }
+  } catch(e){
+    document.getElementById('profile-main').innerHTML='<div class="empty"><p>Error loading profile.</p></div>';
+  }
 };
 
+function chipClass(status){return 'chip chip-'+(status||'applied').toLowerCase();}
+
 function renderProfile(c) {
-  const content = document.getElementById('profile-content');
-  const init = (c.name||'?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
-  const sc = 'status-'+(c.status||'applied').toLowerCase();
+  const init=(c.name||'?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
 
-  // Experience section
-  let expHTML = '';
-  if (c.currentlyEmployed === 'Currently employed') {
-    expHTML = `
-      <div class="data-row"><span class="label">Employment</span><span class="value">Currently Employed</span></div>
-      ${c.currentCompany?`<div class="data-row"><span class="label">Company</span><span class="value">${esc(c.currentCompany)}</span></div>`:''}
-      ${c.currentTitle?`<div class="data-row"><span class="label">Title</span><span class="value">${esc(c.currentTitle)}</span></div>`:''}
-      ${c.currentLength?`<div class="data-row"><span class="label">Duration</span><span class="value">${esc(c.currentLength)}</span></div>`:''}
-      ${c.currentReason?`<div class="data-row"><span class="label">Reason Leaving</span><span class="value">${esc(c.currentReason)}</span></div>`:''}`;
-  } else if (c.currentlyEmployed === 'Previously employed') {
-    expHTML = `
-      <div class="data-row"><span class="label">Employment</span><span class="value">Previously Employed</span></div>
-      ${c.recentCompany?`<div class="data-row"><span class="label">Company</span><span class="value">${esc(c.recentCompany)}</span></div>`:''}
-      ${c.recentTitle?`<div class="data-row"><span class="label">Title</span><span class="value">${esc(c.recentTitle)}</span></div>`:''}
-      ${c.recentWhen?`<div class="data-row"><span class="label">How Long Ago</span><span class="value">${esc(c.recentWhen)}</span></div>`:''}
-      ${c.recentLength?`<div class="data-row"><span class="label">Duration</span><span class="value">${esc(c.recentLength)}</span></div>`:''}
-      ${c.recentReason?`<div class="data-row"><span class="label">Reason Left</span><span class="value">${esc(c.recentReason)}</span></div>`:''}`;
-  } else if (c.currentlyEmployed === 'First job') {
-    expHTML = `<div class="data-row"><span class="label">Employment</span><span class="value">First Job</span></div>`;
-  } else if (c.currentlyEmployed) {
-    expHTML = `<div class="data-row"><span class="label">Employment</span><span class="value">${esc(c.currentlyEmployed)}</span></div>`;
-  }
-  expHTML += `<div class="data-row"><span class="label">Food Industry Exp</span><span class="value">${esc(c.foodExp)}</span></div>`;
-
-  // Format last day
-  let lastDayDisplay = '';
-  if (c.lastDay) {
-    try {
-      const d = new Date(c.lastDay + 'T12:00:00');
-      lastDayDisplay = ' — Last day: ' + d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
-    } catch(e) { lastDayDisplay = ' — ' + c.lastDay; }
-  }
-
-  // Grad year
-  const gradYearRow = (c.student && c.student !== 'No' && c.gradYear) 
-    ? `<div class="data-row"><span class="label">Grad Year</span><span class="value">${esc(c.gradYear)}</span></div>` : '';
-
-  // Vibe eval
-  let vibeHTML = '';
-  if (c.interviewerName) {
-    const grades = [
-      {label:'Attitude',val:parseInt(c.gradeAttitude)||0},
-      {label:'Communication',val:parseInt(c.gradeCommunication)||0},
-      {label:'Reliability',val:parseInt(c.gradeReliability)||0},
-      {label:'Customer Service',val:parseInt(c.gradeCustomerService)||0},
-      {label:'Energy & Enthusiasm',val:parseInt(c.gradeEnergy)||0},
-      {label:'Problem Solving',val:parseInt(c.gradeProblemSolving)||0}
-    ];
-    const barColor = v => v>=4?'var(--green)':v>=3?'var(--yellow)':'var(--red)';
-    let scenHTML = '';
-    SCENARIOS.forEach((s,i) => {
-      const rating = c[`scenario${i}Rating`]; const note = c[`scenario${i}Note`];
-      if (rating||note) scenHTML += `<div style="padding:10px 0;border-bottom:1px solid #f0f0f0"><div style="font-size:13px;color:#666;margin-bottom:4px">${esc(s.q)}</div><div style="display:flex;align-items:center;gap:8px">${rating?`<strong>${rating}</strong>`:''} ${note?`<span style="font-size:13px;color:#444">— ${esc(note)}</span>`:''}</div></div>`;
-    });
-    vibeHTML = `<div class="card">
-      <div class="card-title"><span class="icon" style="background:var(--yellow-light);color:var(--yellow)">🎯</span> Vibe Evaluation</div>
-      <div class="data-row"><span class="label">Interviewer</span><span class="value">${esc(c.interviewerName)}</span></div>
-      <div style="margin:16px 0">${grades.map(g=>`<div class="vibe-score-bar"><span class="label">${g.label}</span><div class="bar"><div class="bar-fill" style="width:${g.val*20}%;background:${barColor(g.val)}"></div></div><span class="score">${g.val}</span></div>`).join('')}</div>
-      <div class="data-row"><span class="label">Enjoy working with?</span><span class="value">${esc(c.enjoyWorking)}</span></div>
-      <div class="data-row"><span class="label">Trust with closing?</span><span class="value">${esc(c.trustClosing)}</span></div>
-      <div class="data-row"><span class="label">Coachability</span><span class="value">${esc(c.coachability)}</span></div>
-      <div class="data-row"><span class="label">Hire Decision</span><span class="value" style="font-weight:700">${esc(c.hireDecision)}</span></div>
-      ${c.vibeNotes?`<div class="data-row"><span class="label">Notes</span><span class="value">${esc(c.vibeNotes)}</span></div>`:''}
-      ${scenHTML?`<div style="margin-top:16px;padding-top:12px;border-top:2px solid #f0f0f0"><div style="font-weight:600;font-size:14px;margin-bottom:8px">📋 Scenario Responses</div>${scenHTML}</div>`:''}
-    </div>`;
-  }
-
-  content.innerHTML = `
-    <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
-      <div class="avatar avatar-lg">${init}</div>
-      <div><h2 style="font-size:22px;font-weight:700">${esc(c.name)}</h2><div style="color:var(--text-soft);font-size:14px;margin-top:2px">${esc(c.phone||'')}${c.email?' · '+esc(c.email):''}</div></div>
-    </div>
-    <div style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap">
-      <span class="status-chip ${sc}">${esc(c.status||'Applied')}</span>
-      ${!c.interviewerName?`<button class="btn btn-primary btn-sm" onclick="startVibe()">🎯 Start Interview</button>`:''}
-      <button class="btn btn-secondary btn-sm" onclick="openScheduleModal()">📅 Schedule Interview</button>
-      <select class="btn btn-secondary btn-sm" onchange="updateStatus(this.value)" style="cursor:pointer">
+  // SIDEBAR
+  document.getElementById('sidebar-content').innerHTML=`
+    <div class="card" style="text-align:center">
+      <div class="avatar" style="width:56px;height:56px;font-size:20px;margin:0 auto 10px">${init}</div>
+      <div style="font-family:'Fraunces',serif;font-size:18px;font-weight:700">${esc(c.name)}</div>
+      <div class="contact" style="margin-top:6px">${esc(c.phone||'')}${c.email?'<br>'+esc(c.email):''}</div>
+      <div style="margin-top:10px"><span class="${chipClass(c.status)}">${esc(c.status||'Applied')}</span></div>
+      <select class="status-select" onchange="updateStatus(this.value)">
         <option value="">Change Status…</option>
         <option value="Applied">📩 Applied</option>
         <option value="Interviewed">💬 Interviewed</option>
         <option value="Hired">✅ Hired</option>
         <option value="Rejected">❌ Rejected</option>
       </select>
-    </div>
-    ${c.interviewDate?`<div class="card" style="border-color:#c3dafe;background:var(--blue-light)">
-      <div class="card-title" style="color:var(--blue)"><span class="icon" style="background:#fff;color:var(--blue)">📅</span> Scheduled Interview</div>
-      <div class="data-row" style="border-color:#c3dafe"><span class="label">Date</span><span class="value">${formatDate(c.interviewDate)}</span></div>
-      <div class="data-row" style="border-color:#c3dafe"><span class="label">Time</span><span class="value">${c.interviewTime?formatTime(c.interviewTime):'—'}</span></div>
-      ${c.interviewNotes?`<div class="data-row" style="border-color:#c3dafe"><span class="label">Notes</span><span class="value">${esc(c.interviewNotes)}</span></div>`:''}
-      <div style="margin-top:12px"><button class="btn btn-secondary btn-sm" onclick="clearInterview()">✕ Remove</button></div>
+      <div class="sidebar-actions" style="margin-top:10px">
+        ${!c.interviewerName?`<button class="btn btn-primary btn-sm" onclick="startVibe()">🎯 Start Interview</button>`:''}
+        <button class="btn btn-sm" onclick="openScheduleModal()">📅 ${c.interviewDate?'Edit Interview':'Schedule Interview'}</button>
+      </div>
+    </div>`;
+
+  // Format available days nicely
+  const daysRaw=c.days||'';
+  const daysFormatted=daysRaw.split('|').map(d=>d.trim()).filter(Boolean).map(d=>{
+    const [day,val]=(d+':').split(':');
+    const v=(val||'').trim();
+    if(!v||v==='No answer')return null;
+    const label=v==='allday'?'All Day':v==='unavailable'?'❌ Unavailable':v;
+    return `<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--border);font-size:12px"><span style="color:var(--text-soft)">${day.trim()}</span><span style="font-weight:500">${label}</span></div>`;
+  }).filter(Boolean).join('');
+
+  // Experience
+  let expHTML='';
+  if(c.currentlyEmployed==='Currently employed'){
+    expHTML=`
+      <div class="data-row"><span class="label">Status</span><span class="value">Currently Employed</span></div>
+      ${c.currentCompany?`<div class="data-row"><span class="label">Company</span><span class="value">${esc(c.currentCompany)}</span></div>`:''}
+      ${c.currentTitle?`<div class="data-row"><span class="label">Title</span><span class="value">${esc(c.currentTitle)}</span></div>`:''}
+      ${c.currentLength?`<div class="data-row"><span class="label">Duration</span><span class="value">${esc(c.currentLength)}</span></div>`:''}
+      ${c.currentReason?`<div class="data-row"><span class="label">Reason Leaving</span><span class="value">${esc(c.currentReason)}</span></div>`:''}`;
+  } else if(c.currentlyEmployed==='Previously employed'){
+    expHTML=`
+      <div class="data-row"><span class="label">Status</span><span class="value">Previously Employed</span></div>
+      ${c.recentCompany?`<div class="data-row"><span class="label">Company</span><span class="value">${esc(c.recentCompany)}</span></div>`:''}
+      ${c.recentTitle?`<div class="data-row"><span class="label">Title</span><span class="value">${esc(c.recentTitle)}</span></div>`:''}
+      ${c.recentWhen?`<div class="data-row"><span class="label">How Long Ago</span><span class="value">${esc(c.recentWhen)}</span></div>`:''}
+      ${c.recentLength?`<div class="data-row"><span class="label">Duration</span><span class="value">${esc(c.recentLength)}</span></div>`:''}
+      ${c.recentReason?`<div class="data-row"><span class="label">Reason Left</span><span class="value">${esc(c.recentReason)}</span></div>`:''}`;
+  } else if(c.currentlyEmployed==='First job'){
+    expHTML=`<div class="data-row"><span class="label">Status</span><span class="value">First Job</span></div>`;
+  } else if(c.currentlyEmployed){
+    expHTML=`<div class="data-row"><span class="label">Status</span><span class="value">${esc(c.currentlyEmployed)}</span></div>`;
+  }
+
+  // Last day display
+  let lastDayDisplay='';
+  if(c.lastDay&&c.jobType==='Seasonal'){
+    try{const d=new Date(c.lastDay+'T12:00:00');lastDayDisplay=' — Last day: '+d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}catch(e){}
+  }
+
+  // Grad year
+  const gradRow=(c.gradYear&&c.student&&c.student!=='No')?`<div class="data-row"><span class="label">Grad Year</span><span class="value">${esc(c.gradYear)}</span></div>`:'';
+
+  // Vibe eval
+  let vibeHTML='';
+  if(c.interviewerName){
+    const grades=GRADES.map((label,i)=>{
+      const key='grade'+label.replace(/[^a-zA-Z]/g,'');
+      const val=parseInt(c[key])||0;
+      const color=val>=4?'var(--green)':val>=3?'var(--yellow)':'var(--red)';
+      return `<div class="vibe-bar"><span class="label">${label}</span><div class="bar"><div class="fill" style="width:${val*20}%;background:${color}"></div></div><span class="score">${val}</span></div>`;
+    }).join('');
+
+    const ratingColor=r=>r==='Strong'?'color:var(--green)':r==='Okay'?'color:var(--yellow)':r==='Weak'?'color:var(--red)':'color:var(--red)';
+    let scenHTML='';
+    SCENARIOS.forEach((s,i)=>{
+      const rating=c[`scenario${i}Rating`];const note=c[`scenario${i}Note`];
+      if(rating||note) scenHTML+=`<div style="padding:8px 0;border-bottom:1px solid var(--border);font-size:12px">
+        <div style="color:var(--text-soft);margin-bottom:3px">${i+1}. ${esc(s.q)}</div>
+        <div style="display:flex;gap:8px;align-items:center">${rating?`<strong style="${ratingColor(rating)}">${rating}</strong>`:''} ${note?`<span style="color:var(--text)">— ${esc(note)}</span>`:''}</div>
+      </div>`;
+    });
+
+    vibeHTML=`<div class="card">
+      <div class="card-title">🎯 Vibe Evaluation</div>
+      <div class="data-row"><span class="label">Interviewer</span><span class="value">${esc(c.interviewerName)}</span></div>
+      <div class="vibe-bar-wrap">${grades}</div>
+      <div class="data-row"><span class="label">Enjoy working with?</span><span class="value">${esc(c.enjoyWorking||'—')}</span></div>
+      <div class="data-row"><span class="label">Trust with closing?</span><span class="value">${esc(c.trustClosing||'—')}</span></div>
+      <div class="data-row"><span class="label">Coachability</span><span class="value">${esc(c.coachability||'—')}</span></div>
+      <div class="data-row"><span class="label">Hire Decision</span><span class="value" style="font-weight:700">${esc(c.hireDecision||'—')}</span></div>
+      ${c.vibeNotes?`<div class="data-row"><span class="label">Notes</span><span class="value">${esc(c.vibeNotes)}</span></div>`:''}
+      ${scenHTML?`<div style="margin-top:12px;padding-top:10px;border-top:2px solid var(--border)"><div style="font-weight:600;font-size:12px;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-soft)">Scenario Responses</div>${scenHTML}</div>`:''}
+    </div>`;
+  }
+
+  // MAIN CONTENT
+  document.getElementById('profile-main').innerHTML=`
+    ${c.interviewDate?`<div class="interview-card">
+      <div class="card-title" style="color:var(--blue)">📅 Scheduled Interview</div>
+      <div class="data-row" style="border-color:var(--blue-border)"><span class="label">Date</span><span class="value">${formatDate(c.interviewDate)}</span></div>
+      <div class="data-row" style="border-color:var(--blue-border)"><span class="label">Time</span><span class="value">${formatTime(c.interviewTime)}</span></div>
+      ${c.interviewNotes?`<div class="data-row" style="border-color:var(--blue-border)"><span class="label">Notes</span><span class="value">${esc(c.interviewNotes)}</span></div>`:''}
+      <button class="btn btn-sm" style="margin-top:10px;color:var(--red);border-color:var(--red-border)" onclick="clearInterview()">✕ Remove</button>
     </div>`:''}
     <div class="card">
-      <div class="card-title"><span class="icon" style="background:var(--blue-light);color:var(--blue)">📅</span> Availability & Reliability</div>
-      <div class="data-row"><span class="label">Student</span><span class="value">${esc(c.student)}</span></div>
-      ${gradYearRow}
-      <div class="data-row"><span class="label">Other Job</span><span class="value">${esc(c.otherJob)}${c.otherJobDesc?' — '+esc(c.otherJobDesc):''}</span></div>
+      <div class="card-title">📅 Availability</div>
+      <div class="data-row"><span class="label">Student</span><span class="value">${esc(c.student||'—')}</span></div>
+      ${gradRow}
+      <div class="data-row"><span class="label">Other Job</span><span class="value">${esc(c.otherJob||'—')}${c.otherJobDesc?' — '+esc(c.otherJobDesc):''}</span></div>
       <div class="data-row"><span class="label">Job Type</span><span class="value">${esc(c.jobType||'—')}${lastDayDisplay}</span></div>
-      <div class="data-row"><span class="label">Available Days</span><span class="value" style="font-size:13px">${esc(c.days)}</span></div>
-      <div class="data-row"><span class="label">Machine Cleaning</span><span class="value">${esc(c.machineCleaning)}</span></div>
+      <div class="data-row"><span class="label">Transportation</span><span class="value">${esc(c.transport||'—')}</span></div>
+      <div class="data-row"><span class="label">Bank Account</span><span class="value">${esc(c.bank||'—')}</span></div>
+      <div class="data-row"><span class="label">Start Immediately</span><span class="value">${esc(c.startNow||'—')}${c.startDate?' — '+esc(c.startDate):''}</span></div>
+      <div class="data-row"><span class="label">Machine Cleaning</span><span class="value">${esc(c.machineCleaning||'—')}</span></div>
       ${c.schedNotes?`<div class="data-row"><span class="label">Schedule Notes</span><span class="value">${esc(c.schedNotes)}</span></div>`:''}
-      <div class="data-row"><span class="label">Hours Preferred</span><span class="value">${esc(c.hoursPreferred)}</span></div>
-      <div class="data-row"><span class="label">Hours Minimum</span><span class="value">${esc(c.hoursMinimum)}</span></div>
-      <div class="data-row"><span class="label">Transportation</span><span class="value">${esc(c.transport)}</span></div>
-      <div class="data-row"><span class="label">Bank Account</span><span class="value">${esc(c.bank)}</span></div>
-      <div class="data-row"><span class="label">Start Immediately</span><span class="value">${esc(c.startNow)}${c.startDate?' — '+esc(c.startDate):''}</span></div>
-    </div>
-
-    <div class="card">
-      <div class="card-title"><span class="icon" style="background:var(--yellow-light);color:var(--yellow)">💼</span> Experience</div>
-      ${expHTML}
+      <div class="data-row"><span class="label">Hours</span><span class="value">${c.hoursPreferred?'Preferred: '+esc(c.hoursPreferred):''}${c.hoursMinimum?' · Min: '+esc(c.hoursMinimum):''}</span></div>
     </div>
     <div class="card">
-      <div class="card-title"><span class="icon" style="background:var(--green-light);color:var(--green)">✅</span> Job Comfort</div>
-      <div class="data-row"><span class="label">Standing / Prep / Cleaning</span><span class="value">${esc(c.comfortPhysical)}</span></div>
-      <div class="data-row"><span class="label">Rushes / Difficult Customers</span><span class="value">${esc(c.comfortRush)}</span></div>
-      ${c.notes?`<div class="data-row"><span class="label">About Themselves</span><span class="value" style="max-width:70%;font-size:13px">${esc(c.notes)}</span></div>`:''}
+      <div class="card-title">📅 Schedule</div>
+      ${daysFormatted||'<p style="font-size:13px;color:var(--text-soft)">No schedule data</p>'}
+    </div>
+    <div class="card">
+      <div class="card-title">💼 Experience</div>
+      ${expHTML||'<div class="data-row"><span class="label">Status</span><span class="value">—</span></div>'}
+      <div class="data-row"><span class="label">Food Industry Exp</span><span class="value">${esc(c.foodExp||'—')}</span></div>
+    </div>
+    <div class="card">
+      <div class="card-title">🍦 Job Comfort</div>
+      <div class="data-row"><span class="label">Standing / Prep / Cleaning</span><span class="value">${esc(c.comfortPhysical||'—')}</span></div>
+      <div class="data-row"><span class="label">Rushes / Difficult Customers</span><span class="value">${esc(c.comfortRush||'—')}</span></div>
+      ${c.notes?`<div style="margin-top:10px;padding:10px;background:var(--bg);border-radius:var(--radius-sm);font-size:13px;line-height:1.6;color:var(--text)">${esc(c.notes)}</div>`:''}
     </div>
     ${vibeHTML}`;
 }
 
-// STATUS UPDATE
-window.updateStatus = async (status) => {
-  if (!status || !currentCandidateId) return;
-  await updateDoc(doc(db,'candidates',currentCandidateId), { status });
-  currentCandidate.status = status;
+// STATUS
+window.updateStatus=async(status)=>{
+  if(!status||!currentCandidateId)return;
+  await updateDoc(doc(db,'candidates',currentCandidateId),{status});
+  currentCandidate.status=status;
   renderProfile(currentCandidate);
-  showToast('Status updated to '+status, true);
+  showToast('Status updated to '+status,true);
 };
 
 // VIBE EVAL
-window.startVibe = () => {
-  if (!currentCandidate) return;
+window.startVibe=()=>{
+  if(!currentCandidate)return;
   showView('vibe');
-  document.getElementById('vibe-candidate-name').textContent = 'Evaluating: ' + currentCandidate.name;
-  document.getElementById('vibe-back-btn').onclick = () => openProfile(currentCandidateId);
-  gradeValues = {}; scenarioRatings = {};
+  document.getElementById('vibe-candidate-name').textContent='Evaluating: '+currentCandidate.name;
+  document.getElementById('vibe-back-btn').onclick=()=>openProfile(currentCandidateId);
+  gradeValues={};scenarioRatings={};
   document.getElementById('vibe-form').reset();
-  document.getElementById('vibe-btn').disabled = false;
-  document.getElementById('vibe-btn').textContent = 'Submit Evaluation';
-  renderScenarios(); renderGradeDots();
+  document.getElementById('vibe-btn').disabled=false;
+  document.getElementById('vibe-btn').textContent='Submit Evaluation';
+  renderScenarios();renderGrades();
 };
 
-function renderScenarios() {
-  document.getElementById('scenario-cards').innerHTML = SCENARIOS.map((s,i) => `
+function renderScenarios(){
+  document.getElementById('scenario-cards').innerHTML=SCENARIOS.map((s,i)=>`
     <div class="scenario-card">
       <div class="question">${i+1}. ${s.q}</div>
       <div class="hint">${s.hint}</div>
@@ -567,108 +675,101 @@ function renderScenarios() {
         <button type="button" onclick="rateScenario(${i},'Weak',this)">⚠️ Weak</button>
         <button type="button" onclick="rateScenario(${i},'Concerning',this)">🚩 Concerning</button>
       </div>
-      <div style="margin-top:8px"><input type="text" name="scenarioNote${i}" placeholder="Quick note (optional)" style="padding:8px 12px;font-size:13px"></div>
+      <div style="margin-top:8px"><input type="text" name="scenarioNote${i}" placeholder="Quick note (optional)" style="padding:6px 10px;font-size:12px"></div>
     </div>`).join('');
 }
 
-window.rateScenario = (idx, rating, btn) => {
-  scenarioRatings[idx] = rating;
+window.rateScenario=(idx,rating,btn)=>{
+  scenarioRatings[idx]=rating;
   btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('selected'));
   btn.classList.add('selected');
 };
 
-function renderGradeDots() {
-  document.querySelectorAll('.grade-dots').forEach(container => {
-    const key = container.dataset.grade;
-    container.innerHTML = [0,1,2,3,4,5].map(n =>
-      `<button type="button" onclick="setGrade('${key}',${n},this)">${n}</button>`).join('');
-  });
+function renderGrades(){
+  document.getElementById('grade-items').innerHTML=GRADES.map(label=>{
+    const key='grade'+label.replace(/[^a-zA-Z]/g,'');
+    return `<div class="grade-row">
+      <span class="label">${label}</span>
+      <div class="grade-dots" data-grade="${key}">
+        ${[0,1,2,3,4,5].map(n=>`<button type="button" onclick="setGrade('${key}',${n},this)">${n}</button>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
 }
 
-window.setGrade = (key, val, btn) => {
-  gradeValues[key] = val;
+window.setGrade=(key,val,btn)=>{
+  gradeValues[key]=val;
   btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('selected'));
   btn.classList.add('selected');
 };
 
-document.getElementById('vibe-form').addEventListener('submit', async (e) => {
+document.getElementById('vibe-form').addEventListener('submit',async(e)=>{
   e.preventDefault();
-  const btn = document.getElementById('vibe-btn');
-  btn.disabled = true; btn.textContent = 'Submitting...';
-  const fd = new FormData(e.target);
-  const data = {
-    interviewerName: fd.get('interviewerName'),
-    enjoyWorking: fd.get('enjoyWorking'),
-    trustClosing: fd.get('trustClosing'),
-    coachability: fd.get('coachability'),
-    hireDecision: fd.get('hireDecision'),
-    vibeNotes: fd.get('vibeNotes')||'',
+  const btn=document.getElementById('vibe-btn');
+  btn.disabled=true;btn.textContent='Submitting...';
+  const fd=new FormData(e.target);
+  const data={
+    interviewerName:fd.get('interviewerName'),
+    enjoyWorking:fd.get('enjoyWorking'),
+    trustClosing:fd.get('trustClosing'),
+    coachability:fd.get('coachability'),
+    hireDecision:fd.get('hireDecision'),
+    vibeNotes:fd.get('vibeNotes')||'',
     ...gradeValues
   };
-  SCENARIOS.forEach((_,i) => {
-    data[`scenario${i}Rating`] = scenarioRatings[i]||'';
-    data[`scenario${i}Note`] = fd.get(`scenarioNote${i}`)||'';
+  SCENARIOS.forEach((_,i)=>{
+    data[`scenario${i}Rating`]=scenarioRatings[i]||'';
+    data[`scenario${i}Note`]=fd.get(`scenarioNote${i}`)||'';
   });
-  if (currentCandidate.status === 'Applied') data.status = 'Interviewed';
-  try {
-    await updateDoc(doc(db,'candidates',currentCandidateId), data);
+  if(currentCandidate.status==='Applied')data.status='Interviewed';
+  try{
+    await updateDoc(doc(db,'candidates',currentCandidateId),data);
     showToast('Evaluation submitted!',true);
-    setTimeout(() => openProfile(currentCandidateId), 800);
-  } catch(err) {
+    setTimeout(()=>openProfile(currentCandidateId),800);
+  }catch(err){
     showToast('Error submitting');
-    btn.disabled = false; btn.textContent = 'Submit Evaluation';
+    btn.disabled=false;btn.textContent='Submit Evaluation';
   }
 });
 
 // INTERVIEW SCHEDULING
-window.openScheduleModal = () => {
-  const modal = document.getElementById('schedule-modal');
-  document.getElementById('sched-date').value = currentCandidate.interviewDate||'';
-  document.getElementById('sched-time').value = currentCandidate.interviewTime||'';
-  document.getElementById('sched-notes').value = currentCandidate.interviewNotes||'';
-  document.getElementById('sched-date').min = new Date().toISOString().split('T')[0];
-  modal.style.display = 'flex';
+window.openScheduleModal=()=>{
+  const modal=document.getElementById('schedule-modal');
+  document.getElementById('sched-date').value=currentCandidate.interviewDate||'';
+  document.getElementById('sched-time').value=currentCandidate.interviewTime||'';
+  document.getElementById('sched-notes').value=currentCandidate.interviewNotes||'';
+  document.getElementById('sched-date').min=new Date().toISOString().split('T')[0];
+  modal.style.display='flex';
 };
-window.closeScheduleModal = () => { document.getElementById('schedule-modal').style.display='none'; };
-
-window.saveInterview = async () => {
-  const date = document.getElementById('sched-date').value;
-  const time = document.getElementById('sched-time').value;
-  const notes = document.getElementById('sched-notes').value;
-  if (!date||!time) { showToast('Please enter date and time'); return; }
-  await updateDoc(doc(db,'candidates',currentCandidateId), { interviewDate:date, interviewTime:time, interviewNotes:notes });
-  currentCandidate.interviewDate = date; currentCandidate.interviewTime = time; currentCandidate.interviewNotes = notes;
-  closeScheduleModal();
-  renderProfile(currentCandidate);
+window.closeScheduleModal=()=>{document.getElementById('schedule-modal').style.display='none';};
+window.saveInterview=async()=>{
+  const date=document.getElementById('sched-date').value;
+  const time=document.getElementById('sched-time').value;
+  const notes=document.getElementById('sched-notes').value;
+  if(!date||!time){showToast('Please enter date and time');return;}
+  await updateDoc(doc(db,'candidates',currentCandidateId),{interviewDate:date,interviewTime:time,interviewNotes:notes});
+  currentCandidate.interviewDate=date;currentCandidate.interviewTime=time;currentCandidate.interviewNotes=notes;
+  closeScheduleModal();renderProfile(currentCandidate);
   showToast('Interview scheduled!',true);
 };
-
-window.clearInterview = async () => {
-  if (!confirm('Remove the scheduled interview?')) return;
-  await updateDoc(doc(db,'candidates',currentCandidateId), { interviewDate:'', interviewTime:'', interviewNotes:'' });
-  currentCandidate.interviewDate = ''; currentCandidate.interviewTime = ''; currentCandidate.interviewNotes = '';
-  renderProfile(currentCandidate);
-  showToast('Interview removed');
+window.clearInterview=async()=>{
+  if(!confirm('Remove the scheduled interview?'))return;
+  await updateDoc(doc(db,'candidates',currentCandidateId),{interviewDate:'',interviewTime:'',interviewNotes:''});
+  currentCandidate.interviewDate='';currentCandidate.interviewTime='';currentCandidate.interviewNotes='';
+  renderProfile(currentCandidate);showToast('Interview removed');
 };
 
-function formatDate(str) {
-  if (!str) return '—';
-  try { const d = new Date(str+'T12:00:00'); return d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',timeZone:'America/Chicago'}); } catch(e) { return str; }
+function formatDate(str){
+  if(!str)return'—';
+  try{const d=new Date(str+'T12:00:00');return d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',timeZone:'America/Chicago'});}catch(e){return str;}
 }
-function formatTime(str) {
-  if (!str) return '—';
-  try {
-    const [h,m] = str.split(':').map(Number);
-    return `${h%12||12}:${String(m).padStart(2,'0')} ${h>=12?'PM':'AM'}`;
-  } catch(e) { return str; }
+function formatTime(str){
+  if(!str)return'—';
+  try{const[h,m]=str.split(':').map(Number);return`${h%12||12}:${String(m).padStart(2,'0')} ${h>=12?'PM':'AM'}`;}catch(e){return str;}
 }
 
 // INIT
-if (sessionStorage.getItem('dashAuth')) {
-  showView('dashboard');
-} else {
-  showView('login');
-}
+if(sessionStorage.getItem('dashAuth')){showView('dashboard');}else{showView('login');}
 </script>
 </body>
 </html>
