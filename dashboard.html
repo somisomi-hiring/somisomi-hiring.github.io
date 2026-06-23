@@ -419,18 +419,18 @@ function renderProfile(c) {
   if (c.currentlyEmployed === 'Currently employed') {
     expHTML = `
       <div class="data-row"><span class="label">Employment</span><span class="value">Currently Employed</span></div>
-      <div class="data-row"><span class="label">Company</span><span class="value">${esc(c.currentCompany)}</span></div>
-      <div class="data-row"><span class="label">Title</span><span class="value">${esc(c.currentTitle)}</span></div>
-      <div class="data-row"><span class="label">Duration</span><span class="value">${esc(c.currentLength)}</span></div>
-      <div class="data-row"><span class="label">Reason Leaving</span><span class="value">${esc(c.currentReason)}</span></div>`;
+      ${c.currentCompany?`<div class="data-row"><span class="label">Company</span><span class="value">${esc(c.currentCompany)}</span></div>`:''}
+      ${c.currentTitle?`<div class="data-row"><span class="label">Title</span><span class="value">${esc(c.currentTitle)}</span></div>`:''}
+      ${c.currentLength?`<div class="data-row"><span class="label">Duration</span><span class="value">${esc(c.currentLength)}</span></div>`:''}
+      ${c.currentReason?`<div class="data-row"><span class="label">Reason Leaving</span><span class="value">${esc(c.currentReason)}</span></div>`:''}`;
   } else if (c.currentlyEmployed === 'Previously employed') {
     expHTML = `
       <div class="data-row"><span class="label">Employment</span><span class="value">Previously Employed</span></div>
-      <div class="data-row"><span class="label">Company</span><span class="value">${esc(c.recentCompany)}</span></div>
-      <div class="data-row"><span class="label">Title</span><span class="value">${esc(c.recentTitle)}</span></div>
-      <div class="data-row"><span class="label">How Long Ago</span><span class="value">${esc(c.recentWhen)}</span></div>
-      <div class="data-row"><span class="label">Duration</span><span class="value">${esc(c.recentLength)}</span></div>
-      <div class="data-row"><span class="label">Reason Left</span><span class="value">${esc(c.recentReason)}</span></div>`;
+      ${c.recentCompany?`<div class="data-row"><span class="label">Company</span><span class="value">${esc(c.recentCompany)}</span></div>`:''}
+      ${c.recentTitle?`<div class="data-row"><span class="label">Title</span><span class="value">${esc(c.recentTitle)}</span></div>`:''}
+      ${c.recentWhen?`<div class="data-row"><span class="label">How Long Ago</span><span class="value">${esc(c.recentWhen)}</span></div>`:''}
+      ${c.recentLength?`<div class="data-row"><span class="label">Duration</span><span class="value">${esc(c.recentLength)}</span></div>`:''}
+      ${c.recentReason?`<div class="data-row"><span class="label">Reason Left</span><span class="value">${esc(c.recentReason)}</span></div>`:''}`;
   } else if (c.currentlyEmployed === 'First job') {
     expHTML = `<div class="data-row"><span class="label">Employment</span><span class="value">First Job</span></div>`;
   } else if (c.currentlyEmployed) {
@@ -520,10 +520,7 @@ function renderProfile(c) {
       <div class="data-row"><span class="label">Bank Account</span><span class="value">${esc(c.bank)}</span></div>
       <div class="data-row"><span class="label">Start Immediately</span><span class="value">${esc(c.startNow)}${c.startDate?' — '+esc(c.startDate):''}</span></div>
     </div>
-    <div class="card">
-      <div class="card-title"><span class="icon" style="background:var(--green-light);color:var(--green)">✅</span> Reliability</div>
-      <div class="data-row"><span class="label">Let go for no-show/late?</span><span class="value">${esc(c.letGo||'—')}</span></div>
-    </div>
+
     <div class="card">
       <div class="card-title"><span class="icon" style="background:var(--yellow-light);color:var(--yellow)">💼</span> Experience</div>
       ${expHTML}
