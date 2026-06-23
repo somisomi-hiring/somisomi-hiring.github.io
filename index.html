@@ -394,7 +394,14 @@ function handleConditional(key, value) {
     if (condKey !== key) return;
     const show = condVals.includes(value);
     if (show) { field.removeAttribute('style'); field.style.display = 'block'; }
-    else { field.setAttribute('style', 'display:none !important'); }
+    else { 
+      field.setAttribute('style', 'display:none !important');
+      // Clear values when hiding so stale data isn't submitted
+      field.querySelectorAll('input,select,textarea').forEach(inp => {
+        if (inp.type === 'radio' || inp.type === 'checkbox') inp.checked = false;
+        else inp.value = '';
+      });
+    }
     const q = appQuestions.find(qq=>qq.key===field.dataset.key);
     const shouldRequire = show && q?.required === true;
     field.querySelectorAll('input,select,textarea').forEach(inp => {
