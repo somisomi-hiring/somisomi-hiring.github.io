@@ -227,17 +227,16 @@ const DEFAULT_APP_QUESTIONS = [
   { key:'bank', label:'Bank account for direct deposit?', type:'radio', options:['Yes','No'], required:true, enabled:true },
   { key:'startNow', label:'Can you start immediately?', type:'radio', options:['Yes','No'], required:true, enabled:true },
   { key:'startDate', label:'When can you start?', type:'date', required:false, enabled:true, conditional:'startNow:No' },
-  { key:'letGo', label:'Have you ever been let go due to a no-show or being late?', type:'radio', options:['Yes','No'], required:true, enabled:true },
   { key:'currentlyEmployed', label:"What's your work experience?", type:'radio', options:['Currently employed','Previously employed','First job'], required:true, enabled:true },
-  { key:'currentCompany', label:'Current Company', type:'text', placeholder:'e.g. Target', required:false, enabled:true, conditional:'currentlyEmployed:Currently employed' },
-  { key:'currentTitle', label:'Current Job Title', type:'text', placeholder:'e.g. Cashier', required:false, enabled:true, conditional:'currentlyEmployed:Currently employed' },
-  { key:'currentLength', label:'How long have you been there?', type:'text', placeholder:'e.g. 6 months', required:false, enabled:true, conditional:'currentlyEmployed:Currently employed' },
-  { key:'currentReason', label:'Reason for leaving?', type:'text', placeholder:'e.g. Looking for new opportunities', required:false, enabled:true, conditional:'currentlyEmployed:Currently employed' },
-  { key:'recentCompany', label:'Most Recent Company', type:'text', placeholder:'e.g. Target', required:false, enabled:true, conditional:'currentlyEmployed:Previously employed' },
-  { key:'recentTitle', label:'Most Recent Job Title', type:'text', placeholder:'e.g. Cashier', required:false, enabled:true, conditional:'currentlyEmployed:Previously employed' },
-  { key:'recentWhen', label:'How long ago?', type:'text', placeholder:'e.g. 3 months ago', required:false, enabled:true, conditional:'currentlyEmployed:Previously employed' },
-  { key:'recentLength', label:'How long were you there?', type:'text', placeholder:'e.g. 1 year', required:false, enabled:true, conditional:'currentlyEmployed:Previously employed' },
-  { key:'recentReason', label:'Reason for leaving?', type:'text', placeholder:'e.g. Moved', required:false, enabled:true, conditional:'currentlyEmployed:Previously employed' },
+  { key:'currentCompany', label:'Current Company', type:'text', placeholder:'e.g. Target', required:true, enabled:true, conditional:'currentlyEmployed:Currently employed' },
+  { key:'currentTitle', label:'Current Job Title', type:'text', placeholder:'e.g. Cashier', required:true, enabled:true, conditional:'currentlyEmployed:Currently employed' },
+  { key:'currentLength', label:'How long have you been there?', type:'text', placeholder:'e.g. 6 months', required:true, enabled:true, conditional:'currentlyEmployed:Currently employed' },
+  { key:'currentReason', label:'Reason for leaving?', type:'text', placeholder:'e.g. Looking for new opportunities', required:true, enabled:true, conditional:'currentlyEmployed:Currently employed' },
+  { key:'recentCompany', label:'Most Recent Company', type:'text', placeholder:'e.g. Target', required:true, enabled:true, conditional:'currentlyEmployed:Previously employed' },
+  { key:'recentTitle', label:'Most Recent Job Title', type:'text', placeholder:'e.g. Cashier', required:true, enabled:true, conditional:'currentlyEmployed:Previously employed' },
+  { key:'recentWhen', label:'How long ago?', type:'text', placeholder:'e.g. 3 months ago', required:true, enabled:true, conditional:'currentlyEmployed:Previously employed' },
+  { key:'recentLength', label:'How long were you there?', type:'text', placeholder:'e.g. 1 year', required:true, enabled:true, conditional:'currentlyEmployed:Previously employed' },
+  { key:'recentReason', label:'Reason for leaving?', type:'text', placeholder:'e.g. Moved', required:true, enabled:true, conditional:'currentlyEmployed:Previously employed' },
   { key:'foodExp', label:'Any food industry experience?', type:'radio', options:['Yes','No'], required:true, enabled:true },
   { key:'comfortPhysical', label:'Comfortable standing for long periods, doing food prep, and cleaning?', type:'radio', options:['Yes','No'], required:true, enabled:true },
   { key:'comfortRush', label:'Comfortable handling busy rushes and difficult customers?', type:'radio', options:['Yes','No'], required:true, enabled:true },
@@ -262,7 +261,6 @@ function buildDynamicForm() {
   // Everything BELOW the schedule grid - machine cleaning merged into availability
   const sections = [
     { id:'availability-bottom', title:'📅 Availability', icon:'📅', keys:['machineCleaning','schedNotes','hoursPreferred','hoursMinimum'], noHeader:true },
-    { id:'reliability', title:'✅ Reliability', icon:'✅', keys:['letGo'] },
     { id:'experience', title:'💼 Experience', icon:'💼', keys:['currentlyEmployed','currentCompany','currentTitle','currentLength','currentReason','recentCompany','recentTitle','recentWhen','recentLength','recentReason','foodExp'] },
     { id:'expectations', title:'🍦 Job Expectations', icon:'🍦', keys:['comfortPhysical','comfortRush','notes'] },
   ];
@@ -419,10 +417,14 @@ async function loadSettings() {
       // Merge saved questions with defaults to preserve conditional logic
       const defaultMap = {};
       DEFAULT_APP_QUESTIONS.forEach(q => defaultMap[q.key] = q);
-      appQuestions = saved.map(q => ({
-        ...( defaultMap[q.key] || {}), // start with default (has conditional)
-        ...q, // override with saved (label, options, enabled etc)
-      }));
+      appQuestions = saved.map(q => {
+        const def = defaultMap[q.key] || {};
+        const merged = { ...def, ...q };
+        // Always preserve conditional from default - never let saved override it
+        if (def.conditional) merged.conditional = def.conditional;
+        else delete merged.conditional;
+        return merged;
+      });
     }
   } catch(e) { console.warn('Using default settings', e); }
 
@@ -528,7 +530,7 @@ document.getElementById('apply-form').addEventListener('submit', async (e) => {
   }
 
   // Manual check for all radio groups
-  const radioNames = ['student','otherJob','jobType','machineCleaning','transport','bank','startNow','letGo','currentlyEmployed','foodExp','comfortPhysical','comfortRush'];
+  const radioNames = ['student','otherJob','jobType','machineCleaning','transport','bank','startNow','currentlyEmployed','foodExp','comfortPhysical','comfortRush'];
   for (const name of radioNames) {
     const el = e.target.querySelector(`input[name="${name}"]`);
     if (!el) continue;
