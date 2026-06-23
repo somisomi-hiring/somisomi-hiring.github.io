@@ -137,7 +137,6 @@ textarea{resize:vertical;min-height:60px;}
       <button class="nav-btn active" onclick="showSection('appform',this)">📋 Application Form</button>
       <button class="nav-btn" onclick="showSection('interview',this)">🎯 Interview Form</button>
       <button class="nav-btn" onclick="showSection('general',this)">⚙️ General</button>
-      <button class="nav-btn" onclick="showSection('pin',this)">🔒 PIN</button>
     </div>
 
     <!-- APP FORM SECTION -->
@@ -196,18 +195,16 @@ textarea{resize:vertical;min-height:60px;}
         <div class="field"><label>Our Motto</label><input type="text" id="motto"></div>
         <button class="btn btn-primary btn-sm" onclick="saveGeneral()">💾 Save</button>
       </div>
-    </div>
-
-    <!-- PIN SECTION -->
-    <div id="section-pin" class="settings-section">
-      <div class="card">
-        <strong style="font-size:15px;display:block;margin-bottom:14px">Change PIN</strong>
+      <div class="card" style="margin-top:12px">
+        <strong style="font-size:15px;display:block;margin-bottom:14px">🔒 Change PIN</strong>
         <div class="field"><label>Current PIN</label><input type="password" id="currentPin" placeholder="Current PIN"></div>
         <div class="field"><label>New PIN</label><input type="password" id="newPin" placeholder="Min 4 digits"></div>
         <div class="field"><label>Confirm New PIN</label><input type="password" id="confirmPin" placeholder="Confirm new PIN"></div>
         <button class="btn btn-primary btn-sm" onclick="changePin()">🔒 Update PIN</button>
       </div>
     </div>
+
+
   </div>
 </div>
 
