@@ -510,6 +510,22 @@ window.handleJobType = (r) => handleConditional('jobType', r.value);
 window.handleStartNow = (r) => handleConditional('startNow', r.value);
 window.handleEmployed = (r) => handleConditional('currentlyEmployed', r.value);
 
+window.handleLockedDay = (prefix) => {
+  const unavail = document.querySelector(`input[name="${prefix}Unavail"]`);
+  const warn = document.getElementById(prefix + 'Warning');
+  if (warn) warn.style.display = unavail && unavail.checked ? 'block' : 'none';
+};
+
+window.handleRequiredDay = (r, prefix) => {
+  const warn = document.getElementById(prefix + 'Warning');
+  if (warn) warn.style.display = r.value === 'unavailable' ? 'block' : 'none';
+};
+
+window.handleMachineCleaning = (r) => {
+  const warn = document.getElementById('machineCleaningWarning');
+  if (warn) warn.style.display = r.value === 'Neither' ? 'block' : 'none';
+};
+
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg; t.classList.add('show');
