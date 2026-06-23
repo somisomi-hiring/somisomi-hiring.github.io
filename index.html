@@ -396,9 +396,15 @@ function handleConditional(key, value) {
     if (show) { field.removeAttribute('style'); field.style.display = 'block'; }
     else { field.setAttribute('style', 'display:none !important'); }
     const q = appQuestions.find(qq=>qq.key===field.dataset.key);
+    const shouldRequire = show && q?.required === true;
     field.querySelectorAll('input,select,textarea').forEach(inp => {
-      inp.required = show && q?.required === true;
+      inp.required = shouldRequire;
     });
+    // Update label to show/hide asterisk
+    const lbl = field.querySelector('label');
+    if (lbl && q) {
+      lbl.textContent = q.label + (shouldRequire ? ' *' : '');
+    }
   });
 }
 
@@ -420,9 +426,10 @@ async function loadSettings() {
       appQuestions = saved.map(q => {
         const def = defaultMap[q.key] || {};
         const merged = { ...def, ...q };
-        // Always preserve conditional from default - never let saved override it
+        // Always preserve conditional and required from default
         if (def.conditional) merged.conditional = def.conditional;
         else delete merged.conditional;
+        if (def.conditional && def.required) merged.required = true;
         return merged;
       });
     }
@@ -580,6 +587,10 @@ document.getElementById('apply-form').addEventListener('submit', async (e) => {
   const checkedNames = new Set();
   for (const el of requiredEls) {
     if (el.disabled) continue;
+    // Skip hidden fields
+    const parentField = el.closest('.field');
+    if (parentField && parentField.style.display === 'none') continue;
+    if (parentField && parentField.getAttribute('style') && parentField.getAttribute('style').includes('none')) continue;
     if (el.type === 'radio' || el.type === 'checkbox') {
       if (checkedNames.has(el.name)) continue;
       checkedNames.add(el.name);
