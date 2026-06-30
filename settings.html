@@ -505,13 +505,18 @@ window.saveQuestion = () => {
 window.closeQuestionModal = () => { document.getElementById('question-modal').style.display='none'; };
 
 window.saveAppForm = async () => {
-  // Preserve conditional logic from defaults when saving
   const defaultMap = {};
   DEFAULT_APP_QUESTIONS.forEach(q => defaultMap[q.key] = q);
-  const toSave = appQuestions.map(q => ({
-    ...(defaultMap[q.key] ? { conditional: defaultMap[q.key].conditional } : {}),
-    ...q,
-  }));
+  const toSave = appQuestions.map(q => {
+    const def = defaultMap[q.key];
+    const out = { ...q };
+    // Preserve conditional from defaults
+    if (def?.conditional) out.conditional = def.conditional;
+    else delete out.conditional;
+    // Remove any undefined values (Firebase rejects them)
+    Object.keys(out).forEach(k => { if (out[k] === undefined) delete out[k]; });
+    return out;
+  });
   await setDoc(doc(db,'config','appForm'), { questions: toSave });
   showToast('✅ Application form saved!', true);
 };
