@@ -253,19 +253,6 @@ function buildDynamicForm() {
   container.innerHTML = '';
   if (topContainer) topContainer.innerHTML = '';
 
-  // Availability questions ABOVE the schedule grid
-  const topSections = [
-    { id:'availability-top', title:'📅 Availability', icon:'📅', keys:['student','gradYear','otherJob','otherJobDesc','jobType','lastDay','transport','bank','startNow','startDate'] },
-  ];
-
-  // Everything BELOW the schedule grid - machine cleaning merged into availability
-  const sections = [
-    { id:'availability-bottom', title:'📅 Availability', icon:'📅', keys:['machineCleaning','schedNotes','hoursPreferred','hoursMinimum'], noHeader:true },
-    { id:'experience', title:'💼 Experience', icon:'💼', keys:['currentlyEmployed','currentCompany','currentTitle','currentLength','currentReason','recentCompany','recentTitle','recentWhen','recentLength','recentReason','foodExp'] },
-    { id:'expectations', title:'🍦 Job Expectations', icon:'🍦', keys:['comfortPhysical','comfortRush','notes'] },
-    ...(customKeys.length ? [{ id:'custom', title:'📝 Additional Questions', icon:'📝', keys:customKeys }] : []),
-  ];
-
   const enabledQuestions = appQuestions.filter(q => q.enabled !== false);
   const keyToQ = {};
   enabledQuestions.forEach(q => keyToQ[q.key] = q);
@@ -277,6 +264,19 @@ function buildDynamicForm() {
     'recentCompany','recentTitle','recentWhen','recentLength','recentReason','foodExp',
     'comfortPhysical','comfortRush','notes'];
   const customKeys = enabledQuestions.filter(q => !knownKeys.includes(q.key)).map(q => q.key);
+
+  // Availability questions ABOVE the schedule grid
+  const topSections = [
+    { id:'availability-top', title:'📅 Availability', icon:'📅', keys:['student','gradYear','otherJob','otherJobDesc','jobType','lastDay','transport','bank','startNow','startDate'] },
+  ];
+
+  // Everything BELOW the schedule grid
+  const sections = [
+    { id:'availability-bottom', title:'📅 Availability', icon:'📅', keys:['machineCleaning','schedNotes','hoursPreferred','hoursMinimum'], noHeader:true },
+    { id:'experience', title:'💼 Experience', icon:'💼', keys:['currentlyEmployed','currentCompany','currentTitle','currentLength','currentReason','recentCompany','recentTitle','recentWhen','recentLength','recentReason','foodExp'] },
+    { id:'expectations', title:'🍦 Job Expectations', icon:'🍦', keys:['comfortPhysical','comfortRush','notes'] },
+    ...(customKeys.length ? [{ id:'custom', title:'📝 Additional Questions', icon:'📝', keys:customKeys }] : []),
+  ];
 
   // Render top availability questions (above schedule grid)
   topSections.forEach(section => {
