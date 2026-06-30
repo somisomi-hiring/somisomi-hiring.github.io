@@ -127,7 +127,7 @@ textarea{resize:vertical;min-height:60px;}
         <h1 style="font-size:18px;font-weight:600">Settings</h1>
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <a href="index.html" class="btn btn-secondary">📋 View Form</a>
+        <a href="https://somisomi-hiring.github.io/" class="btn btn-secondary" target="_blank">📋 View Form</a>
         <a href="dashboard.html" class="btn btn-secondary">📊 Dashboard</a>
         <button class="btn btn-secondary" onclick="logout()">🔒 Log Out</button>
       </div>
@@ -190,7 +190,7 @@ textarea{resize:vertical;min-height:60px;}
     <div id="section-general" class="settings-section">
       <div class="card">
         <strong style="font-size:15px;display:block;margin-bottom:14px">General Settings</strong>
-        <div class="field"><label>Location Name</label><input type="text" id="locationName" placeholder="e.g. The Woodlands - Metropark Square"></div>
+        <div class="field"><label>Location Name</label><input type="text" id="locationName" placeholder="e.g. Metropark Square"></div>
         <div class="field"><label>Pay Info</label><textarea id="payInfo" rows="3"></textarea></div>
         <div class="field"><label>Our Motto</label><input type="text" id="motto"></div>
         <button class="btn btn-primary btn-sm" onclick="saveGeneral()">💾 Save</button>
@@ -326,7 +326,7 @@ const DEFAULT_GRADES = ['Attitude','Communication','Reliability','Customer Servi
 const DEFAULT_SETTINGS = {
   payInfo: "$7.25/hour for your first 35 training hours. After training you will receive tips which put you anywhere between $11–$14/hr.",
   motto: "Be on time, ready to learn, and work with a positive attitude.",
-  locationName: "The Woodlands - Metropark Square",
+  locationName: "The Woodlands (Metropark Square)",
   pin: "1234",
   schedule: {
     Monday:    { day:"12pm–6pm", eve:"6pm–10:30pm", locked:false },
