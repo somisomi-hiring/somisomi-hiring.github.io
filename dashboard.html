@@ -568,7 +568,9 @@ function renderProfile(c) {
     'currentlyEmployed','currentCompany','currentTitle','currentLength','currentReason',
     'recentCompany','recentTitle','recentWhen','recentLength','recentReason','foodExp',
     'comfortPhysical','comfortRush','notes','interviewDate','interviewTime','interviewNotes',
-    'interviewerName','enjoyWorking','trustClosing','coachability','hireDecision','vibeNotes','id']);
+    'interviewerName','enjoyWorking','trustClosing','coachability','hireDecision','vibeNotes','id',
+    'monShift','tueShift','wedShift','thuShift','friShift','satShift','sunShift',
+    'satUnavail','sunUnavail','mondayUnavail','tuesdayUnavail','wednesdayUnavail','thursdayUnavail','fridayUnavail']);
   // Add scenario/grade fields
   for(let i=0;i<10;i++){knownFields.add(`scenario${i}Rating`);knownFields.add(`scenario${i}Note`);}
   ['Attitude','Communication','Reliability','CustomerService','Energy','EnthusiasmProblemSolving'].forEach(g=>knownFields.add('grade'+g));
