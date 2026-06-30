@@ -396,13 +396,18 @@ document.getElementById('pin-input').addEventListener('keydown',e=>{if(e.key==='
 window.logoutDash=()=>{sessionStorage.removeItem('dashAuth');showView('login');};
 
 // DASHBOARD
+let appFormQuestions = [];
+
 async function loadCandidates() {
   const list=document.getElementById('candidate-list');
   list.innerHTML='<div class="loading"><div class="spinner"></div></div>';
   try {
-    const q=query(collection(db,'candidates'),orderBy('timestamp','desc'));
-    const snap=await getDocs(q);
-    candidates=snap.docs.map(d=>({id:d.id,...d.data()}));
+    const [qSnap, formSnap] = await Promise.all([
+      getDocs(query(collection(db,'candidates'),orderBy('timestamp','desc'))),
+      getDoc(doc(db,'config','appForm'))
+    ]);
+    candidates=qSnap.docs.map(d=>({id:d.id,...d.data()}));
+    if(formSnap.exists()) appFormQuestions = formSnap.data().questions || [];
     renderCandidates();
   } catch(e) {
     list.innerHTML='<div class="empty"><div class="icon">⚠️</div><p>Could not load candidates.</p></div>';
@@ -579,7 +584,11 @@ function renderProfile(c) {
   const customEntries = Object.entries(c).filter(([k])=>!knownFields.has(k));
   const customFieldsHTML = customEntries.length ? `<div class="card">
     <div class="card-title">📝 Additional Questions</div>
-    ${customEntries.map(([k,v])=>`<div class="data-row"><span class="label">${esc(k)}</span><span class="value">${esc(String(v||'—'))}</span></div>`).join('')}
+    ${customEntries.map(([k,v])=>{
+      const q = appFormQuestions.find(q=>q.key===k);
+      const label = q ? q.label : k;
+      return `<div class="data-row"><span class="label">${esc(label)}</span><span class="value">${esc(String(v||'—'))}</span></div>`;
+    }).join('')}
   </div>` : '';
 
   // Last day display
