@@ -175,7 +175,7 @@ textarea{resize:vertical;min-height:70px;}
 <div class="toast" id="toast"></div>
 
 <!-- LOGIN -->
-<div id="view-login" class="view active">
+<div id="view-login" class="view active" style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg);">
   <div class="login-box">
     <div style="font-family:'Fraunces',serif;font-size:22px;font-weight:800;color:var(--accent);margin-bottom:4px">SomiSomi</div>
     <p style="color:var(--text-soft);font-size:13px;margin-bottom:20px">Hiring Dashboard</p>
@@ -561,6 +561,25 @@ function renderProfile(c) {
     expHTML=`<div class="data-row"><span class="label">Status</span><span class="value">${esc(c.currentlyEmployed)}</span></div>`;
   }
 
+  // Known fields that are already displayed elsewhere
+  const knownFields = new Set(['name','phone','email','status','days','timestamp','student','gradYear',
+    'otherJob','otherJobDesc','jobType','lastDay','transport','bank','startNow','startDate',
+    'machineCleaning','schedNotes','hoursPreferred','hoursMinimum',
+    'currentlyEmployed','currentCompany','currentTitle','currentLength','currentReason',
+    'recentCompany','recentTitle','recentWhen','recentLength','recentReason','foodExp',
+    'comfortPhysical','comfortRush','notes','interviewDate','interviewTime','interviewNotes',
+    'interviewerName','enjoyWorking','trustClosing','coachability','hireDecision','vibeNotes','id']);
+  // Add scenario/grade fields
+  for(let i=0;i<10;i++){knownFields.add(`scenario${i}Rating`);knownFields.add(`scenario${i}Note`);}
+  ['Attitude','Communication','Reliability','CustomerService','Energy','EnthusiasmProblemSolving'].forEach(g=>knownFields.add('grade'+g));
+  GRADES.forEach(g=>knownFields.add('grade'+g.replace(/[^a-zA-Z]/g,'')));
+
+  const customEntries = Object.entries(c).filter(([k])=>!knownFields.has(k));
+  const customFieldsHTML = customEntries.length ? `<div class="card">
+    <div class="card-title">📝 Additional Questions</div>
+    ${customEntries.map(([k,v])=>`<div class="data-row"><span class="label">${esc(k)}</span><span class="value">${esc(String(v||'—'))}</span></div>`).join('')}
+  </div>` : '';
+
   // Last day display
   let lastDayDisplay='';
   if(c.lastDay&&c.jobType==='Seasonal'){
@@ -640,6 +659,7 @@ function renderProfile(c) {
       <div class="data-row"><span class="label">Rushes / Difficult Customers</span><span class="value">${esc(c.comfortRush||'—')}</span></div>
       ${c.notes?`<div style="margin-top:10px;padding:10px;background:var(--bg);border-radius:var(--radius-sm);font-size:13px;line-height:1.6;color:var(--text)">${esc(c.notes)}</div>`:''}
     </div>
+    ${customFieldsHTML}
     ${vibeHTML}`;
 }
 
