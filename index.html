@@ -454,6 +454,12 @@ async function loadSettings() {
       DEFAULT_APP_QUESTIONS.forEach(q => {
         if (!savedKeys.has(q.key)) appQuestions.push(q);
       });
+      // Deduplicate by key (keep last occurrence)
+      const seen = new Set();
+      appQuestions = appQuestions.reverse().filter(q => {
+        if (seen.has(q.key)) return false;
+        seen.add(q.key); return true;
+      }).reverse();
     }
   } catch(e) { console.warn('Using default settings', e); }
 
