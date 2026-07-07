@@ -8,7 +8,7 @@
 <style>
 :root {
   --bg: #F7F8FA;
-  --surface: #FFFFFF; 
+  --surface: #FFFFFF;
   --surface-alt: #F3F4F6;
   --border: #E5E7EB;
   --border-focus: #E8572A;
@@ -264,12 +264,12 @@ function buildDynamicForm() {
     'machineCleaning','schedNotes','hoursPreferred','hoursMinimum',
     'currentlyEmployed','currentCompany','currentTitle','currentLength','currentReason',
     'recentCompany','recentTitle','recentWhen','recentLength','recentReason','foodExp',
-    'comfortPhysical','comfortRush','notes','hoursOkay','goodStanding'];
+    'comfortPhysical','comfortRush','notes','goodStanding'];
   const customKeys = enabledQuestions.filter(q => !knownKeys.includes(q.key)).map(q => q.key);
 
   // Availability questions ABOVE the schedule grid
   const topSections = [
-    { id:'availability-top', title:'📅 Availability', icon:'📅', keys:['student','gradYear','otherJob','otherJobDesc','jobType','lastDay','transport','bank','hoursOkay','startNow','startDate'] },
+    { id:'availability-top', title:'📅 Availability', icon:'📅', keys:['student','gradYear','otherJob','otherJobDesc','jobType','lastDay','transport','bank','startNow','startDate'] },
   ];
 
   // Everything BELOW the schedule grid
@@ -444,11 +444,15 @@ async function loadSettings() {
       appQuestions = saved.map(q => {
         const def = defaultMap[q.key] || {};
         const merged = { ...def, ...q };
-        // Always preserve conditional and required from default
         if (def.conditional) merged.conditional = def.conditional;
         else delete merged.conditional;
         if (def.conditional && def.required) merged.required = true;
         return merged;
+      });
+      // Add any DEFAULT questions not yet in Firebase
+      const savedKeys = new Set(saved.map(q => q.key));
+      DEFAULT_APP_QUESTIONS.forEach(q => {
+        if (!savedKeys.has(q.key)) appQuestions.push(q);
       });
     }
   } catch(e) { console.warn('Using default settings', e); }
