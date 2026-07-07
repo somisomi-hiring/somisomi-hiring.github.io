@@ -162,6 +162,7 @@ textarea{resize:vertical;min-height:70px;}
 .back-btn:hover{color:var(--accent);}
 .view{display:none;}
 .view.active{display:block;}
+#view-login.active{display:flex!important;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 
 /* Login */
@@ -175,7 +176,7 @@ textarea{resize:vertical;min-height:70px;}
 <div class="toast" id="toast"></div>
 
 <!-- LOGIN -->
-<div id="view-login" class="view active" style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg);">
+<div id="view-login" class="view active" style="min-height:100vh;width:100%;display:flex;align-items:center;justify-content:center;background:var(--bg);">
   <div class="login-box">
     <div style="font-family:'Fraunces',serif;font-size:22px;font-weight:800;color:var(--accent);margin-bottom:4px">SomiSomi</div>
     <p style="color:var(--text-soft);font-size:13px;margin-bottom:20px">Hiring Dashboard</p>
