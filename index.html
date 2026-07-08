@@ -351,8 +351,13 @@ function buildField(q) {
     const box = document.createElement('div');
     box.className = 'info-box';
     box.style.cssText = 'white-space:pre-line;line-height:1.7;font-size:13px;';
-    box.textContent = q.placeholder || q.label;
-    div.removeChild(label); // remove label since text IS the content
+    const title = document.createElement('strong');
+    title.textContent = q.label;
+    title.style.cssText = 'display:block;margin-bottom:6px;font-size:13px;';
+    box.appendChild(title);
+    const text = document.createTextNode(q.placeholder || '');
+    box.appendChild(text);
+    div.removeChild(label);
     div.appendChild(box);
     return div;
   }
