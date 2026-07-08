@@ -159,10 +159,9 @@ textarea { resize:vertical; min-height:72px; }
 
       <div class="card" id="pay-card">
         <div class="info-box">
-          <strong>💵 Pay Info</strong><br><br>
-          <span id="pay-info-text">Loading pay info...</span><br><br>
           <strong>Our Motto:</strong> <span id="motto-text">Be on time, ready to learn, and work with a positive attitude.</span>
         </div>
+        <span id="pay-info-text" style="display:none"></span>
       </div>
 
       <button type="submit" class="btn-primary" id="apply-btn">Submit Application</button>
@@ -341,7 +340,11 @@ function buildField(q) {
   }
 
   const label = document.createElement('label');
-  label.textContent = q.label + (q.required ? ' *' : '');
+  if (q.key === 'payOkay') {
+    label.innerHTML = q.label + (q.required ? ' <span style="color:var(--accent)">*</span>' : '');
+  } else {
+    label.textContent = q.label + (q.required ? ' *' : '');
+  }
   div.appendChild(label);
 
   if (q.type === 'radio') {
@@ -471,7 +474,7 @@ async function loadSettings() {
   buildScheduleGrid();
   // Update pay okay question label with actual pay info
   const payOkayQ = appQuestions.find(q => q.key === 'payOkay');
-  if (payOkayQ) payOkayQ.label = `Are you okay with the pay? ${settings.payInfo}`;
+  if (payOkayQ) payOkayQ.label = `Please review our pay before submitting:<br><br>• Paid training: $7.25 (your first 25–30 hours)<br>&nbsp;&nbsp;&nbsp;↳ Depends on how fast you pick things up<br>• After training: tips bring you to $11–$13/hr<br><br>Are you still interested?`;
   buildDynamicForm();
 
   document.getElementById('loading').style.display = 'none';
