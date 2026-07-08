@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SomiSomi — Settings</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700;800&display=swap" rel="stylesheet">
-<style> 
+<style>
 :root {
   --bg:#F7F8FA;--surface:#FFFFFF;--surface-alt:#F3F4F6;--border:#E5E7EB;
   --text:#111827;--text-soft:#374151;--text-xs:#6B7280;
@@ -287,13 +287,15 @@ const DEFAULT_APP_QUESTIONS = [
   { key:'otherJobDesc', label:'Describe your other job & schedule', type:'text', placeholder:'e.g. Retail, Tues-Thurs 9am-3pm', required:false, enabled:true, conditional:'otherJob:Yes' },
   { key:'jobType', label:'Are you looking for a seasonal or long-term position?', type:'radio', options:['Long Term','Seasonal'], required:true, enabled:true },
   { key:'lastDay', label:'Expected last day', type:'date', required:false, enabled:true, conditional:'jobType:Seasonal' },
-  { key:'machineCleaning', label:'Machine cleaning availability (once/week, 6PM–Midnight)', type:'radio', options:['Open to Both','Thursday Night','Sunday Night','Neither'], required:true, enabled:true },
+  { key:'machineCleaning', label:'Machine cleaning is required once per week. Please select which night you are available for.', type:'radio', options:['Open to Both','Thursday Night','Sunday Night','Neither'], required:true, enabled:true },
   { key:'schedNotes', label:'Scheduling Notes', type:'textarea', placeholder:"Any upcoming vacations or specific dates/times that won't work? If none, write 'None'.", required:true, enabled:true },
   { key:'hoursPreferred', label:'Preferred hours/week', type:'number', placeholder:'e.g. 20', required:true, enabled:true },
   { key:'hoursMinimum', label:'Minimum hours/week', type:'number', placeholder:'e.g. 10', required:true, enabled:true },
   { key:'transport', label:'Do you have reliable transportation?', type:'radio', options:['Yes - own car','Yes - shared car','Yes - rideshare/bus','No'], required:true, enabled:true },
   { key:'bank', label:'Bank account for direct deposit?', type:'radio', options:['Yes','No'], required:true, enabled:true },
   { key:'startNow', label:'Can you start immediately?', type:'radio', options:['Yes','No'], required:true, enabled:true },
+  { key:'payOkay', label:'Please review our pay before submitting:', type:'radio', options:["✅ Yes, I'm still interested","❌ No, this doesn't work for me"], required:true, enabled:true },
+  { key:'hoursOkay', label:'Are you okay with 15–20 hours per week?', type:'radio', options:['Yes','No'], required:true, enabled:true },
   { key:'startDate', label:'When can you start?', type:'date', required:false, enabled:true, conditional:'startNow:No' },
   { key:'currentlyEmployed', label:"What's your work experience?", type:'radio', options:['Currently employed','Previously employed','First job'], required:true, enabled:true },
   { key:'currentCompany', label:'Current Company', type:'text', placeholder:'e.g. Target', required:false, enabled:true, conditional:'currentlyEmployed:Currently employed' },
@@ -305,6 +307,7 @@ const DEFAULT_APP_QUESTIONS = [
   { key:'recentWhen', label:'How long ago?', type:'text', placeholder:'e.g. 3 months ago', required:false, enabled:true, conditional:'currentlyEmployed:Previously employed' },
   { key:'recentLength', label:'How long were you there?', type:'text', placeholder:'e.g. 1 year', required:false, enabled:true, conditional:'currentlyEmployed:Previously employed' },
   { key:'recentReason', label:'Reason for leaving?', type:'text', placeholder:'e.g. Moved', required:false, enabled:true, conditional:'currentlyEmployed:Previously employed' },
+  { key:'goodStanding', label:'If you have left a previous job, did you give proper notice and leave in good standing?', type:'radio', options:['Yes','No','Not Applicable'], required:true, enabled:true },
   { key:'foodExp', label:'Any food industry experience?', type:'radio', options:['Yes','No'], required:true, enabled:true },
   { key:'comfortPhysical', label:'Comfortable standing for long periods, doing food prep, and cleaning?', type:'radio', options:['Yes','No'], required:true, enabled:true },
   { key:'comfortRush', label:'Comfortable handling busy rushes and difficult customers?', type:'radio', options:['Yes','No'], required:true, enabled:true },
