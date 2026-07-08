@@ -198,7 +198,7 @@ const db = getFirestore(app);
 
 // Default settings fallback
 const DEFAULT_SETTINGS = {
-  payInfo: "$7.25/hour for your first 35 training hours. After training you will receive tips which put you anywhere between $11–$14/hr.",
+  payInfo: "$7.25/hour for your first 25-30 hours of training (depending on how fast you pick things up). After training you will receive tips which put you anywhere between $11–$13/hr.",
   motto: "Be on time, ready to learn, and work with a positive attitude.",
   locationName: "The Woodlands (Metropark Square)",
   schedule: {
@@ -226,6 +226,7 @@ const DEFAULT_APP_QUESTIONS = [
   { key:'transport', label:'Do you have reliable transportation?', type:'radio', options:['Yes - own car','Yes - shared car','Yes - rideshare/bus','No'], required:true, enabled:true },
   { key:'bank', label:'Bank account for direct deposit?', type:'radio', options:['Yes','No'], required:true, enabled:true },
   { key:'hoursOkay', label:'Are you okay with 15–20 hours per week?', type:'radio', options:['Yes','No'], required:true, enabled:true },
+  { key:'payOkay', label:'PAY_INFO_PLACEHOLDER', type:'radio', options:['✅ Yes, I\'m still interested','❌ No, this doesn\'t work for me'], required:true, enabled:true },
   { key:'startNow', label:'Can you start immediately?', type:'radio', options:['Yes','No'], required:true, enabled:true },
   { key:'startDate', label:'When can you start?', type:'date', required:false, enabled:true, conditional:'startNow:No' },
   { key:'currentlyEmployed', label:"What's your work experience?", type:'radio', options:['Currently employed','Previously employed','First job'], required:true, enabled:true },
@@ -468,6 +469,9 @@ async function loadSettings() {
   document.getElementById('motto-text').textContent = settings.motto;
   document.getElementById('location-text').textContent = `${settings.locationName} Location — Please fill out the form below!`;
   buildScheduleGrid();
+  // Update pay okay question label with actual pay info
+  const payOkayQ = appQuestions.find(q => q.key === 'payOkay');
+  if (payOkayQ) payOkayQ.label = `Are you okay with the pay? ${settings.payInfo}`;
   buildDynamicForm();
 
   document.getElementById('loading').style.display = 'none';
@@ -581,7 +585,7 @@ document.getElementById('apply-form').addEventListener('submit', async (e) => {
   }
 
   // Manual check for all radio groups
-  const radioNames = ['student','otherJob','jobType','machineCleaning','transport','bank','startNow','hoursOkay','currentlyEmployed','goodStanding','foodExp','comfortPhysical','comfortRush'];
+  const radioNames = ['student','otherJob','jobType','machineCleaning','transport','bank','startNow','payOkay','hoursOkay','currentlyEmployed','goodStanding','foodExp','comfortPhysical','comfortRush'];
   for (const name of radioNames) {
     const el = e.target.querySelector(`input[name="${name}"]`);
     if (!el) continue;
