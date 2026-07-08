@@ -347,6 +347,16 @@ function buildField(q) {
   }
   div.appendChild(label);
 
+  if (q.type === 'info') {
+    const box = document.createElement('div');
+    box.className = 'info-box';
+    box.style.cssText = 'white-space:pre-line;line-height:1.7;font-size:13px;';
+    box.textContent = q.placeholder || q.label;
+    div.removeChild(label); // remove label since text IS the content
+    div.appendChild(box);
+    return div;
+  }
+
   if (q.type === 'radio') {
     const group = document.createElement('div');
     group.className = 'radio-group';
@@ -472,9 +482,6 @@ async function loadSettings() {
   document.getElementById('motto-text').textContent = settings.motto;
   document.getElementById('location-text').textContent = `${settings.locationName} Location — Please fill out the form below!`;
   buildScheduleGrid();
-  // Update pay okay question label with actual pay info
-  const payOkayQ = appQuestions.find(q => q.key === 'payOkay');
-  if (payOkayQ) payOkayQ.label = `Please review our pay before submitting:<br><br>• Paid training: $7.25/hour (your first 25–30 hours)<br>&nbsp;&nbsp;&nbsp;↳ Depends on how fast you pick things up<br>• After training: tips bring you to $11–$13/hr<br><br>Are you still interested?`;
   buildDynamicForm();
 
   document.getElementById('loading').style.display = 'none';
