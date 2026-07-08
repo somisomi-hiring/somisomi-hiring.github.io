@@ -574,7 +574,7 @@ function renderProfile(c) {
     'machineCleaning','schedNotes','hoursPreferred','hoursMinimum',
     'currentlyEmployed','currentCompany','currentTitle','currentLength','currentReason',
     'recentCompany','recentTitle','recentWhen','recentLength','recentReason','foodExp',
-    'comfortPhysical','comfortRush','notes','hoursOkay','goodStanding','interviewDate','interviewTime','interviewNotes',
+    'comfortPhysical','comfortRush','notes','hoursOkay','goodStanding','payOkay','parttimeok','interviewDate','interviewTime','interviewNotes',
     'interviewerName','enjoyWorking','trustClosing','coachability','hireDecision','vibeNotes','id',
     'monShift','tueShift','wedShift','thuShift','friShift','satShift','sunShift',
     'satUnavail','sunUnavail','mondayUnavail','tuesdayUnavail','wednesdayUnavail','thursdayUnavail','fridayUnavail']);
@@ -670,6 +670,7 @@ function renderProfile(c) {
     </div>
     <div class="card">
       <div class="card-title">🍦 Job Comfort</div>
+      ${c.payOkay?`<div class="data-row"><span class="label">Okay with pay?</span><span class="value">${esc(c.payOkay)}</span></div>`:''}
       <div class="data-row"><span class="label">Standing / Prep / Cleaning</span><span class="value">${esc(c.comfortPhysical||'—')}</span></div>
       <div class="data-row"><span class="label">Rushes / Difficult Customers</span><span class="value">${esc(c.comfortRush||'—')}</span></div>
       ${c.notes?`<div style="margin-top:10px;padding:10px;background:var(--bg);border-radius:var(--radius-sm);font-size:13px;line-height:1.6;color:var(--text)">${esc(c.notes)}</div>`:''}
