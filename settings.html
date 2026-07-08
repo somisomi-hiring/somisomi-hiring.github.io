@@ -192,7 +192,6 @@ textarea{resize:vertical;min-height:60px;}
       <div class="card">
         <strong style="font-size:15px;display:block;margin-bottom:14px">General Settings</strong>
         <div class="field"><label>Location Name</label><input type="text" id="locationName" placeholder="e.g. Metropark Square"></div>
-        <div class="field"><label>Pay Info</label><textarea id="payInfo" rows="3"></textarea></div>
         <div class="field"><label>Our Motto</label><input type="text" id="motto"></div>
         <button class="btn btn-primary btn-sm" onclick="saveGeneral()">💾 Save</button>
       </div>
@@ -220,6 +219,7 @@ textarea{resize:vertical;min-height:60px;}
         <option value="radio">Radio (pick one)</option>
         <option value="text">Text input</option>
         <option value="textarea">Long answer</option>
+        <option value="info">Info / Description box</option>
         <option value="date">Date</option>
         <option value="number">Number</option>
         <option value="select">Dropdown</option>
@@ -394,7 +394,6 @@ async function loadAll() {
     interviewScenarios = DEFAULT_SCENARIOS;
     gradeCategories = DEFAULT_GRADES;
   }
-  document.getElementById('payInfo').value = settings.payInfo||'';
   document.getElementById('motto').value = settings.motto||'';
   document.getElementById('locationName').value = settings.locationName||'';
   renderAppQuestions();
@@ -472,6 +471,8 @@ function renderOptions(opts) {
 window.handleTypeChange = () => {
   const type = document.getElementById('q-type').value;
   document.getElementById('options-section').style.display = (type==='radio'||type==='select') ? 'block' : 'none';
+  // For info type, use placeholder as the text content
+  document.querySelector('label[for="q-placeholder"]') && (document.querySelector('.field:has(#q-placeholder) label').textContent = type==='info' ? 'Info Text (what applicants will see)' : 'Placeholder / Helper Text (optional)');
 };
 
 let currentOptions = [];
@@ -647,7 +648,6 @@ window.saveSchedule = async () => {
 // ── GENERAL ──
 window.saveGeneral = async () => {
   settings.locationName = document.getElementById('locationName').value.trim();
-  settings.payInfo = document.getElementById('payInfo').value.trim();
   settings.motto = document.getElementById('motto').value.trim();
   await setDoc(doc(db,'config','settings'), settings);
   showToast('✅ Settings saved!', true);
