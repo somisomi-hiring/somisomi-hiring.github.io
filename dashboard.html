@@ -15,13 +15,14 @@
   --red:#DC2626;--red-light:#FEF2F2;--red-border:#FECACA;
   --blue:#2563EB;--blue-light:#EFF6FF;--blue-border:#BFDBFE;
   --purple:#7C3AED;--purple-light:#F5F3FF;
+  --surface-alt:#F3F4F6;
   --radius:10px;--radius-sm:6px;
   --shadow:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);
   --shadow-md:0 4px 12px rgba(0,0,0,0.08);
   --shadow-lg:0 8px 24px rgba(0,0,0,0.1);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;font-size:14px;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;font-size:14px;touch-action:manipulation;}
 .container{max-width:1100px;margin:0 auto;padding:0 20px 60px;}
 h1,h2,h3{font-family:'Fraunces',serif;}
 
@@ -67,7 +68,28 @@ h1,h2,h3{font-family:'Fraunces',serif;}
 .chip-interviewed{background:var(--yellow-light);color:var(--yellow);border:1px solid var(--yellow-border);}
 .chip-hired{background:var(--green-light);color:var(--green);border:1px solid var(--green-border);}
 .chip-rejected{background:var(--red-light);color:var(--red);border:1px solid var(--red-border);}
+.chip-no-show{background:var(--surface-alt);color:var(--text-soft);border:1px solid var(--border);}
+.student-chip{display:inline-block;vertical-align:middle;margin-left:6px;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:700;letter-spacing:0.2px;white-space:nowrap;}
+.student-chip.college{background:var(--green-light);color:var(--green);border:1px solid var(--green-border);}
+.student-chip.hs{background:var(--yellow-light);color:var(--yellow);border:1px solid var(--yellow-border);}
+.student-chip.none{background:var(--surface-alt);color:var(--text-soft);border:1px solid var(--border);}
+.noshow-btn{flex-shrink:0;color:var(--text-soft);}
+.noshow-btn:hover{color:var(--red);border-color:var(--red-border);}
 .chip-contacted{background:var(--purple-light);color:var(--purple);border:1px solid #DDD6FE;}
+.chip-offered{background:#ECFEFF;color:#0E7490;border:1px solid #A5F3FC;}
+.pros-cons{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
+@media(max-width:600px){.pros-cons{grid-template-columns:1fr;}}
+.pc-box{padding:10px 12px;border-radius:var(--radius-sm);font-size:12px;line-height:1.5;white-space:pre-wrap;background:var(--surface-alt);border:1px solid var(--border);}
+.pc-box.pc-pros{background:var(--green-light);border-color:var(--green-border);}
+.pc-box.pc-cons{background:var(--red-light);border-color:var(--red-border);}
+.pc-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;}
+.pc-pros .pc-title{color:var(--green);}
+.pc-cons .pc-title{color:var(--red);}
+.rth-offer{flex:1;padding:8px;font-size:12px;font-weight:600;background:var(--blue-light);color:var(--blue);border:1px solid var(--blue-border);border-radius:var(--radius-sm);cursor:pointer;font-family:'DM Sans',sans-serif;}
+.rth-view{padding:8px 12px;font-size:12px;font-weight:600;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:none;}
+.rth-view:hover{border-color:var(--accent);color:var(--accent);}
+.rth-actions{flex-wrap:wrap;}
+.phone-link{color:var(--accent);text-decoration:none;}
 
 /* Candidate list */
 .candidate-list{display:flex;flex-direction:column;gap:8px;}
@@ -81,7 +103,13 @@ h1,h2,h3{font-family:'Fraunces',serif;}
 .rth-card.conditions{border-color:#FDE68A;}
 .rth-card-header{padding:11px 13px;display:flex;align-items:center;gap:10px;cursor:pointer;}
 .rth-card-header:hover{background:var(--surface-alt);}
-.drag-handle-rth{color:var(--text-xs);cursor:grab;font-size:16px;}
+.rank-ctl{display:flex;flex-direction:column;align-items:center;gap:1px;flex-shrink:0;}
+.rank-btn{width:34px;height:22px;border:1px solid var(--border);background:var(--surface);border-radius:5px;font-size:10px;color:var(--text-soft);cursor:pointer;padding:0;line-height:1;}
+.rank-btn:hover:not(:disabled){background:var(--accent-light);color:var(--accent);border-color:var(--accent);}
+.rank-btn:disabled{opacity:0.3;cursor:default;}
+.rank-input{width:34px;height:26px;text-align:center;font-size:13px;font-weight:700;color:var(--green);border:1px solid var(--border);border-radius:5px;padding:0;background:var(--surface);font-family:'DM Sans',sans-serif;outline:none;-moz-appearance:textfield;}
+.rank-input::-webkit-outer-spin-button,.rank-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+.rank-input:focus{border-color:var(--accent);}
 .rth-rank{font-size:16px;font-weight:700;color:var(--green);width:26px;text-align:center;}
 .rth-rank.unranked{color:var(--text-xs);font-size:13px;}
 .rth-avatar{width:34px;height:34px;border-radius:50%;background:var(--accent-light);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;font-family:'Fraunces',serif;flex-shrink:0;}
@@ -112,8 +140,10 @@ h1,h2,h3{font-family:'Fraunces',serif;}
 .rth-save{padding:8px 12px;font-size:12px;font-weight:600;background:var(--surface);color:var(--text-soft);border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;font-family:'DM Sans',sans-serif;}
 .awaiting-card{background:var(--blue-light);border:1px solid var(--blue-border);border-radius:var(--radius);padding:12px 14px;display:flex;align-items:center;gap:10px;margin-bottom:6px;}
 .empty-rth{text-align:center;padding:40px 20px;color:var(--text-soft);font-size:13px;}
-.candidate-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;cursor:pointer;transition:all 0.15s;box-shadow:var(--shadow);display:flex;align-items:center;gap:12px;}
-.candidate-card:hover{border-color:var(--accent);box-shadow:var(--shadow-md);transform:translateY(-1px);}
+.candidate-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;cursor:pointer;transition:border-color 0.15s,box-shadow 0.15s;box-shadow:var(--shadow);display:flex;align-items:center;gap:12px;user-select:none;-webkit-user-select:none;}
+.candidate-card:hover{border-color:var(--accent);box-shadow:var(--shadow-md);}
+.candidate-card:active{background:var(--accent-light);}
+.upcoming-item{user-select:none;-webkit-user-select:none;}
 .candidate-card .avatar{width:40px;height:40px;border-radius:50%;background:var(--accent-light);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;font-family:'Fraunces',serif;flex-shrink:0;}
 .candidate-card .info{flex:1;min-width:0;}
 .candidate-card .name{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
@@ -256,8 +286,10 @@ textarea{resize:vertical;min-height:70px;}
         <button class="filter-btn" onclick="setFilter('Applied',this)">📩 Applied</button>
         <button class="filter-btn" onclick="setFilter('Contacted',this)">📞 Contacted</button>
         <button class="filter-btn" onclick="setFilter('Interviewed',this)">💬 Interviewed</button>
+        <button class="filter-btn" onclick="setFilter('Offered',this)">🤝 Offered</button>
         <button class="filter-btn" onclick="setFilter('Hired',this)">✅ Hired</button>
         <button class="filter-btn" onclick="setFilter('Rejected',this)">❌ Rejected</button>
+        <button class="filter-btn" onclick="setFilter('No-show',this)">👻 No-show</button>
       </div>
     </div>
     <div id="upcoming-interviews"></div>
@@ -361,8 +393,12 @@ textarea{resize:vertical;min-height:70px;}
           </div>
         </div>
         <div class="field" style="margin-top:10px">
-          <label>Notes <span style="font-weight:400;text-transform:none">(optional)</span></label>
-          <textarea name="vibeNotes" placeholder="Any other thoughts..."></textarea>
+          <label style="color:var(--green)">👍 Pros <span style="font-weight:400;text-transform:none">(what stood out)</span></label>
+          <textarea name="vibePros" placeholder="e.g. Great energy, has weekend availability, food experience..."></textarea>
+        </div>
+        <div class="field" style="margin-top:10px">
+          <label style="color:var(--red)">⚠️ Concerns <span style="font-weight:400;text-transform:none">(anything that worried you)</span></label>
+          <textarea name="vibeConcerns" placeholder="e.g. Seemed unsure about closing shifts, no car..."></textarea>
         </div>
       </div>
       <button type="submit" class="btn btn-primary" style="width:100%;padding:12px;font-size:15px" id="vibe-btn">Submit Evaluation</button>
@@ -428,14 +464,36 @@ function showToast(msg,ok=false) {
   t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);
 }
 
+let dashScrollY = 0;
 function showView(name) {
+  const leaving=document.querySelector('.view.active');
+  if(leaving&&leaving.id==='view-dashboard') dashScrollY=window.scrollY;
   document.querySelectorAll('.view').forEach(v=>{v.classList.remove('active');v.style.display='none';});
   const el=document.getElementById('view-'+name);
   el.style.display='block';el.classList.add('active');
-  window.scrollTo(0,0);
-  if(name==='dashboard') loadCandidates();
+  if(name==='dashboard'){
+    // Only hit Firestore the first time; afterwards reuse the loaded list so
+    // coming back from a profile is instant and the cards are clickable right away.
+    if(candidates.length){
+      renderCandidates();
+      if(currentMainView==='rth') renderRTH();
+      window.scrollTo(0,dashScrollY);
+    } else {
+      loadCandidates();
+      window.scrollTo(0,0);
+    }
+  } else {
+    window.scrollTo(0,0);
+  }
 }
 window.showView=showView;
+
+// Keep the in-memory list in sync with a candidate we just loaded or changed
+function syncCandidate(c){
+  if(!c||!c.id)return;
+  const i=candidates.findIndex(x=>x.id===c.id);
+  if(i>=0) candidates[i]={...candidates[i],...c}; else candidates.unshift(c);
+}
 
 // LOGIN
 window.checkPin = async () => {
@@ -469,18 +527,29 @@ async function loadCandidates() {
     ]);
     candidates=qSnap.docs.map(d=>({id:d.id,...d.data()}));
     if(formSnap.exists()) appFormQuestions = formSnap.data().questions || [];
-    // Load saved rankings
+    // Load saved rankings (one rank per candidate; older per-week fields are migrated)
+    rthRankings={};
     candidates.forEach(c => {
-      if (c.rthRank_thisWeek) rthRankings['thisWeek:'+c.id] = c.rthRank_thisWeek;
-      if (c.rthRank_lastWeek) rthRankings['lastWeek:'+c.id] = c.rthRank_lastWeek;
+      // Prefer the new field (even if it's 0 = cleared); only fall back to the old per-week fields for records that never had it
+      const r=('rthRank' in c)?(parseInt(c.rthRank)||0):(parseInt(c.rthRank_thisWeek)||parseInt(c.rthRank_lastWeek)||0);
+      if (r>0) rthRankings[c.id]=r;
     });
     renderCandidates();
+    if(currentMainView==='rth') renderRTH();
   } catch(e) {
     list.innerHTML='<div class="empty"><div class="icon">⚠️</div><p>Could not load candidates.</p></div>';
   }
 }
 
-window.refreshDash=()=>{loadCandidates();showToast('Refreshed!',true);};
+window.refreshDash=async()=>{await loadCandidates();showToast('Refreshed!',true);};
+
+// One click handler for the whole list (works even while cards are still fading in)
+['candidate-list','upcoming-interviews'].forEach(id=>{
+  document.getElementById(id).addEventListener('click',e=>{
+    const card=e.target.closest('[data-id]');
+    if(card) openProfile(card.dataset.id);
+  });
+});
 
 
 
@@ -506,11 +575,10 @@ window.renderCandidates=()=>{
     const init=(c.name||'?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
     const sc='chip-'+(c.status||'applied').toLowerCase();
     const date=c.timestamp?.toDate?c.timestamp.toDate().toLocaleDateString():'';
-    const studentLabel=c.student==='Yes - High School'?'🏫 HS':c.student==='Yes - College'?'🎓 College':'';
-    const meta=[c.phone||'',date?'Applied '+date:'',studentLabel,c.jobType||''].filter(Boolean).join(' · ');
-    return `<div class="candidate-card" onclick="openProfile('${c.id}')" style="animation:fadeUp 0.2s ease ${i*0.03}s both">
+    const meta=[c.phone||'',date?'Applied '+date:'',c.jobType||''].filter(Boolean).join(' · ');
+    return `<div class="candidate-card" data-id="${c.id}" style="animation:fadeUp 0.2s ease ${Math.min(i,12)*0.03}s both">
       <div class="avatar">${init}</div>
-      <div class="info"><div class="name">${esc(c.name)}</div><div class="meta">${esc(meta)}</div></div>
+      <div class="info"><div class="name">${esc(c.name)} ${studentChip(c)}</div><div class="meta">${esc(meta)}</div></div>
       <div class="right">
         <span class="chip ${sc}">${esc(c.status||'Applied')}</span>
         ${c.interviewDate?`<span class="interview-tag">📅 ${formatDate(c.interviewDate)} ${c.interviewTime?formatTime(c.interviewTime):''}</span>`:''}
@@ -539,14 +607,31 @@ function renderUpcoming() {
       const d=new Date(c.interviewDate+'T12:00:00');
       const month=d.toLocaleDateString('en-US',{month:'short',timeZone:'America/Chicago'});
       const day=d.toLocaleDateString('en-US',{day:'numeric',timeZone:'America/Chicago'});
-      return `<div class="upcoming-item" onclick="openProfile('${c.id}')">
+      return `<div class="upcoming-item" data-id="${c.id}">
         <div class="date-badge"><div class="month">${month}</div><div class="day">${day}</div></div>
         <div style="flex:1;min-width:0"><div style="font-weight:600;font-size:13px">${esc(c.name)}</div><div style="font-size:12px;color:var(--text-soft)">${c.interviewTime?formatTime(c.interviewTime):''}${c.interviewNotes?' · '+esc(c.interviewNotes):''}</div></div>
         <span class="chip chip-${(c.status||'applied').toLowerCase()}">${esc(c.status||'Applied')}</span>
+        <button class="btn btn-sm noshow-btn" data-noshow="${c.id}" onclick="event.stopPropagation();markNoShow('${c.id}')">👻 No-show</button>
       </div>`;
     }).join('')}
   </div>`;
 }
+
+// Candidate didn't turn up: tag them, clear the slot, keep a record of when
+window.markNoShow = async (id) => {
+  const c = candidates.find(x => x.id === id) || currentCandidate;
+  if (!c) return;
+  if (!confirm(`Mark ${c.name} as a no-show? This clears their interview slot.`)) return;
+  const when = c.interviewDate ? `${c.interviewDate}${c.interviewTime ? ' ' + c.interviewTime : ''}` : new Date().toISOString().slice(0,10);
+  const update = { status: 'No-show', noShowAt: when, interviewDate: '', interviewTime: '', interviewNotes: '' };
+  try { await updateDoc(doc(db,'candidates',id), update); }
+  catch(e) { showToast('Could not save, try again'); return; }
+  Object.assign(c, update);
+  syncCandidate(c);
+  if (currentCandidate && currentCandidate.id === id) { Object.assign(currentCandidate, update); renderProfile(currentCandidate); }
+  renderCandidates();
+  showToast(`${c.name} marked as no-show`);
+};
 
 // PROFILE
 window.openProfile=async(id)=>{
@@ -557,6 +642,7 @@ window.openProfile=async(id)=>{
   try {
     const snap=await getDoc(doc(db,'candidates',id));
     currentCandidate={id,...snap.data()};
+    syncCandidate(currentCandidate);
     renderProfile(currentCandidate);
   } catch(e){
     document.getElementById('profile-main').innerHTML='<div class="empty"><p>Error loading profile.</p></div>';
@@ -573,16 +659,20 @@ function renderProfile(c) {
     <div class="card" style="text-align:center">
       <div class="avatar" style="width:56px;height:56px;font-size:20px;margin:0 auto 10px">${init}</div>
       <div style="font-family:'Fraunces',serif;font-size:18px;font-weight:700">${esc(c.name)}</div>
-      <div class="contact" style="margin-top:6px">${esc(c.phone||'')}${c.email?'<br>'+esc(c.email):''}</div>
+      ${studentChip(c)?`<div style="margin-top:6px">${studentChip(c)}</div>`:''}
+      <div class="contact" style="margin-top:6px">${c.phone?`<a class="phone-link" href="tel:${esc(String(c.phone).replace(/[^\d+]/g,''))}">${esc(c.phone)}</a>`:''}${c.email?'<br>'+esc(c.email):''}</div>
       <div style="margin-top:10px"><span class="${chipClass(c.status)}">${esc(c.status||'Applied')}</span></div>
       <select class="status-select" onchange="updateStatus(this.value)">
         <option value="">Change Status…</option>
         <option value="Applied">📩 Applied</option>
         <option value="Contacted">📞 Contacted</option>
         <option value="Interviewed">💬 Interviewed</option>
+        <option value="Offered">🤝 Offered</option>
         <option value="Hired">✅ Hired</option>
         <option value="Rejected">❌ Rejected</option>
+        <option value="No-show">👻 No-show</option>
       </select>
+      ${c.noShowAt?`<div style="font-size:11px;color:var(--text-soft);margin-top:6px">👻 No-show for ${formatDate(c.noShowAt.slice(0,10))}${c.noShowAt.length>10?' '+formatTime(c.noShowAt.slice(11)):''}</div>`:''}
       <div class="sidebar-actions" style="margin-top:10px">
         ${!c.interviewerName?`<button class="btn btn-primary btn-sm" onclick="startVibe()">🎯 Start Interview</button>`:''}
         <button class="btn btn-sm" onclick="openScheduleModal()">📅 ${c.interviewDate?'Edit Interview':'Schedule Interview'}</button>
@@ -640,7 +730,8 @@ function renderProfile(c) {
     'currentlyEmployed','currentCompany','currentTitle','currentLength','currentReason',
     'recentCompany','recentTitle','recentWhen','recentLength','recentReason','foodExp',
     'comfortPhysical','comfortRush','notes','hoursOkay','goodStanding','payOkay','parttimeok','interviewDate','interviewTime','interviewNotes',
-    'interviewerName','enjoyWorking','trustClosing','coachability','hireDecision','vibeNotes','id',
+    'interviewerName','enjoyWorking','trustClosing','coachability','hireDecision','vibeNotes','vibePros','vibeConcerns','interviewCompletedAt','id',
+    'rthRank','rthRank_thisWeek','rthRank_lastWeek','callNotes','offeredAt','noShowAt',
     'monShift','tueShift','wedShift','thuShift','friShift','satShift','sunShift',
     'satUnavail','sunUnavail','mondayUnavail','tuesdayUnavail','wednesdayUnavail','thursdayUnavail','fridayUnavail']);
   // Add scenario/grade fields
@@ -690,12 +781,13 @@ function renderProfile(c) {
     vibeHTML=`<div class="card">
       <div class="card-title">🎯 Vibe Evaluation</div>
       <div class="data-row"><span class="label">Interviewer</span><span class="value">${esc(c.interviewerName)}</span></div>
+      ${c.interviewCompletedAt?`<div class="data-row"><span class="label">Interview completed</span><span class="value">${formatDateTime(c.interviewCompletedAt)}</span></div>`:''}
       <div class="vibe-bar-wrap">${grades}</div>
       <div class="data-row"><span class="label">Enjoy working with?</span><span class="value">${esc(c.enjoyWorking||'—')}</span></div>
       <div class="data-row"><span class="label">Trust with closing?</span><span class="value">${esc(c.trustClosing||'—')}</span></div>
       <div class="data-row"><span class="label">Coachability</span><span class="value">${esc(c.coachability||'—')}</span></div>
       <div class="data-row"><span class="label">Hire Decision</span><span class="value" style="font-weight:700">${esc(c.hireDecision||'—')}</span></div>
-      ${c.vibeNotes?`<div class="data-row"><span class="label">Notes</span><span class="value">${esc(c.vibeNotes)}</span></div>`:''}
+      ${prosConsHTML(c)}
       ${scenHTML?`<div style="margin-top:12px;padding-top:10px;border-top:2px solid var(--border)"><div style="font-weight:600;font-size:12px;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-soft)">Scenario Responses</div>${scenHTML}</div>`:''}
     </div>`;
   }
@@ -707,7 +799,10 @@ function renderProfile(c) {
       <div class="data-row" style="border-color:var(--blue-border)"><span class="label">Date</span><span class="value">${formatDate(c.interviewDate)}</span></div>
       <div class="data-row" style="border-color:var(--blue-border)"><span class="label">Time</span><span class="value">${formatTime(c.interviewTime)}</span></div>
       ${c.interviewNotes?`<div class="data-row" style="border-color:var(--blue-border)"><span class="label">Notes</span><span class="value">${esc(c.interviewNotes)}</span></div>`:''}
-      <button class="btn btn-sm" style="margin-top:10px;color:var(--red);border-color:var(--red-border)" onclick="clearInterview()">✕ Remove</button>
+      <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+        <button class="btn btn-sm" onclick="markNoShow('${c.id}')">👻 No-show</button>
+        <button class="btn btn-sm" style="color:var(--red);border-color:var(--red-border)" onclick="clearInterview()">✕ Remove</button>
+      </div>
     </div>`:''}
     <div class="card">
       <div class="card-title">📅 Availability</div>
@@ -749,6 +844,7 @@ window.updateStatus=async(status)=>{
   if(!status||!currentCandidateId)return;
   await updateDoc(doc(db,'candidates',currentCandidateId),{status});
   currentCandidate.status=status;
+  syncCandidate(currentCandidate);
   renderProfile(currentCandidate);
   showToast('Status updated to '+status,true);
 };
@@ -816,14 +912,17 @@ document.getElementById('vibe-form').addEventListener('submit',async(e)=>{
     trustClosing:fd.get('trustClosing'),
     coachability:fd.get('coachability'),
     hireDecision:fd.get('hireDecision'),
-    vibeNotes:fd.get('vibeNotes')||'',
+    vibePros:fd.get('vibePros')||'',
+    vibeConcerns:fd.get('vibeConcerns')||'',
+    interviewCompletedAt:new Date().toISOString(),
     ...gradeValues
   };
   SCENARIOS.forEach((_,i)=>{
     data[`scenario${i}Rating`]=scenarioRatings[i]||'';
     data[`scenario${i}Note`]=fd.get(`scenarioNote${i}`)||'';
   });
-  if(currentCandidate.status==='Applied')data.status='Interviewed';
+  // Finishing an evaluation always moves them to Interviewed (unless already decided)
+  if(!['Hired','Rejected','Offered'].includes(currentCandidate.status))data.status='Interviewed';
   try{
     await updateDoc(doc(db,'candidates',currentCandidateId),data);
     showToast('Evaluation submitted!',true);
@@ -849,8 +948,12 @@ window.saveInterview=async()=>{
   const time=document.getElementById('sched-time').value;
   const notes=document.getElementById('sched-notes').value;
   if(!date||!time){showToast('Please enter date and time');return;}
-  await updateDoc(doc(db,'candidates',currentCandidateId),{interviewDate:date,interviewTime:time,interviewNotes:notes});
-  currentCandidate.interviewDate=date;currentCandidate.interviewTime=time;currentCandidate.interviewNotes=notes;
+  const update={interviewDate:date,interviewTime:time,interviewNotes:notes};
+  // Scheduling an interview means we've reached them
+  if(!currentCandidate.status||currentCandidate.status==='Applied') update.status='Contacted';
+  await updateDoc(doc(db,'candidates',currentCandidateId),update);
+  Object.assign(currentCandidate,update);
+  syncCandidate(currentCandidate);
   closeScheduleModal();renderProfile(currentCandidate);
   showToast('Interview scheduled!',true);
 };
@@ -858,12 +961,26 @@ window.clearInterview=async()=>{
   if(!confirm('Remove the scheduled interview?'))return;
   await updateDoc(doc(db,'candidates',currentCandidateId),{interviewDate:'',interviewTime:'',interviewNotes:''});
   currentCandidate.interviewDate='';currentCandidate.interviewTime='';currentCandidate.interviewNotes='';
+  syncCandidate(currentCandidate);
   renderProfile(currentCandidate);showToast('Interview removed');
 };
 
 function formatDate(str){
   if(!str)return'—';
   try{const d=new Date(str+'T12:00:00');return d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',timeZone:'America/Chicago'});}catch(e){return str;}
+}
+function formatDateTime(iso){
+  if(!iso)return'';
+  try{const d=new Date(iso);if(isNaN(d))return'';return d.toLocaleString('en-US',{weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZone:'America/Chicago'});}catch(e){return'';}
+}
+// Pros / Concerns block (also shows old single "Notes" field on past evaluations)
+function prosConsHTML(c){
+  if(!c.vibePros&&!c.vibeConcerns&&!c.vibeNotes)return'';
+  return `<div class="pros-cons">
+    ${c.vibePros?`<div class="pc-box pc-pros"><div class="pc-title">👍 Pros</div><div>${esc(c.vibePros)}</div></div>`:''}
+    ${c.vibeConcerns?`<div class="pc-box pc-cons"><div class="pc-title">⚠️ Concerns</div><div>${esc(c.vibeConcerns)}</div></div>`:''}
+    ${c.vibeNotes?`<div class="pc-box"><div class="pc-title">📝 Notes</div><div>${esc(c.vibeNotes)}</div></div>`:''}
+  </div>`;
 }
 function formatTime(str){
   if(!str)return'—';
@@ -872,9 +989,8 @@ function formatTime(str){
 
 // ── MAIN VIEW TOGGLE ──
 let currentMainView = 'applicants';
-let rthRankings = {}; // 'week:candidateId' -> rank number
-let dragSrcId = null;
-let dragSrcWeek = null;
+let rthRankings = {}; // candidateId -> rank number (saved as rthRank on the candidate)
+let rthGroups = {};   // group name -> ordered array of candidate ids, as currently displayed
 let expandedCard = null;
 let rthSubView = 'yes'; // 'yes' or 'conditions'
 
@@ -887,6 +1003,7 @@ window.switchRTHSub = (sub) => {
 
 window.switchMainView = (view) => {
   currentMainView = view;
+  if (view === 'applicants') renderCandidates(); // pick up status changes made in Ready to Hire
   document.getElementById('view-applicants-inner').style.display = view === 'applicants' ? 'block' : 'none';
   document.getElementById('view-rth-inner').style.display = view === 'rth' ? 'block' : 'none';
   document.getElementById('toggle-applicants').classList.toggle('active', view === 'applicants');
@@ -921,15 +1038,21 @@ function renderRTH() {
   if (!container) return;
 
   // Filter candidates by hire decision
-  const allYesHire = candidates.filter(c => c.hireDecision === 'Yes' && c.status !== 'Hired' && c.status !== 'Rejected');
-  const allWithConditions = candidates.filter(c => c.hireDecision === 'Yes – with conditions' && c.status !== 'Hired' && c.status !== 'Rejected');
-  const awaitingResponse = candidates.filter(c => c.status === 'Offered');
+  const done = c => ['Hired','Rejected','Offered'].includes(c.status);
+  const allYesHire = candidates.filter(c => c.hireDecision === 'Yes' && !done(c));
+  const allWithConditions = candidates.filter(c => c.hireDecision === 'Yes – with conditions' && !done(c));
+  const awaitingResponse = candidates.filter(c => c.status === 'Offered').sort((a,b)=>(b.offeredAt||'').localeCompare(a.offeredAt||''));
   const yesHire = rthSubView === 'yes' ? allYesHire : [];
   const withConditions = rthSubView === 'conditions' ? allWithConditions : [];
 
+  // When the interview actually happened: the evaluation timestamp if we have one,
+  // otherwise the scheduled date (older records)
   function getInterviewTime(c) {
-    if (!c.interviewDate) return 0;
-    try { return new Date(c.interviewDate+'T12:00:00').getTime(); } catch(e) { return 0; }
+    try {
+      if (c.interviewCompletedAt) { const t = new Date(c.interviewCompletedAt).getTime(); if (!isNaN(t)) return t; }
+      if (c.interviewDate) return new Date(c.interviewDate+'T12:00:00').getTime();
+    } catch(e) {}
+    return 0;
   }
 
   // Get start of this week (Monday) and last week
@@ -954,11 +1077,14 @@ function renderRTH() {
     return !t || t < startOfLastWeek.getTime();
   });
 
-  function sortByRank(arr, week) {
-    const ranked = arr.filter(c => rthRankings[week+':'+c.id]).sort((a,b) => rthRankings[week+':'+a.id] - rthRankings[week+':'+b.id]);
-    const unranked = arr.filter(c => !rthRankings[week+':'+c.id]).sort((a,b) => getInterviewTime(b) - getInterviewTime(a));
-    return [...ranked, ...unranked];
+  function sortByRank(arr, group) {
+    const ranked = arr.filter(c => rthRankings[c.id]).sort((a,b) => rthRankings[a.id] - rthRankings[b.id]);
+    const unranked = arr.filter(c => !rthRankings[c.id]).sort((a,b) => getInterviewTime(b) - getInterviewTime(a));
+    const sorted = [...ranked, ...unranked];
+    rthGroups[group] = sorted.map(c => c.id);
+    return sorted;
   }
+  const renderGroup = (arr, group) => sortByRank(arr, group).map((c, i) => renderRTHCard(c, rthRankings[c.id]||null, 'yes-hire', group, i, arr.length)).join('');
 
   let html = '';
 
@@ -966,8 +1092,8 @@ function renderRTH() {
   if (thisWeek.length || lastWeek.length) {
     html += `<div class="rth-section">
       <div class="rth-section-title">🏆 Top Candidates</div>
-      ${thisWeek.length ? `<div style="font-size:11px;font-weight:600;color:var(--text-xs);text-transform:uppercase;letter-spacing:0.4px;margin:8px 0 5px;padding-left:2px">This week</div>${sortByRank(thisWeek,'thisWeek').map(c => renderRTHCard(c, rthRankings['thisWeek:'+c.id]||null, 'yes-hire', false, 'thisWeek')).join('')}` : ''}
-      ${lastWeek.length ? `<div style="font-size:11px;font-weight:600;color:var(--text-xs);text-transform:uppercase;letter-spacing:0.4px;margin:10px 0 5px;padding-left:2px">Last week</div>${sortByRank(lastWeek,'lastWeek').map(c => renderRTHCard(c, rthRankings['lastWeek:'+c.id]||null, 'yes-hire', false, 'lastWeek')).join('')}` : ''}
+      ${thisWeek.length ? `<div style="font-size:11px;font-weight:600;color:var(--text-xs);text-transform:uppercase;letter-spacing:0.4px;margin:8px 0 5px;padding-left:2px">This week</div>${renderGroup(thisWeek,'thisWeek')}` : ''}
+      ${lastWeek.length ? `<div style="font-size:11px;font-weight:600;color:var(--text-xs);text-transform:uppercase;letter-spacing:0.4px;margin:10px 0 5px;padding-left:2px">Last week</div>${renderGroup(lastWeek,'lastWeek')}` : ''}
     </div>`;
   }
 
@@ -980,10 +1106,11 @@ function renderRTH() {
         return `<div class="awaiting-card">
           <div class="rth-avatar">${init}</div>
           <div class="rth-info">
-            <div class="rth-name">${esc(c.name)}</div>
-            <div class="rth-meta">Offered ${formatDateShort(c.offeredAt||c.timestamp)}</div>
+            <div class="rth-name">${esc(c.name)} ${studentChip(c)}</div>
+            <div class="rth-meta">Offer made ${formatDateShort(c.offeredAt||c.timestamp)}${c.phone?' · <a class="phone-link" href="tel:'+esc(String(c.phone).replace(/[^\d+]/g,''))+'">'+esc(c.phone)+'</a>':''}${c.callNotes?' · '+esc(c.callNotes):''}</div>
           </div>
-          <div style="display:flex;gap:6px">
+          <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end">
+            <button class="rth-view" onclick="openProfile('${c.id}')">📄 View</button>
             <button class="rth-accept" onclick="markOffer('${c.id}','Hired')">✅ Accepted</button>
             <button class="rth-decline" onclick="markOffer('${c.id}','Rejected')">❌ Declined</button>
           </div>
@@ -996,7 +1123,7 @@ function renderRTH() {
   if (aged.length) {
     html += `<div class="rth-section">
       <div class="rth-section-title">⏰ Older Interviews <span style="font-size:10px;background:var(--yellow-light);color:var(--yellow);padding:2px 7px;border-radius:10px;margin-left:4px">before last week</span></div>
-      ${aged.map(c => renderRTHCard(c, rthRankings[c.id]||null, 'yes-hire', true)).join('')}
+      ${renderGroup(aged,'older')}
     </div>`;
   }
 
@@ -1004,12 +1131,11 @@ function renderRTH() {
   if (withConditions.length) {
     html += `<div class="rth-section">
       <div class="rth-section-title">🔄 Backup — With Conditions <span style="font-size:10px;background:var(--yellow-light);color:var(--yellow);padding:2px 7px;border-radius:10px;margin-left:4px">${withConditions.length}</span></div>
-      ${withConditions.map(c => renderRTHCard(c, null, 'conditions')).join('')}
+      ${withConditions.map(c => renderRTHCard(c, null, 'conditions', null)).join('')}
     </div>`;
   }
 
-  const topCandidates = [...thisWeek, ...lastWeek];
-  if (!topCandidates.length && !awaitingResponse.length && !withConditions.length) {
+  if (!html) {
     const msg = rthSubView === 'yes' 
       ? 'No candidates marked "Yes — hire" yet.' 
       : 'No candidates marked "With conditions" yet.';
@@ -1019,11 +1145,23 @@ function renderRTH() {
   container.innerHTML = html;
 }
 
-function renderRTHCard(c, rank, type, aged=false, week="") {
+// Student status badge: college is the priority hire, so it gets the strongest color
+function studentChip(c) {
+  const s = c.student || '';
+  if (s === 'Yes - College') return `<span class="student-chip college">🎓 College${c.gradYear?' ’'+esc(String(c.gradYear).slice(-2)):''}</span>`;
+  if (s === 'Yes - High School') return `<span class="student-chip hs">🏫 High School${c.gradYear?' ’'+esc(String(c.gradYear).slice(-2)):''}</span>`;
+  if (s === 'No') return `<span class="student-chip none">Not a student</span>`;
+  return s ? `<span class="student-chip none">${esc(s)}</span>` : '';
+}
+
+function renderRTHCard(c, rank, type, group=null, pos=0, total=1) {
   const init=(c.name||'?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
   const overall = calcOverall(c);
   const appliedDate = formatDateShort(c.timestamp);
-  const interviewedDate = c.interviewDate ? formatDate(c.interviewDate) : '';
+  // Date and time the interview happened (evaluation timestamp, or the scheduled slot for older records)
+  let interviewedDate = '';
+  if (c.interviewCompletedAt) interviewedDate = formatDateTime(c.interviewCompletedAt);
+  else if (c.interviewDate) interviewedDate = formatDate(c.interviewDate) + (c.interviewTime ? ' ' + formatTime(c.interviewTime) : '');
   const meta = [appliedDate?'Applied '+appliedDate:'', interviewedDate?'Interviewed '+interviewedDate:'', overall?overall+'/5':'', c.jobType||''].filter(Boolean).join(' · ');
   const isOpen = expandedCard === c.id;
 
@@ -1040,34 +1178,35 @@ function renderRTHCard(c, rank, type, aged=false, week="") {
     </div>`;
   }).join('');
 
-  return `<div class="rth-card ${type}" id="rthcard-${c.id}"
-    ondragover="event.preventDefault();event.currentTarget.style.borderColor='var(--accent)'"
-    ondragleave="event.currentTarget.style.borderColor=''"
-    ondrop="event.preventDefault();event.currentTarget.style.borderColor='';if(dragSrcId&&dragSrcId!=='${c.id}'&&dragSrcWeek==='${week}'){dropRank(dragSrcId,'${c.id}','${week}');}">
+  const rankable = !!group;
+  const rankUI = rankable ? `
+      <div class="rank-ctl" onclick="event.stopPropagation()">
+        <button type="button" class="rank-btn" title="Move up" ${pos===0?'disabled':''} onclick="moveRank('${c.id}','${group}',-1)">▲</button>
+        <input type="number" inputmode="numeric" min="1" max="99" value="${rank||''}" placeholder="–" class="rank-input"
+          onchange="setRank('${c.id}','${group}',this.value)">
+        <button type="button" class="rank-btn" title="Move down" ${pos>=total-1?'disabled':''} onclick="moveRank('${c.id}','${group}',1)">▼</button>
+      </div>` : '';
+
+  return `<div class="rth-card ${type}" id="rthcard-${c.id}">
     <div class="rth-card-header" onclick="toggleRTHCard('${c.id}')">
-      <div class="drag-handle-rth" 
-        draggable="true"
-        ondragstart="event.stopPropagation();dragSrcId='${c.id}';dragSrcWeek='${week}';event.dataTransfer.effectAllowed='move';"
-        ondragend="document.querySelectorAll('.rth-card').forEach(el=>el.style.opacity='1')">⠿</div>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
-        <input type="number" min="1" max="99" value="${rank||''}" placeholder="—" 
-          onclick="event.stopPropagation()" 
-          onchange="setRank('${c.id}','${week}',this.value)"
-          style="width:36px;text-align:center;font-size:13px;font-weight:700;color:var(--green);border:1px solid var(--border);border-radius:5px;padding:2px;background:var(--surface);font-family:'DM Sans',sans-serif;outline:none">
-      </div>
+      ${rankUI}
       <div class="rth-avatar">${init}</div>
       <div class="rth-info">
-        <div class="rth-name">${esc(c.name)}</div>
-        <div class="rth-meta">${meta}${!rank?' · drag to rank':''}</div>
+        <div class="rth-name">${esc(c.name)} ${studentChip(c)}</div>
+        <div class="rth-meta">${meta}${rankable&&!rank?' · not ranked yet':''}</div>
       </div>
       <div class="rth-chevron ${isOpen?'open':''}">›</div>
     </div>
     <div class="rth-expanded ${isOpen?'open':''}" id="rthexp-${c.id}">
       <div class="rth-phone-box">
         <span style="font-size:18px">📱</span>
-        <div>
+        <div style="flex:1">
           <div style="font-size:10px;color:var(--text-soft);margin-bottom:1px">Phone</div>
-          <div class="rth-phone-number">${esc(c.phone||'—')}</div>
+          <div class="rth-phone-number">${c.phone?`<a class="phone-link" href="tel:${esc(String(c.phone).replace(/[^\d+]/g,''))}">${esc(c.phone)}</a>`:'—'}</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:10px;color:var(--text-soft);margin-bottom:1px">Interview completed</div>
+          <div style="font-size:12px;font-weight:600">${c.interviewCompletedAt?formatDateTime(c.interviewCompletedAt):(c.interviewDate?formatDate(c.interviewDate)+(c.interviewTime?' '+formatTime(c.interviewTime):'')+' (scheduled)':'—')}</div>
         </div>
       </div>
       ${c.interviewerName ? `
@@ -1079,14 +1218,17 @@ function renderRTHCard(c, rank, type, aged=false, week="") {
           <div class="rth-eval-item"><div class="label">Enjoy working with</div><div class="value">${esc(c.enjoyWorking||'—')}</div></div>
         </div>
         <div class="rth-grades">${gradeBars}</div>
-        ${c.vibeNotes?`<div style="border-top:1px solid var(--border);padding-top:8px;margin-top:4px"><div style="font-size:10px;color:var(--text-xs);margin-bottom:3px">Interviewer notes</div><div style="font-size:12px;line-height:1.5">${esc(c.vibeNotes)}</div></div>`:''}
+        ${prosConsHTML(c)}
+        ${c.interviewerName?`<div style="font-size:10px;color:var(--text-xs);margin-top:8px">Interviewed by ${esc(c.interviewerName)}</div>`:''}
       </div>` : '<div style="font-size:12px;color:var(--text-soft);margin-bottom:12px;padding:8px;background:var(--surface-alt);border-radius:var(--radius-sm)">No vibe evaluation yet.</div>'}
       <div class="rth-notes-label">📝 Call Notes</div>
       <textarea class="rth-call-notes" id="callnotes-${c.id}" placeholder="e.g. Called at 3pm, left voicemail...">${esc(c.callNotes||'')}</textarea>
       <div class="rth-actions">
+        <button class="rth-view" onclick="openProfile('${c.id}')">📄 View application</button>
+        <button class="rth-save" onclick="saveCallNotes('${c.id}')">Save notes</button>
+        <button class="rth-offer" onclick="markOffer('${c.id}','Offered')">🤝 Offer made, waiting on reply</button>
         <button class="rth-accept" onclick="markOffer('${c.id}','Hired')">✅ Accepted offer</button>
         <button class="rth-decline" onclick="markOffer('${c.id}','Rejected')">❌ Declined offer</button>
-        <button class="rth-save" onclick="saveCallNotes('${c.id}')">Save notes</button>
       </div>
     </div>
   </div>`;
@@ -1097,48 +1239,65 @@ window.toggleRTHCard = (id) => {
   renderRTH();
 };
 
-window.setRank = (id, week, val) => {
-  const key = week+':'+id;
+// Save one candidate's rank (0 clears it). Stored on the candidate as rthRank,
+// so it follows them when they move from "this week" to "last week" to "older".
+function persistRank(id, num) {
+  if (num > 0) rthRankings[id] = num; else delete rthRankings[id];
+  const c = candidates.find(x => x.id === id);
+  if (c) c.rthRank = num || 0;
+  return updateDoc(doc(db,'candidates',id), { rthRank: num || 0 }).catch(() => showToast('Could not save rank'));
+}
+
+// Give every candidate in a group ranks 1..n in the given order, saving only what changed
+function applyGroupOrder(ids) {
+  const writes = [];
+  ids.forEach((id, i) => { if (rthRankings[id] !== i + 1) writes.push(persistRank(id, i + 1)); });
+  return Promise.all(writes);
+}
+
+// Typed a number into the rank box
+window.setRank = (id, group, val) => {
   const num = parseInt(val);
+  const ids = (rthGroups[group] || []).filter(x => x !== id);
   if (num > 0) {
-    Object.keys(rthRankings).forEach(k => {
-      if (k.startsWith(week+':') && rthRankings[k] === num && k !== key) delete rthRankings[k];
-    });
-    rthRankings[key] = num;
+    // Insert at that position; everyone else shifts down and gets renumbered
+    ids.splice(Math.min(num, ids.length + 1) - 1, 0, id);
+    const rankedIds = ids.filter(x => x === id || rthRankings[x]);
+    applyGroupOrder(rankedIds);
   } else {
-    delete rthRankings[key];
+    persistRank(id, 0);
   }
-  updateDoc(doc(db,'candidates',id), { ['rthRank_'+week]: num||0 }).catch(()=>{});
   renderRTH();
 };
 
-window.dropRank = (srcId, targetId, week) => {
-  const srcKey = week+':'+srcId;
-  const tgtKey = week+':'+targetId;
-  const srcRank = rthRankings[srcKey];
-  const tgtRank = rthRankings[tgtKey];
-  // Swap ranks
-  if (srcRank && tgtRank) {
-    rthRankings[srcKey] = tgtRank;
-    rthRankings[tgtKey] = srcRank;
-    updateDoc(doc(db,'candidates',srcId), { ['rthRank_'+week]: tgtRank }).catch(()=>{});
-    updateDoc(doc(db,'candidates',targetId), { ['rthRank_'+week]: srcRank }).catch(()=>{});
-  } else if (tgtRank) {
-    rthRankings[srcKey] = tgtRank;
-    delete rthRankings[tgtKey];
-    updateDoc(doc(db,'candidates',srcId), { ['rthRank_'+week]: tgtRank }).catch(()=>{});
-    updateDoc(doc(db,'candidates',targetId), { ['rthRank_'+week]: 0 }).catch(()=>{});
-  }
+// Up / down arrows: swap with the neighbor, then renumber the group
+window.moveRank = (id, group, dir) => {
+  const ids = [...(rthGroups[group] || [])];
+  const i = ids.indexOf(id);
+  const j = i + dir;
+  if (i < 0 || j < 0 || j >= ids.length) return;
+  [ids[i], ids[j]] = [ids[j], ids[i]];
+  // Everyone from the top through the moved pair gets a rank so the order sticks
+  const upto = Math.max(i, j);
+  const rankedIds = ids.filter((x, k) => k <= upto || rthRankings[x]);
+  applyGroupOrder(rankedIds);
   renderRTH();
 };
 
 window.markOffer = async (id, status) => {
-  const notes = document.getElementById('callnotes-'+id)?.value || '';
-  await updateDoc(doc(db,'candidates',id), { status, callNotes: notes, offeredAt: new Date().toISOString() });
   const c = candidates.find(c=>c.id===id);
-  if (c) { c.status = status; c.callNotes = notes; }
+  const name = c?.name || 'this candidate';
+  if (status === 'Hired' && !confirm(`Mark ${name} as Hired?`)) return;
+  if (status === 'Rejected' && !confirm(`Mark ${name} as Declined? They will be removed from Ready to Hire.`)) return;
+  const notes = document.getElementById('callnotes-'+id)?.value ?? c?.callNotes ?? '';
+  const update = { status, callNotes: notes };
+  if (status === 'Offered') update.offeredAt = new Date().toISOString();
+  try {
+    await updateDoc(doc(db,'candidates',id), update);
+  } catch(e) { showToast('Could not save, try again'); return; }
+  if (c) Object.assign(c, update);
   renderRTH();
-  showToast(status === 'Hired' ? '🎉 Marked as Hired!' : 'Marked as Declined', status === 'Hired');
+  showToast(status === 'Hired' ? `🎉 ${name} marked as Hired (see Applicants › Hired)` : status === 'Offered' ? `${name} moved to Awaiting Response` : `${name} marked as Declined`, status !== 'Rejected');
 };
 
 window.saveCallNotes = async (id) => {
